@@ -61,7 +61,7 @@
                                                 	<input class="" id="abc" type="checkbox" value='회원관리'/>회원관리
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login.html">추가하기</a></div>
+                                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login">추가하기</a></div>
                                         </form>
                                     </div>
 <!--                                     <div class="card-footer text-center"> -->
