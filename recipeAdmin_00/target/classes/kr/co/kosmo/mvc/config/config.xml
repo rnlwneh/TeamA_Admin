@@ -5,5 +5,6 @@
  <configuration>
  	<typeAliases>
  		<typeAlias type="kr.co.kosmo.mvc.dto.AdminMemberDTO" alias="adMem"/>
+ 		<typeAlias type="kr.co.kosmo.mvc.dto.AdminInfoDTO" alias="adInfo"/>
  	</typeAliases>
  </configuration>

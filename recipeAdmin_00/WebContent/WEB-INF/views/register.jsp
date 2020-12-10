@@ -25,19 +25,19 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputFirstName">이름</label>
-                                                        <input class="form-control py-4" id="inputFirstName" type="text" placeholder="이름" />
+                                                        <input name="ad_name" class="form-control py-4" id="inputFirstName" type="text" placeholder="이름" />
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label class="small mb-1" for="inputLastName">전화번호</label>
-                                                        <input class="form-control py-4" id="inputLastName" type="text" placeholder="-를 빼고 입력하세요" />
+                                                        <input name="ad_phone" class="form-control py-4" id="inputLastName" type="text" placeholder="-를 빼고 입력하세요" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">이메일</label>
-                                                <input class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="이메일주소" />
+                                                <input name="ad_email" class="form-control py-4" id="inputEmailAddress" type="email" aria-describedby="emailHelp" placeholder="이메일주소" />
                                             </div>
                                             <div class="form-row">
                                                 <div class="col-md-6">
@@ -61,7 +61,7 @@
                                                 	<input class="" id="abc" type="checkbox" value='회원관리'/>회원관리
                                                 </div>
                                             </div>
-                                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="login">추가하기</a></div>
+                                            <div class="form-group mt-4 mb-0"><a class="btn btn-primary btn-block" href="addAdmin">추가하기</a></div>
                                         </form>
                                     </div>
 <!--                                     <div class="card-footer text-center"> -->
