@@ -5,6 +5,7 @@ package kr.co.kosmo.mvc.dto;
         ad_phone char(11) not null,
         ad_email varchar2(30) unique,
         ad_pwd varchar2(15) not null,
+        ad_author varchar2(50) not null,
         ad_logintime date default sysdate,
         ad_logouttime date default sysdate,
         ad_regdate date default sysdate,
@@ -15,6 +16,7 @@ public class AdminInfoDTO {
 	private String ad_phone;
 	private String ad_email;
 	private String ad_pwd;
+	private String ad_author;
 	private String ad_logintime;
 	private String ad_logouttime;
 	private String ad_regdate;
@@ -48,6 +50,12 @@ public class AdminInfoDTO {
 	}
 	public void setAd_pwd(String ad_pwd) {
 		this.ad_pwd = ad_pwd;
+	}	
+	public String getAd_author() {
+		return ad_author;
+	}
+	public void setAd_author(String ad_author) {
+		this.ad_author = ad_author;
 	}
 	public String getAd_logintime() {
 		return ad_logintime;

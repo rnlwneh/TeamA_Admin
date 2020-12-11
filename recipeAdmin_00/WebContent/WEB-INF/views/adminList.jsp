@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    
     	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -173,40 +175,66 @@
                                         </thead>
 
                                         <tbody>
+                                        <c:forEach items='${adminList }' var='adminList' varStatus='status'>
                                             <tr>
-                                            	<td><input type='checkbox'></td>
-                                                <td><a href=''>신동주</a></td>
-                                                <td>qwe123@recipe.com</td>
-                                                <td>사이트 관리</td>
-                                                <td>010-1324-1234</td>
-                                                <td>20-11-25 11시15분</td>
-                                                <td>20-11-25 13시20분</td>
-                                                <td>20-11-21</td>
+                                            	<td>
+                                            		<input type='checkbox' id='adminCheck'>
+                                            		<input type='hidden' value='${adminList.ad_no }'>
+                                            	</td>
+                                                <td>${adminList.ad_name }</td>
+                                                <td>${adminList.ad_email }</td>
+                                                <td>${adminList.ad_author }</td>
+                                                <td>${adminList.ad_phone }</td>
+                                                <td>${adminList.ad_logintime }</td>
+                                                <td>${adminList.ad_logouttime }</td>
+                                                <td>${adminList.ad_regdate }</td>
                                             </tr>
-                                           
+                                        </c:forEach>
                                         </tbody>
                                     </table>
-                                    <div float='right'><input type='button' value='선택된 관리자 권한삭제'></div>
+                                    <div float='right'><input id='delBtn' type='button' value='선택된 관리자 권한삭제'></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </main>
-                <footer class="py-4 bg-light mt-auto">
-                    <div class="container-fluid">
-                        <div class="d-flex align-items-center justify-content-between small">
-                            <div class="text-muted">Copyright &copy; Your Website 2020</div>
-                            <div>
-                                <a href="#">Privacy Policy</a>
-                                &middot;
-                                <a href="#">Terms &amp; Conditions</a>
-                            </div>
-                        </div>
-                    </div>
-                </footer>
+<!--                 <footer class="py-4 bg-light mt-auto"> -->
+<!--                     <div class="container-fluid"> -->
+<!--                         <div class="d-flex align-items-center justify-content-between small"> -->
+<!--                             <div class="text-muted">Copyright &copy; Your Website 2020</div> -->
+<!--                             <div> -->
+<!--                                 <a href="#">Privacy Policy</a> -->
+<!--                                 &middot; -->
+<!--                                 <a href="#">Terms &amp; Conditions</a> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </footer> -->
             </div>
         </div>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script>
+        
+        
+        <script>
+        
+        	$(document).ready(function(){
+        		$('#delBtn').click(function(){
+        			if(confirm("선택된 관리자를 삭제하시겠습니까?")){
+        				var adminNo = "";
+            			$('#adminCheck:checked').each(function(){
+            				adminNo = adminNo +","+$(this).next().val();
+            			})
+            			adminNo = adminNo.substr(1,);
+            			location.href='deleteAdmin?adminNo='+adminNo
+        			}else{
+        				return;
+        			}
+        		})
+        	})
+        
+        </script>
+        
+        
+<!--         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script> -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
         <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>

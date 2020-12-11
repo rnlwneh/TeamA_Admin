@@ -4,6 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace='adminInfo'>
   	<insert id="addAdmin" parameterType="adInfo">
-  		
+  		insert into admin_info values(ad_sq.nextval, #{ad_name}, #{ad_phone}
+  		, #{ad_email}, #{ad_pwd}, #{ad_author}, sysdate, sysdate, sysdate)
   	</insert>
+  	
+  	<select id='adminList' resultType='adInfo'>
+  		select * from admin_info order by ad_no
+  	</select>
+  	
+  	<delete id='deleteAdmin' parameterType='String'>
+  		delete admin_info where ad_no=#{ad_no}
+  	</delete>
   </mapper>
