@@ -33,7 +33,7 @@
 <!--                         <a class="dropdown-item" href="#">Settings</a> -->
 <!--                         <a class="dropdown-item" href="#">Activity Log</a> -->
 <!--                         <div class="dropdown-divider"></div> -->
-                        <a class="dropdown-item" href="login">로그아웃</a>
+                        <a class="dropdown-item" href="logout">로그아웃</a>
                     </div>
                 </li>
             </ul>

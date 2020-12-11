@@ -69,4 +69,13 @@ public class AdminInfoController {
 		}
 		return mv;
 	}
+	
+	@RequestMapping(value="/logout")
+	public ModelAndView logout(HttpSession session) {
+		session.removeAttribute("ad_name");
+		session.removeAttribute("ad_author");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("login");
+		return mv;
+	}
 }
