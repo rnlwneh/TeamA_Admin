@@ -30,6 +30,12 @@ public class AdminInfoDaoImpl implements AdminInfoDao{
 		System.out.println("=====AdminInfoMapper deleteAdmin 호출=====");
 		ss.delete("adminInfo.deleteAdmin", ad_no);
 	}
+
+	@Override
+	public AdminInfoDTO adminLogin(AdminInfoDTO vo) {
+		System.out.println("=====AdminInfoMapper adminLogin 호출=====");
+		return ss.selectOne("adminInfo.adminLogin", vo);
+	}
 	
 	
 }

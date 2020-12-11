@@ -1,15 +1,14 @@
 package kr.co.kosmo.mvc.controller;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -33,7 +32,7 @@ public class AdminInfoController {
 	}
 	
 	@RequestMapping(value="/adminList")
-	public ModelAndView adminList(AdminInfoDTO vo,Model m) {
+	public ModelAndView adminList(AdminInfoDTO vo) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println("=====adminInfoDao adminList»£√‚=====");
 		List<AdminInfoDTO> adminList = adminInfodao.adminList(vo);
@@ -54,6 +53,20 @@ public class AdminInfoController {
 			adminInfodao.deleteAdmin(ad_no);
 		}
 		mv.setViewName("redirect:adminList");
+		return mv;
+	}
+	
+	@RequestMapping(value="/indexA", method=RequestMethod.POST)
+	public ModelAndView indexA(HttpSession session, HttpServletRequest request, AdminInfoDTO vo) {
+		ModelAndView mv = new ModelAndView();
+		AdminInfoDTO adminLogin = adminInfodao.adminLogin(vo);
+		if(adminLogin==null) {
+			mv.setViewName("/");
+		}else {
+			mv.setViewName("indexA");
+			session.setAttribute("ad_name", adminLogin.getAd_name());
+			session.setAttribute("ad_author", adminLogin.getAd_author());
+		}
 		return mv;
 	}
 }

@@ -15,4 +15,9 @@
   	<delete id='deleteAdmin' parameterType='String'>
   		delete admin_info where ad_no=#{ad_no}
   	</delete>
+  	
+  	<select id="adminLogin" parameterType="adInfo" resultType="adInfo">
+  		select * from admin_info where ad_email=#{ad_email} and ad_pwd=#{ad_pwd}
+  	</select>
+  	
   </mapper>

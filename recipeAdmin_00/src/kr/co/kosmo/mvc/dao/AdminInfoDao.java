@@ -8,4 +8,5 @@ public interface AdminInfoDao{
 	public void addAdmin(AdminInfoDTO vo);
 	public List<AdminInfoDTO> adminList(AdminInfoDTO vo);
 	public void deleteAdmin(String vo);
+	public AdminInfoDTO adminLogin(AdminInfoDTO vo);
 }
