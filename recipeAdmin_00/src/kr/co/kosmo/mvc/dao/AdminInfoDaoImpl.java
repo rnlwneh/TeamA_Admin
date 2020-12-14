@@ -14,6 +14,7 @@ public class AdminInfoDaoImpl implements AdminInfoDao{
 	@Autowired
 	SqlSessionTemplate ss;
 	
+	@Override
 	public void addAdmin(AdminInfoDTO vo) {
 		System.out.println("=====AdminInfoMapper addAdmin»£√‚=====");
 		ss.insert("adminInfo.addAdmin",vo);

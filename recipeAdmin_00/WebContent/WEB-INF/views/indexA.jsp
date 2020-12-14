@@ -176,7 +176,7 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1 class="mt-4">${ad_name }관리자님어서오세요</h1>
+					<h1 class="mt-4">${ad_name } 관리자</h1>
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
 					</ol>
