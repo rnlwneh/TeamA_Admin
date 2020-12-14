@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
  <configuration>
  	<typeAliases>
- 		<typeAlias type="kr.co.kosmo.mvc.dto.AdminMemberDTO" alias="adMem"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.AdminInfoDTO" alias="adInfo"/>
+ 		<typeAlias type="kr.co.kosmo.mvc.dto.AdminScheduleDTO" alias="adSche"/>
  	</typeAliases>
  </configuration>

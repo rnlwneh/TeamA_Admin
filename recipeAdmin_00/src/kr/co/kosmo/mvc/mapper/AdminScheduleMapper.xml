@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="adSchedule">
+
+	<insert id="addSchedule" parameterType="adSche">
+		insert into admin_schedule values(ad_sche_no_sq.nextval, #{ad_no}, #{ad_sche_imp}, #{ad_sche_date}, #{ad_sche_hour}
+		, #{ad_sche_title}, #{ad_sche_detail})
+	</insert>
+	
+	<select id="scheduleList" parameterType="Object" resultType="adSche">
+		select * from admin_schedule where ad_no=#{ad_no}
+	</select>
+
+</mapper>

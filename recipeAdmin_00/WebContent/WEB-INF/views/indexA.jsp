@@ -71,7 +71,7 @@
 
 						<div class="sb-sidenav-menu-heading">일정 관리</div>
 						<nav class="sb-sidenav-menu-nested nav">
-							<a href='adminSchedule2'><font size='2' color='gray'>달력</font></a>
+							<a href='adminSchedule2?ad_no=${ad_no }'><font size='2' color='gray'>달력</font></a>
 						</nav>
 
 
