@@ -9,4 +9,5 @@ public interface AdminInfoDao{
 	public List<AdminInfoDTO> adminList(AdminInfoDTO vo);
 	public void deleteAdmin(String vo);
 	public AdminInfoDTO adminLogin(AdminInfoDTO vo);
+	public void logOut(Object vo);
 }

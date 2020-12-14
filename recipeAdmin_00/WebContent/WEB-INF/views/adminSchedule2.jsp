@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
     <head>
     	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     	<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
@@ -62,7 +63,7 @@
 <!--                         <a class="dropdown-item" href="#">Settings</a> -->
 <!--                         <a class="dropdown-item" href="#">Activity Log</a> -->
 <!--                         <div class="dropdown-divider"></div> -->
-                        <a class="dropdown-item" href="login">로그아웃</a>
+                        <a class="dropdown-item" href="ad_logout">로그아웃</a>
                     </div>
                 </li>
             </ul>
@@ -85,20 +86,24 @@
 									<a href='adminSchedule2'><font size='2' color='white'>달력</font></a>
                            		</nav>
                             
-                            
-                            
-                            
-                            <div class="sb-sidenav-menu-heading">사이트 관리</div>
-                            	<nav class="sb-sidenav-menu-nested nav">
-									<a href='adminBoardRegist'><font size='2' color='gray'>신고된 글 관리</font></a>
-                           		</nav>
-                           		<nav class="sb-sidenav-menu-nested nav">
-									<a href=''><font size='2' color='gray'>사이트 카테고리 관리</font></a>
-                           		</nav>
-                            
-                            
-                            
-                            
+                            <c:set var="author" value="${ad_author }"/>
+
+						<c:if test="${fn:contains(author, '사이트관리')}">
+
+
+							<div class="sb-sidenav-menu-heading">사이트 관리</div>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='adminBoardRegist'><font size='2' color='gray'>신고된
+										글 관리</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href=''><font size='2' color='gray'>사이트 카테고리 관리</font></a>
+							</nav>
+
+						</c:if>
+
+
+						<c:if test="${fn:contains(author, '스토어관리')}">
                             
                             <div class="sb-sidenav-menu-heading">스토어 관리</div>
                             	<nav class="sb-sidenav-menu-nested nav">
@@ -126,7 +131,10 @@
 									<a href='memberOrderList'><font size='2' color='gray'>고객 주문 관리</font></a>
                            		</nav>
                            
+                           </c:if>
                            
+                           
+                            <c:if test="${fn:contains(author, '회원관리')}">
                            
                             <div class="sb-sidenav-menu-heading">회원관리</div>
                             	<nav class="sb-sidenav-menu-nested nav">
@@ -138,6 +146,8 @@
                                  <nav class="sb-sidenav-menu-nested nav">
                            			<a href='chiefManage'><font size='2' color='gray'>셰프관리</font></a>
                                  </nav>
+                           		
+                           	</c:if>
                            		
                             
                             <div class="sb-sidenav-menu-heading">관리자</div>

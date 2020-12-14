@@ -34,6 +34,7 @@ public class AdminInfoController {
 	@RequestMapping(value="/adminList")
 	public ModelAndView adminList(AdminInfoDTO vo) {
 		ModelAndView mv = new ModelAndView();
+		
 		System.out.println("=====adminInfoDao adminList호출=====");
 		List<AdminInfoDTO> adminList = adminInfodao.adminList(vo);
 		System.out.println("=====mapper까지 찍고옴=====");
@@ -45,6 +46,7 @@ public class AdminInfoController {
 	@RequestMapping(value="/deleteAdmin")
 	public ModelAndView deleteAdmin(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
+		
 		String no = request.getParameter("adminNo");
 		String[] adminNo = no.split(",");
 		for(String ad_no : adminNo) {
@@ -56,25 +58,42 @@ public class AdminInfoController {
 		return mv;
 	}
 	
-	@RequestMapping(value="/indexA", method=RequestMethod.POST)
-	public ModelAndView indexA(HttpSession session, HttpServletRequest request, AdminInfoDTO vo) {
+	@RequestMapping(value="/loginCheck", method=RequestMethod.POST)
+	public ModelAndView loginCheck(HttpSession session, HttpServletRequest request, AdminInfoDTO vo) {
 		ModelAndView mv = new ModelAndView();
+		
 		AdminInfoDTO adminLogin = adminInfodao.adminLogin(vo);
 		if(adminLogin==null) {
-			mv.setViewName("/");
+			mv.setViewName("login");
+			mv.addObject("msg", "이메일과 비밀번호를 다시 확인해주세요");
 		}else {
 			mv.setViewName("indexA");
+			//세션 추가
 			session.setAttribute("ad_name", adminLogin.getAd_name());
 			session.setAttribute("ad_author", adminLogin.getAd_author());
+			session.setAttribute("ad_no", adminLogin.getAd_no());
 		}
 		return mv;
 	}
 	
-	@RequestMapping(value="/logout")
+	@RequestMapping(value="/ad_logout")
 	public ModelAndView logout(HttpSession session) {
+		ModelAndView mv = new ModelAndView();
+		
+		try {
+			//로그아웃 시간 저장
+			Object ad_no = session.getAttribute("ad_no");
+			System.out.println(ad_no);
+			adminInfodao.logOut(ad_no);
+		}catch(Exception e){
+			//세션값 없을시 500에러 나므로
+			mv.setViewName("login");
+			return mv;
+		}
+		//세션삭제
 		session.removeAttribute("ad_name");
 		session.removeAttribute("ad_author");
-		ModelAndView mv = new ModelAndView();
+		session.removeAttribute("ad_no");
 		mv.setViewName("login");
 		return mv;
 	}

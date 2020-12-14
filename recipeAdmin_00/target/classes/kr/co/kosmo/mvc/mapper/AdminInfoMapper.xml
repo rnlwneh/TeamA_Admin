@@ -20,4 +20,12 @@
   		select * from admin_info where ad_email=#{ad_email} and ad_pwd=#{ad_pwd}
   	</select>
   	
+  	<update id="loginTime" parameterType="adInfo">
+  		update admin_info set ad_logintime = sysdate where ad_no = #{ad_no}
+  	</update>
+  	
+  	<update id="logoutTime" parameterType="Object">
+  		update admin_info set ad_logouttime = sysdate where ad_no = #{ad_no}
+  	</update>
+  	
   </mapper>

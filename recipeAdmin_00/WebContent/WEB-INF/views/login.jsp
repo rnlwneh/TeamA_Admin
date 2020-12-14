@@ -21,7 +21,7 @@
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">로그인</h3></div>
                                     <div class="card-body">
-                                        <form name='loginForm' action='indexA' method='POST'>
+                                        <form name='loginForm' action='loginCheck' method='POST'>
                                             <div class="form-group">
                                                 <label class="small mb-1" for="inputEmailAddress">이메일</label>
                                                 <input name='ad_email' class="form-control py-4" id="inputEmailAddress" type="email" placeholder="이메일 주소" />
@@ -32,8 +32,7 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="custom-control custom-checkbox">
-                                                    <input class="custom-control-input" id="rememberPasswordCheck" type="checkbox" />
-<!--                                                     <label class="custom-control-label" for="rememberPasswordCheck">비밀번호 저장</label> -->
+                                                    <font color='red'>${msg }</font>
                                                 </div>
                                             </div>
                                             <div class="form-group d-flex align-items-center justify-content-between mt-4 mb-0">

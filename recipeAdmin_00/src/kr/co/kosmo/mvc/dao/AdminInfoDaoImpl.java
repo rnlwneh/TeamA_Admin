@@ -34,7 +34,18 @@ public class AdminInfoDaoImpl implements AdminInfoDao{
 	@Override
 	public AdminInfoDTO adminLogin(AdminInfoDTO vo) {
 		System.out.println("=====AdminInfoMapper adminLogin 호출=====");
-		return ss.selectOne("adminInfo.adminLogin", vo);
+		AdminInfoDTO result = ss.selectOne("adminInfo.adminLogin", vo);
+		if(result != null) {
+			System.out.println("=== 로그인 시간 저장 ===");
+			ss.update("adminInfo.loginTime", result);
+		}
+		return result;
+	}
+
+	@Override
+	public void logOut(Object vo) {
+		System.out.println("=== 로그아웃 시간 저장 ===");
+		ss.update("adminInfo.logoutTime", vo);
 	}
 	
 	
