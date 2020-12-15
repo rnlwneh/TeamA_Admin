@@ -375,7 +375,7 @@
 					arr.push("<tr height='100'>");
 	
 					for(var j = 0; j <=6; j++){
-						//일요일 빨간색, 토요일 파란색, 나머지 회색
+						//일요일 빨간색, 토요일 파란색, 나머지 색x
 						if(j == 6){
 							arr.push("<td bgcolor=skyblue>");
 						}else if(j == 0){
@@ -405,69 +405,23 @@
 				//미리 만들어둔 div태그에 html코드 입력
 				$("."+className).html( arr.join("") );
 			}		//function print_calender( className, year, month ){
-	
-			//화살표 왼쪽 누를 때
-			function lastClick(){
-				$(document).ready( function() {
-					$(".last").click( function(){
-						if(month == 1){
-							year--;
-							month = 12;
-						}else{
-							month--;
-						}
-						print_calender("xxx", year, month);
-						$('.cal_schedule:eq(5)').html("<a href='#'><font color='blue'>●</font><font color='black'>primary 일정</font></a>")
-			            $('.cal_schedule:eq(11)').html("<a href='#'><font color='yellow'>●</font><font color='black'>warning 일정</font></a>")
-			            $('.cal_schedule:eq(20)').html("<a href='#'><font color='green'>●</font><font color='black'>success 일정</font></a>")
-			            $('.cal_schedule:eq(15)').html("<a href='#'><font color='red'>●</font><font color='black'>danger 일정</font></a>")
-						lastClick();
-						nextClick();
-					})
-				})
-			}		//function lastClick(){
-	
-			//화살표 오른쪽 누를 때
-			function nextClick(){
-				$(document).ready( function() {
-					$(".next").click( function(){
-						if(month == 12){
-							year++;
-							month = 1;
-						}else{
-							month++;
-						}
-						print_calender("xxx", year, month);
-						$('.cal_schedule:eq(5)').html("<a href='#'><font color='blue'>●</font><font color='black'>primary 일정</font></a>")
-			            $('.cal_schedule:eq(11)').html("<a href='#'><font color='yellow'>●</font><font color='black'>warning 일정</font></a>")
-			            $('.cal_schedule:eq(20)').html("<a href='#'><font color='green'>●</font><font color='black'>success 일정</font></a>")
-			            $('.cal_schedule:eq(15)').html("<a href='#'><font color='red'>●</font><font color='black'>danger 일정</font></a>")
-						nextClick();
-						lastClick();
-					})
-				})
-			}		//function nextClick(){
-	
-			
-                
-			//전역변수 선언
-			var today = new Date();
-			var year = today.getFullYear();
-			var month = today.getMonth() + 1;	
-				
-			$(document).ready(function(){
-				
+
+			//ajax함수
+			function ajaxF(){
 				//로그인한 관리자 일정만 뽑아오기
-				var ad_no = $('#ad_no').val();				
+				var ad_no = $('#ad_no').val();
+				print_calender( "xxx", year, month );
 				$.ajax({
 					url:"scheduleList?="+ad_no
 					,success : function(scheduleList){
+						//달력에 일정 적기
 						for(var i=0; i<scheduleList.length; i++){
 							//alert(scheduleList[i].ad_sche_date)
 							var ad_sche_date = scheduleList[i].ad_sche_date;
 							var scheYear = ad_sche_date.substr(0,4);
 							var scheMonth = ad_sche_date.substr(5,2);
 							var scheDate = ad_sche_date.substr(8,2);
+							var scheHour = scheduleList[i].ad_sche_hour;
 							var ad_sche_title = scheduleList[i].ad_sche_title;
 							if(scheDate.substr(0,1)==0){
 								scheDate = scheDate.substr(1,);
@@ -481,55 +435,121 @@
 								color='red'
 							}
 							if(scheYear==year && scheMonth==month){
-								$('.cal_schedule').eq(scheDate-1).html("<a href='#'><font color="+color+">●</font><font color='black'>"+ad_sche_title+"</font></a>")
+								$('.cal_schedule').eq(scheDate-1).html("<p style='cursor:pointer'><font size='5' color="+color+">●</font><font color='black'>"+scheHour+"시 "+ad_sche_title+"</font></p>")
 							}
-						}
+						}		//for(var i=0; i<scheduleList.length; i++){
+							
+						//일정 눌렀을 때 상세보기
+						$(document).ready(function(){
+							$('.cal_schedule').click(function(){
+								var date = $('.cal_schedule').index($(this))+1;
+								for(var i=0; i<scheduleList.length; i++){
+									var ad_sche_date = scheduleList[i].ad_sche_date;
+									var scheYear = ad_sche_date.substr(0,4);
+									var scheMonth = ad_sche_date.substr(5,2);
+									var scheDate = ad_sche_date.substr(8,2);
+									if(scheDate.substr(0,1)==0){
+										scheDate = scheDate.substr(1,);
+									}
+									var ad_sche_title = scheduleList[i].ad_sche_title;
+									var scheHour = scheduleList[i].ad_sche_hour;
+									var color = 'blue';
+									if(scheduleList[i].ad_sche_imp=='warning'){
+										color='yellow';
+									}else if(scheduleList[i].ad_sche_imp=='success'){
+										color='green';
+									}else if(scheduleList[i].ad_sche_imp=='danger'){
+										color='red'
+									}
+									var scheDetail = scheduleList[i].ad_sche_detail
+									
+									if(scheYear==year && scheMonth==month && date==scheDate){
+										if(scheDate.length==1){
+											scheDate = "0"+scheDate;
+										}
+										var detailSchHtml = "";
+										detailSchHtml += "<div class='card-body'>";
+										detailSchHtml += "		<div class='table-responsive'>";
+										detailSchHtml += "			<table class='table table-bordered' id='scheTable' width='100%' cellspacing='0'>";
+										detailSchHtml += "				<thead>";
+										detailSchHtml += "					<tr><th>일정<th>일시<th>상세내용<th>중요도";
+										detailSchHtml += "				</thead>";
+										detailSchHtml += "				<tbody>";
+										detailSchHtml += "					<tr><td><font size='5' color="+color+">●</font><font color='black'>"+scheHour+"시 "+ad_sche_title+"</font><td>"+scheMonth+"월 "+scheDate+"일 "+scheHour+"시 "+"<td><textarea cols='30' rows='3'>"+scheDetail+"</textarea>";
+										detailSchHtml += "						<td><select>";
+										detailSchHtml += "							<option value="+scheduleList[i].ad_sche_imp+" selected disabled hidden>"+scheduleList[i].ad_sche_imp+"</option>";
+										detailSchHtml += "							<option value='primary'>primary</option>";
+										detailSchHtml += "							<option value='warning'>warning</option>";
+										detailSchHtml += "							<option value='success'>success</option>";
+										detailSchHtml += "							<option value='danger'>danger</option>";
+										detailSchHtml += "						</select>";
+										detailSchHtml += "				</tbody>";
+										detailSchHtml += "			</table>";
+										detailSchHtml += "			&nbsp<div align='right'><input type='button' value='변경'>";
+										detailSchHtml += "			&nbsp<input type='button' value='삭제'></div>";
+										detailSchHtml += "		</div>";
+										detailSchHtml += "</div>";
+										$('.detailSchedule').html(detailSchHtml)
+									}
+								}		//for(var i=0; i<scheduleList.length; i++){
+							})		//$('.cal_schedule').click(function(){
+						})		//$(document).ready(function(){
 					}		//,success : function(scheduleList){
 					,error : function(request,status,error){
 						$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
 					}
 				})		//$.ajax({
+			}		//function ajaxF(){
 				
+			//화살표 왼쪽 누를 때
+			function lastClick(){
+				$(document).ready(function(){
+					$(".last").click(function(){
+						if(month == 1){
+							year--;
+							month = 12;
+						}else{
+							month--;
+						}
+						ajaxF();
+						lastClick();
+						nextClick();
+					})
+				})
+			}		//function lastClick(){
+	
+			//화살표 오른쪽 누를 때
+			function nextClick(){
+				$(document).ready(function(){
+					$(".next").click(function(){
+						if(month == 12){
+							year++;
+							month = 1;
+						}else{
+							month++;
+						}
+						ajaxF();
+						nextClick();
+						lastClick();
+					})
+				})
+			}		//function nextClick(){
+                
 				
+			//전역변수 선언 (오늘날짜 년/월)
+			var today = new Date();
+			var year = today.getFullYear();
+			var month = today.getMonth() + 1;	
 				
+			$(document).ready(function(){
+				//이번달 달력을 출력하고 이번달 일정 출력
+				ajaxF();
+				
+				//달력을 그린뒤 새로운body를 다시읽기위해 호출
 				lastClick();
 				nextClick();
 				
-				
-		
-				print_calender( "xxx", year, month );
-				
-				$('.cal_schedule:eq(5)').html("<a href='#'><font color='blue'>●</font><font color='black'>primary 일정</font></a>")
-	            $('.cal_schedule:eq(11)').html("<a href='#'><font color='yellow'>●</font><font color='black'>warning 일정</font></a>")
-	            $('.cal_schedule:eq(20)').html("<a href='#'><font color='green'>●</font><font color='black'>success 일정</font></a>")
-	            $('.cal_schedule:eq(15)').html("<a href='#'><font color='red'>●</font><font color='black'>danger 일정</font></a>")
-				
-				$('.cal_schedule:eq(5)').click(function(){
-					var detailSchHtml = "";
-					detailSchHtml += "<div class='card-body'>";
-					detailSchHtml += "		<div class='table-responsive'>";
-					detailSchHtml += "			<table class='table table-bordered' id='scheTable' width='100%' cellspacing='0'>";
-					detailSchHtml += "				<thead>";
-					detailSchHtml += "					<tr><th>일정<th>일시<th>상세내용<th>중요도";
-					detailSchHtml += "				</thead>";
-					detailSchHtml += "				<tbody>";
-					detailSchHtml += "					<tr><td><font color='blue'>●</font><font color='black'>primary 일정</font><td>OO월 OO일 OO시<td><textarea cols='30' rows='3'>내용~~~</textarea>";
-					detailSchHtml += "						<td><select>";
-					detailSchHtml += "							<option value='primary'>primary</option>";
-					detailSchHtml += "							<option value='warning'>warning</option>";
-					detailSchHtml += "							<option value='success'>success</option>";
-					detailSchHtml += "							<option value='danger'>danger</option>";
-					detailSchHtml += "						</select>";
-					detailSchHtml += "						&nbsp<input type='button' value='변경'>";
-					detailSchHtml += "						&nbsp<input type='button' value='삭제'>";
-					detailSchHtml += "				</tbody>";
-					detailSchHtml += "			</table>";
-					detailSchHtml += "		</div>";
-					detailSchHtml += "</div>";
-          
-					$('.detailSchedule').html(detailSchHtml)
-				})
-			
+				//새일정 저장
 				$('#saveSche').click(function(){
 					var scheYear = $('#scheYear').val();
 					var scheMonth = $('#scheMonth').val();
