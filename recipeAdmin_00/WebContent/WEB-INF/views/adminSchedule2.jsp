@@ -401,7 +401,8 @@
 					if(thisMonth_date > thisMonth_lastDate){ break; }
 				}
 				arr.push("</table>")
-	
+				
+				//미리 만들어둔 div태그에 html코드 입력
 				$("."+className).html( arr.join("") );
 			}		//function print_calender( className, year, month ){
 	
@@ -456,15 +457,34 @@
 				
 			$(document).ready(function(){
 				
-				var ad_no = $('#ad_no').val();
-				
+				//로그인한 관리자 일정만 뽑아오기
+				var ad_no = $('#ad_no').val();				
 				$.ajax({
 					url:"scheduleList?="+ad_no
 					,success : function(scheduleList){
 						for(var i=0; i<scheduleList.length; i++){
-							alert(scheduleList[i].ad_sche_date)
+							//alert(scheduleList[i].ad_sche_date)
+							var ad_sche_date = scheduleList[i].ad_sche_date;
+							var scheYear = ad_sche_date.substr(0,4);
+							var scheMonth = ad_sche_date.substr(5,2);
+							var scheDate = ad_sche_date.substr(8,2);
+							var ad_sche_title = scheduleList[i].ad_sche_title;
+							if(scheDate.substr(0,1)==0){
+								scheDate = scheDate.substr(1,);
+							}
+							var color = 'blue';
+							if(scheduleList[i].ad_sche_imp=='warning'){
+								color='yellow';
+							}else if(scheduleList[i].ad_sche_imp=='success'){
+								color='green';
+							}else if(scheduleList[i].ad_sche_imp=='danger'){
+								color='red'
+							}
+							if(scheYear==year && scheMonth==month){
+								$('.cal_schedule').eq(scheDate-1).html("<a href='#'><font color="+color+">●</font><font color='black'>"+ad_sche_title+"</font></a>")
+							}
 						}
-					}
+					}		//,success : function(scheduleList){
 					,error : function(request,status,error){
 						$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
 					}
