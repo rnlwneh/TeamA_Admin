@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--   어진 -->
+ <mapper namespace="recipeMember">
+ 
+ 	<select id="memlist" resultType="rpMem">
+		SELECT MEM_NO,
+		MEM_GRADE_NO,
+		MEM_ID,
+		MEM_EMAIL
+		FROM member_info ORDER BY MEM_NO
+		
+</select>
+<update id="memlistup">
+
+
+
+</update>
+
+ </mapper>

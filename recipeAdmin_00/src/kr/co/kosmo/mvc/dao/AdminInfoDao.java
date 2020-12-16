@@ -4,6 +4,7 @@ import java.util.List;
 
 import kr.co.kosmo.mvc.dto.AdminInfoDTO;
 
+//µø¡÷
 public interface AdminInfoDao{
 	public void addAdmin(AdminInfoDTO vo);
 	public List<AdminInfoDTO> adminList(AdminInfoDTO vo);

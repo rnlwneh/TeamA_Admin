@@ -2,14 +2,18 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--   동주 -->
   <mapper namespace='adminInfo'>
   	<insert id="addAdmin" parameterType="adInfo">
-  		insert into admin_info values(ad_sq.nextval, #{ad_name}, #{ad_phone}
-  		, #{ad_email}, #{ad_pwd}, #{ad_author}, sysdate, sysdate, sysdate)
+  		insert into admin_info 
+  		values(ad_sq.nextval, #{ad_name}, #{ad_phone}, #{ad_email}
+  		, #{ad_pwd}, #{ad_author}, sysdate, sysdate, sysdate)
   	</insert>
   	
   	<select id='adminList' resultType='adInfo'>
-  		select * from admin_info order by ad_no
+  		select ad_no, ad_name, ad_phone, ad_email, ad_pwd, ad_author, ad_logintime, ad_logouttime, ad_regdate 
+  		from admin_info 
+  		order by ad_no
   	</select>
   	
   	<delete id='deleteAdmin' parameterType='String'>
@@ -17,15 +21,21 @@
   	</delete>
   	
   	<select id="adminLogin" parameterType="adInfo" resultType="adInfo">
-  		select * from admin_info where ad_email=#{ad_email} and ad_pwd=#{ad_pwd}
+  		select ad_no, ad_name, ad_phone, ad_email, ad_pwd, ad_author, ad_logintime, ad_logouttime, ad_regdate 
+  		from admin_info 
+  		where ad_email=#{ad_email} and ad_pwd=#{ad_pwd}
   	</select>
   	
   	<update id="loginTime" parameterType="adInfo">
-  		update admin_info set ad_logintime = sysdate where ad_no = #{ad_no}
+  		update admin_info 
+  		set ad_logintime = sysdate 
+  		where ad_no = #{ad_no}
   	</update>
   	
   	<update id="logoutTime" parameterType="Object">
-  		update admin_info set ad_logouttime = sysdate where ad_no = #{ad_no}
+  		update admin_info 
+  		set ad_logouttime = sysdate 
+  		where ad_no = #{ad_no}
   	</update>
   	
   </mapper>

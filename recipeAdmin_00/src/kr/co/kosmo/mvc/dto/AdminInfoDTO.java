@@ -1,15 +1,16 @@
 package kr.co.kosmo.mvc.dto;
 /*
- ad_no number(2),
-        ad_name varchar2(15) not null,
-        ad_phone char(11) not null,
-        ad_email varchar2(30) unique,
-        ad_pwd varchar2(15) not null,
-        ad_author varchar2(50) not null,
-        ad_logintime date default sysdate,
-        ad_logouttime date default sysdate,
-        ad_regdate date default sysdate,
+	ad_no number(2),
+    ad_name varchar2(15) not null,
+    ad_phone char(11) not null,
+    ad_email varchar2(30) unique,
+    ad_pwd varchar2(15) not null,
+    ad_author varchar2(50) not null,
+    ad_logintime date default sysdate,
+    ad_logouttime date default sysdate,
+    ad_regdate date default sysdate,
  */
+//µø¡÷
 public class AdminInfoDTO {
 	private int ad_no;
 	private String ad_name;

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.co.kosmo.mvc.dto.AdminScheduleDTO;
 
+//µø¡÷
 @Repository
 public class AdminScheduleDaoImpl implements AdminScheduleDao{
 

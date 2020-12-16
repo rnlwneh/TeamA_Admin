@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.kosmo.mvc.dao.AdminInfoDao;
 import kr.co.kosmo.mvc.dto.AdminInfoDTO;
 
+//µø¡÷
 @Controller
 public class AdminInfoController {
 	

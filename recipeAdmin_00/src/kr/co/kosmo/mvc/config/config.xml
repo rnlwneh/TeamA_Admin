@@ -6,5 +6,6 @@
  	<typeAliases>
  		<typeAlias type="kr.co.kosmo.mvc.dto.AdminInfoDTO" alias="adInfo"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.AdminScheduleDTO" alias="adSche"/>
+ 		<typeAlias alias="rpMem" type="kr.co.kosmo.mvc.dto.RecipeMemberDTO"/>
  	</typeAliases>
  </configuration>
