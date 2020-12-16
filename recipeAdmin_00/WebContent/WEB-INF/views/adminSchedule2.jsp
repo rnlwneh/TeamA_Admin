@@ -232,7 +232,18 @@
                             </div>
                         </div>
                         
-                        
+                         <div class='detailSchedule'></div>
+	                    
+	                    <div>&nbsp</div>
+	                    
+                        <div class="card mb-4">
+                            <div class="card-body">
+  
+							    <div class="xxx"></div>
+                                
+                            </div>
+                            
+                        </div>
                         	<div class="card-body">
                                 <div class="table-responsive">
                                     <table class="table table-bordered" id="scheTable" width="100%" cellspacing="0">
@@ -293,24 +304,6 @@
                         
 	                    
 	                    <div id='errr'></div>
-	                    
-	                    
-	                    <div>&nbsp</div>
-	                    
-	                    <div class='detailSchedule'></div>
-	                    
-	                    <div>&nbsp</div>
-	                    
-                        <div class="card mb-4">
-                            <div class="card-body">
-  
-							    <div class="xxx"></div>
-                                
-                            </div>
-                            
-                        </div>
-                        
-                        <div>&nbsp</div>
                         <div>&nbsp</div>
                        
                         
@@ -448,8 +441,8 @@
 							detailSchHtml += "				</thead>";
 							detailSchHtml += "				<input id='ad_sche_no' type='hidden' value="+ad_sche_no+">";
 							detailSchHtml += "				<tbody>";
-							detailSchHtml += "					<tr><td><font size='5' color="+color+">●</font><font color='black'>"+scheHour+"시 "+ad_sche_title+"</font><td>"+scheMonth+"월 "+scheDate+"일 "+scheHour+"시 "+"<td><textarea cols='30' rows='3'>"+scheDetail+"</textarea>";
-							detailSchHtml += "						<td><select>";
+							detailSchHtml += "					<tr><td><font size='5' color="+color+">●</font><font color='black'>"+scheHour+"시 "+ad_sche_title+"</font><td>"+scheMonth+"월 "+scheDate+"일 "+scheHour+"시 <td>"+scheDetail;
+							detailSchHtml += "						<td><select id='ad_sche_imp'>";
 							detailSchHtml += "							<option value="+scheduleList[i].ad_sche_imp+" selected disabled hidden>"+scheduleList[i].ad_sche_imp+"</option>";
 							detailSchHtml += "							<option value='primary'>primary</option>";
 							detailSchHtml += "							<option value='warning'>warning</option>";
@@ -458,17 +451,52 @@
 							detailSchHtml += "						</select>";
 							detailSchHtml += "				</tbody>";
 							detailSchHtml += "			</table>";
-							detailSchHtml += "			&nbsp<div align='right'><input type='button' value='변경'>";
+							detailSchHtml += "			&nbsp<div align='right'><input type='button' id='updateSche' value='변경'>";
 							detailSchHtml += "			&nbsp<input type='button' id='deleteSche' value='삭제'></div>";
 							detailSchHtml += "		</div>";
 							detailSchHtml += "</div>";
+							var beforeHtml = $('.detailSchedule').html()
 							$('.detailSchedule').html(detailSchHtml);
-							
+							if(beforeHtml===$('.detailSchedule').html()){
+								$('.detailSchedule').html("")
+							}
 							//삭제버튼 누를시
 							$('#deleteSche').click(function(){
-								alert($('#ad_sche_no').val())
-							})
-						}
+								if(confirm("정말 삭제하시겠습니까?")){
+									var scheNo = $('#ad_sche_no').val();
+									$.ajax({
+										url:"deleteSchedule?ad_sche_no="+scheNo
+										,success : function(){
+											var ad_no = $('#ad_no').val();
+											alert("삭제가 완료되었습니다!");
+											location.href="adminSchedule2?ad_sche_no="+scheNo;
+										}
+										,error : function(request,status,error){
+											$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+										}
+									})
+								}
+							})		//$('#deleteSche').click(function(){
+							
+							//변경버튼 누를시
+							$('#updateSche').click(function(){
+								if(confirm("변경하시겠습니까?")){
+									var scheNo = $('#ad_sche_no').val();
+									var scheImp = $('#ad_sche_imp').val();
+									$.ajax({
+										url:"updateSchedule?ad_sche_no="+scheNo+"&ad_sche_imp="+scheImp
+										,success : function(){
+											var ad_no = $('#ad_no').val();
+											alert("변경이 완료되었습니다!");
+											location.href="adminSchedule2?ad_sche_no="+scheNo;
+										}
+										,error : function(request,status,error){
+											$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+										}
+									})
+								}
+							})		//$('#updateSche').click(function(){
+						}		//if(parseInt(pkNo)===ad_sche_no){
 					}		//for(var i=0; i<scheduleList.length; i++){
 				})		//$('.cal_schedule').click(function(){
 			}		//function detailClick(){

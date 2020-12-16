@@ -18,4 +18,12 @@
 		where ad_no=#{ad_no} order by ad_sche_hour
 	</select>
 
+	<delete id="deleteSchedule" parameterType="String">
+		delete admin_schedule 
+		where ad_sche_no=#{ad_sche_no}
+	</delete>
+	
+	<update id="updateSchedule" parameterType="adSche">
+		update admin_schedule set ad_sche_imp = #{ad_sche_imp} where ad_sche_no=#{ad_sche_no}
+	</update>
 </mapper>

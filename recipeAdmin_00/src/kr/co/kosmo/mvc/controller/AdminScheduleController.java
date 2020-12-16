@@ -50,4 +50,23 @@ public class AdminScheduleController {
 		System.out.println("===mapper까지 이상없음===");
 		return scheduleList;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value="/deleteSchedule")
+	public void deleteSche(String ad_sche_no) {
+		System.out.println("=====AdminScheduleDao deleteSchedule 호출=====");
+		adminScheduleDao.deleteSchedule(ad_sche_no);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updateSchedule")
+	public void updateSchedule(AdminScheduleDTO vo) {
+		//System.out.println(vo.getAd_sche_no());
+		//System.out.println("imp값 : " + vo.getAd_sche_imp());
+		if(vo.getAd_sche_imp().equals("null")) {
+			return;
+		}
+		System.out.println("=====AdminScheduleDao updateSchedule 호출=====");
+		adminScheduleDao.updateSchedule(vo);
+	}
 }

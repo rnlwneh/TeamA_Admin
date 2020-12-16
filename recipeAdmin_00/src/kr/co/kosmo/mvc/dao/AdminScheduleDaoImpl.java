@@ -26,4 +26,16 @@ public class AdminScheduleDaoImpl implements AdminScheduleDao{
 		System.out.println("=====AdminScheduleMapper scheduleList 호출=====");
 		return ss.selectList("adSchedule.scheduleList", ad_no);
 	}
+
+	@Override
+	public void deleteSchedule(String ad_sche_no) {
+		System.out.println("=====AdminScheduleMapper deleteSchedule 호출=====");
+		ss.delete("adSchedule.deleteSchedule", ad_sche_no);
+	}
+
+	@Override
+	public void updateSchedule(AdminScheduleDTO vo) {
+		System.out.println("=====AdminScheduleMapper updateSchedule 호출=====");
+		ss.update("adSchedule.updateSchedule", vo);
+	}
 }
