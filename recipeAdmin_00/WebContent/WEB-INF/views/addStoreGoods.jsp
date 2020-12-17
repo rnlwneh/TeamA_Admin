@@ -187,7 +187,11 @@
 							<!--                                 . -->
 						</div>
 					</div>
-					<div class="row">
+					<div align='right'style = "padding: 0 0 25px 0;">
+						<input type='button' value='임시등록'>
+						<input type='button' value='저장'>
+					</div>
+					<div class="row" margin='20px'>
 						<div class="col-xl-6">
 							<div class="card mb-4">
 								<div class="card-header">
@@ -261,7 +265,8 @@
 							</div>
 						</div>
 					</div>
-					<div align='right'><input type='button' value='저장'></div>
+					<div>&nbsp</div>
+					<div>&nbsp</div>
 				</div>
 			</main>
 <!-- 			<footer class="py-4 bg-light mt-auto"> -->
