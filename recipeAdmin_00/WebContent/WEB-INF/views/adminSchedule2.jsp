@@ -469,7 +469,7 @@
 										,success : function(){
 											var ad_no = $('#ad_no').val();
 											alert("삭제가 완료되었습니다!");
-											location.href="adminSchedule2?ad_sche_no="+scheNo;
+											location.href="adminSchedule2";
 										}
 										,error : function(request,status,error){
 											$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
@@ -488,7 +488,7 @@
 										,success : function(){
 											var ad_no = $('#ad_no').val();
 											alert("변경이 완료되었습니다!");
-											location.href="adminSchedule2?ad_sche_no="+scheNo;
+											location.href="adminSchedule2";
 										}
 										,error : function(request,status,error){
 											$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
@@ -539,7 +539,7 @@
 				//달력그리기
 				printCalender( "xxx", year, month );
 				$.ajax({
-					url:"scheduleList?="+ad_no
+					url:"scheduleList"
 					,success : function(scheduleList){
 						//달력에 일정 적기
 						scheduleWrite(scheduleList);					
@@ -575,9 +575,6 @@
 						}
 						ajaxF();
 						lastNextClick();
-					})
-					$('#deleteSche').click(function(){
-						alert(1)
 					})
 				})
 			}
@@ -629,7 +626,7 @@
 						}
 						,success : function(){
 							alert("일정이 추가되었습니다.")
-							location.href="adminSchedule2?ad_no="+ad_no
+							location.href="adminSchedule2"
 						}
 						,error : function(request,status,error){
 							$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)

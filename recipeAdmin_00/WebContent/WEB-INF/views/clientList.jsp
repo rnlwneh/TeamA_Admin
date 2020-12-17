@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<head>
+    <head>
+    	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -194,85 +194,61 @@ table, th, td {
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-
-
-
-
-
-
-								<script>
-									var students = [];
-									for (var i = 1; i <= 10; i++) {
-										students.push({
-											s_no : i,
-											s_name : "오찡" + i
-
-											,
-											money : Math
-													.ceil(Math.random() * 2000)
-										});
-									}
-
-									function randomItem(a) {
-										return a[Math.floor(Math.random()
-												* a.length)];
-									}
-
-									document
-											.write("<table border=1 cellspacing=0 cellpadding=5>");
-									document
-											.write("<tr><th>번호<th>거래처명<th>거래액<th>발주요일<th>상세보기");
-									for (var i = 0; i < students.length; i++) {
-
-										var rank = new Array('싱싱과일', '우리농산물',
-												'내마을생선', '여긴바다', '우리집텃밭',
-												'할머니손맛', '집앞냉장고', '이마트',
-												'홈플러스', '농협');
-										var orderDate = new Array('월', '화',
-												'수', '목', '금');
-										var bgcolor = "white";
-										var detail = "상세보기";
-										var lo = "location.href='clientDetail'";
-										document
-												.write("<tr bgcolor="+bgcolor+">");
-										document.write("<td>"
-												+ (students[i].s_no));
-										document.write("<td>" + rank[i]);
-										//	document.write("<td>"+rank);
-
-										document.write("<td>"
-												+ (students[i].money) + "만원");
-										document.write("<td>"
-												+ randomItem(orderDate));
-										document
-												.write('<td><a href="clientDetail">상세보기</a></td>');
-									}
-									document.write("</table>");
-								</script>
-
-
-
+								<div class="table-responsive">
+									<table class="table table-bordered">
+										<tr>
+											<th>거래처명</th>
+											<th>거래처 담당자</th>
+											<th>담당자 번호</th>
+											<th>발주요일</th>
+											<th>납품날짜</th>
+										</tr>
+										
+										<c:forEach items="${trdList }" var="trdList">
+											<tr style="cursor: pointer" id='detailTrdList$'>
+												<td>${trdList.trd_list_name }</td>
+												<input type='hidden' id='trdListNo' value='${trdList.trd_list_no }'>
+												<td>${trdList.trd_list_mng_name }</td>
+												<td>${trdList.trd_list_mng_phone }</td>
+												<td>${trdList.trd_list_orderdate }</td>
+												<td>${trdList.trd_list_receivedate }</td>
+											</tr>
+										</c:forEach>
+										
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</main>
-			<footer class="py-4 bg-light mt-auto">
-				<div class="container-fluid">
-					<div
-						class="d-flex align-items-center justify-content-between small">
-						<div class="text-muted">Copyright &copy; Your Website 2020</div>
-						<div>
-							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms
-								&amp; Conditions</a>
-						</div>
-					</div>
-				</div>
-			</footer>
+<!-- 			<footer class="py-4 bg-light mt-auto"> -->
+<!-- 				<div class="container-fluid"> -->
+<!-- 					<div -->
+<!-- 						class="d-flex align-items-center justify-content-between small"> -->
+<!-- 						<div class="text-muted">Copyright &copy; Your Website 2020</div> -->
+<!-- 						<div> -->
+<!-- 							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms -->
+<!-- 								&amp; Conditions</a> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</footer> -->
 		</div>
 	</div>
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		crossorigin="anonymous"></script>
+	
+	<script>
+		$('[id^=detailTrdList]').click(function(){
+			var idx = $('[id^=detailTrdList]').index($(this));
+			var trdListNo = $('[id=trdListNo]').eq(idx).val();
+			//alert(trdListNo)
+			location.href='clientDetail'
+		})
+	</script>
+	
+	
+<!-- 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" -->
+<!-- 		crossorigin="anonymous"></script> -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tradeList">
+
+	<select id="tradeList" resultType="trdList">
+		select trd_list_no, trd_list_name, trd_list_mng_name
+			, trd_list_mng_phone, trd_list_orderdate, trd_list_receivedate 
+		from trade_list
+	</select>
+	
+</mapper>

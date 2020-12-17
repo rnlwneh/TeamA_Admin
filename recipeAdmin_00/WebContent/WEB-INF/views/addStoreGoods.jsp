@@ -19,6 +19,13 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
 	crossorigin="anonymous"></script>
+	<style type="text/css">
+		textarea {
+	        width: 90%;
+	        height: 200px;
+	        resize:none;
+	    }
+	</style>
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -166,11 +173,12 @@
 		<div id="layoutSidenav_content">
 			<main>
 				<div class="container-fluid">
-					<h1 class="mt-4">스토어 상품 관리</h1>
+					<h1 class="mt-4">스토어 상품 추가</h1>
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
 						<li class="breadcrumb-item"><a href="storeGoodsList">스토어
 								상품 관리</a></li>
+						<li class="breadcrumb-item"><a href="addStoreGoods">스토어 상품 추가</a></li>
 					</ol>
 					<div class="card mb-4">
 						<div class="card-body">
@@ -179,56 +187,81 @@
 							<!--                                 . -->
 						</div>
 					</div>
-					<div class="card mb-4">
-						<div class="card-header">
-							<i class="fas fa-table mr-1"></i> 상품 현황
+					<div class="row">
+						<div class="col-xl-6">
+							<div class="card mb-4">
+								<div class="card-header">
+									상품 기본 정보
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<table class="table table-bordered" id="" width="100%" cellspacing="0">
+											<tr>
+												<th>상품이름</th>
+												<th><input type='text'></th>
+											</tr>
+											<tr>
+												<th>거래처</th>
+												<th>
+													<select>
+														<option value=''>-거래처 선택-
+														<c:forEach items="${trdListName }" var='trdListName'>
+															<option value='${trdListName.trd_list_name }'>${trdListName.trd_list_name }
+														</c:forEach>
+													</select>
+												</th>
+											</tr>
+											<tr>
+												<th>재고량</th>
+												<th><input type='text'></th>
+											</tr>
+											<tr>
+												<th>원가</th>
+												<th><input type='text'></th>
+											</tr>
+											<tr>
+												<th>판매가</th>
+												<th><input type='text'></th>
+											</tr>
+											<tr>
+												<th>썸네일 이미지</th>
+												<th><input type='file' id='img'></th>
+											</tr>
+											<tr>
+												<th>썸네일 미리보기</th>
+												<th><div align='center' class="select_img"><img src="" /></div></th>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="" width="100%"
-									cellspacing="0">
-									<thead>
+						
+						<div class="col-xl-6">
+							<div class="card mb-4">
+								<div class="card-header">
+									상품 상세 정보
+								</div>
+								<div class="card-body">
+									<table class="table table-bordered" id="" width="100%" cellspacing="0">
 										<tr>
-											<th>판매등록 상품 갯수</th>
-											<th>판매중인 상품 갯수</th>
-											<th>품절된 상품 갯수</th>
-											<th>삭제한 상품 갯수</th>
+											<th>상세 이미지</th>
+											<th><input type='file' id='img2'>
 										</tr>
-									</thead>
-									<tbody>
 										<tr>
-											<td>100</td>
-											<td>90</td>
-											<td>10</td>
-											<td>0</td>
+											<th>이미지 미리보기</th>
+											<th><div align='center' class="select_img2"><img src="" /></div></th>
 										</tr>
-									</tbody>
-								</table>
-								<table class="table table-bordered" id="" width="100%"
-									cellspacing="0">
-									<thead>
 										<tr>
-											<th>상품명</th>
-											<th>업체명</th>
-											<th>재고</th>
-											<th>가격</th>
+											<th>상품 설명</th>
+											<th><textarea id='' name=''></textarea></th>
 										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><a href='productInfo'>aaaa</a></td>
-											<td>이마트</td>
-											<td>500</td>
-											<td>10000</td>
-										</tr>
-									</tbody>
-								</table>
-								<div align='right'>
-									<input type='button' id='addStoreGoods' value='상품추가'>
+									</table>	
 								</div>
 							</div>
 						</div>
 					</div>
+					<div align='right'><input type='button' value='저장'></div>
 				</div>
 			</main>
 <!-- 			<footer class="py-4 bg-light mt-auto"> -->
@@ -247,9 +280,25 @@
 	</div>
 	
 	<script>
-		$('#addStoreGoods').click(function(){
-			location.href='addStoreGoods'
-		})
+		$("#img").change(function(){
+			if(this.files && this.files[0]) {
+				var reader = new FileReader;
+				reader.onload = function(data) {
+					$(".select_img img").attr("src", data.target.result).width(200);        
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+		
+		$("#img2").change(function(){
+			if(this.files && this.files[0]) {
+				var reader = new FileReader;
+				reader.onload = function(data) {
+					$(".select_img2 img").attr("src", data.target.result).width(200);        
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
 	</script>
 	
 	

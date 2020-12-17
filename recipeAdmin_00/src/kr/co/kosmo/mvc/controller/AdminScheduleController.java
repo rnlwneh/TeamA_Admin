@@ -24,14 +24,6 @@ public class AdminScheduleController {
 	@Autowired
 	private AdminScheduleDao adminScheduleDao;
 	
-	@RequestMapping(value="/adminSchedule2")
-	public ModelAndView adminSchedule2() {
-		ModelAndView mv = new ModelAndView();
-		
-		mv.setViewName("adminSchedule2");
-		return mv;
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="/addSchedule", method=RequestMethod.POST)
 	public void addSchedule(HttpServletRequest request, AdminScheduleDTO vo) throws ServletException,IOException {

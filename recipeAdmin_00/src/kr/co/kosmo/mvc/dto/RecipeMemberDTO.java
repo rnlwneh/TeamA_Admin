@@ -1,6 +1,5 @@
 package kr.co.kosmo.mvc.dto;
 
-import java.util.Date;
 
 //¾îÁø
 public class RecipeMemberDTO {
@@ -12,7 +11,7 @@ public class RecipeMemberDTO {
 	private String mem_juminnum;
 	private String mem_email;
 	private String mem_phone;
-	private Date mem_regdate;
+	private String mem_regdate;
 	private String mem_pic;
 	private String mem_grade_no;
 	private int kind_tag_no;
@@ -81,11 +80,11 @@ public class RecipeMemberDTO {
 		this.mem_phone = mem_phone;
 	}
 
-	public Date getMem_regdate() {
+	public String getMem_regdate() {
 		return mem_regdate;
 	}
 
-	public void setMem_regdate(Date mem_regdate) {
+	public void setMem_regdate(String mem_regdate) {
 		this.mem_regdate = mem_regdate;
 	}
 
