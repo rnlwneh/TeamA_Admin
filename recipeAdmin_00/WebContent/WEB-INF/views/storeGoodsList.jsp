@@ -19,6 +19,8 @@
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js"
 	crossorigin="anonymous"></script>
+
+	
 </head>
 <body class="sb-nav-fixed">
 	<nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -172,60 +174,68 @@
 						<li class="breadcrumb-item"><a href="storeGoodsList">스토어
 								상품 관리</a></li>
 					</ol>
-					<div class="card mb-4">
-						<div class="card-body">
-							<!--                                 DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the -->
-							<!--                                 <a target="_blank" href="https://datatables.net/">official DataTables documentation</a> -->
-							<!--                                 . -->
-						</div>
-					</div>
+<!-- 					<div class="card mb-4"> -->
+						<table class="table table-bordered" id="" width="100%"
+									cellspacing="0">
+									<thead>
+										<tr align='center'>
+											<th>판매등록 상품</th>
+											<th>판매중인 상품</th>
+											<th>품절된 상품</th>
+											<th>안보이기 등록 상품</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr align='center'>
+											<td>100개</td>
+											<td>90개</td>
+											<td>10개</td>
+											<td>0개</td>
+										</tr>
+									</tbody>
+								</table>
+								<div>&nbsp</div>
+<!-- 					</div> -->
 					<div class="card mb-4">
 						<div class="card-header">
 							<i class="fas fa-table mr-1"></i> 상품 현황
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="" width="100%"
-									cellspacing="0">
-									<thead>
-										<tr>
-											<th>판매등록 상품 갯수</th>
-											<th>판매중인 상품 갯수</th>
-											<th>품절된 상품 갯수</th>
-											<th>삭제한 상품 갯수</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>100</td>
-											<td>90</td>
-											<td>10</td>
-											<td>0</td>
-										</tr>
-									</tbody>
-								</table>
-								<table class="table table-bordered" id="" width="100%"
-									cellspacing="0">
-									<thead>
-										<tr>
-											<th>상품명</th>
-											<th>업체명</th>
-											<th>재고</th>
-											<th>가격</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td><a href='productInfo'>aaaa</a></td>
-											<td>이마트</td>
-											<td>500</td>
-											<td>10000</td>
-										</tr>
-									</tbody>
-								</table>
 								<div align='right'>
 									<input type='button' id='addStoreGoods' value='상품추가'>
 								</div>
+								<div>&nbsp</div>
+								
+								<table class="table table-bordered" id="goodsList" width="100%" cellspacing="0">
+									<thead>
+										<tr align='center'>
+											<th>상품</th>
+											<th>업체명</th>
+											<th>재고</th>
+											<th>원가</th>
+											<th>판매가</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr >
+											<td width="15%">
+												<a href='productInfo?str_pro_no='>
+													<div align="center">
+														<img src="${pageContext.request.contextPath}/resources/image/asd123.PNG" width="150px" >
+														<div align="center">aaaaaa</div>
+													</div>
+													
+												</a>
+											</td>
+											<td align='center' style="vertical-align:middle;"><a href='clientDetail?trd_list_no='>이마트</a></td>
+											<td align='center' style="vertical-align:middle;">500개</td>
+											<td align='center' style="vertical-align:middle;">5000원</td>
+											<td align='center' style="vertical-align:middle;">10000원</td>
+										</tr>
+									</tbody>
+								</table>
+								
 							</div>
 						</div>
 					</div>

@@ -184,12 +184,26 @@
 						<table class="table table-bordered" id="" width="100%"
 							cellspacing="0">
 							<tr>
-								<td>배송상태</td>
-								<td><input type='radio' name='aa' value='전체'>전체 <input
-									type='radio' name='aa' value='결제확인중'>결제확인중 <input
-									type='radio' name='aa' value='배송중'>배송중 <input
-									type='radio' name='aa' value='배송완료'>배송완료 <input
-									type='radio' name='aa' value='주문취소'>주문취소</td>
+								<td align='center'>배송상태</td>
+								<td>
+									<label for='status'><input type='radio' id='status' name='aa' value='전체'>전체</label>&nbsp&nbsp
+									<label for='status2'><input type='radio' id='status2' name='aa' value='결제확인중'>결제확인중</label> &nbsp&nbsp
+									<label for='status3'><input type='radio' id='status3' name='aa' value='배송중'>배송중</label> &nbsp&nbsp
+									<label for='status4'><input type='radio' id='status4' name='aa' value='배송완료'>배송완료</label> &nbsp&nbsp
+									<label for='status5'><input type='radio' id='status5' name='aa' value='주문취소'>주문취소</label> 
+								</td>
+							</tr>
+							<tr>
+								<td align='center'>회원명</td>
+								<td><input type='text'></td>
+							</tr>
+							<tr>
+								<td align='center'>상품명</td>
+								<td><input type='text'></td>
+							</tr>
+							<tr>
+								<td align='center'>결제수단</td>
+								<td><input type='text'></td>
 							</tr>
 						</table>
 						<div class="card-body">

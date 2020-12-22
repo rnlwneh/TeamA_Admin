@@ -73,9 +73,9 @@
 										<div class="form-group">
 											<label class="small mb-1" for="ability">권한</label>
 											<div>
-												<input name='author' class="author" id="author" type="checkbox" value='사이트관리' />사이트관리
-												<input name='author' class="author" id="author" type="checkbox" value='스토어관리' />스토어관리
-												<input name='author' class="author" id="author" type="checkbox" value='회원관리' />회원관리
+												<label for='author1'><input name='author' class="author" id="author1" type="checkbox" value='사이트관리' />사이트관리</label>
+												<label for='author2'><input name='author' class="author" id="author2" type="checkbox" value='스토어관리' />스토어관리</label>
+												<label for='author3'><input name='author' class="author" id="author3" type="checkbox" value='회원관리' />회원관리</label>
 											</div>
 										</div>
 										<div class="form-group mt-4 mb-0">

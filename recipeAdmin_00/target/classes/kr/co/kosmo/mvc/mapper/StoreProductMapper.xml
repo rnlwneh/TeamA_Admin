@@ -4,6 +4,42 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="strProduct">
 	<select id='trdListName' resultType="trdList">
-		select distinct TRD_LIST_NAME "TRD_LIST_NAME" from trade_list
+		select distinct TRD_LIST_NAME "TRD_LIST_NAME" 
+		, trd_list_no "TRD_LIST_NO"
+		from trade_list
 	</select>
+	
+	<insert id="addStoreGoods" parameterType="strPro">
+		insert into store_product values(
+		    str_pro_no_sq.nextval
+		    , #{trd_list_no}
+		    , #{str_pro_image}
+		    , #{str_pro_detail_image}
+		    , #{str_pro_content}
+		    , #{str_pro_name}
+		    , #{str_pro_remind}
+		    , #{str_pro_primecost}
+		    , #{str_pro_salescost}
+		    , #{str_pro_show}
+		)
+	</insert>
+
+<!-- 	<resultMap type="AaaVo" id="AaaVo"> -->
+<!-- 		<id property="str_pro_no" column="str_pro_no" javaType="int"/> -->
+<!-- 	    <result column="AAA_UID" property="aaaUid"/> -->
+<!-- 	    <result column="AAA_COL1" property="aaaCol1"/> -->
+<!-- 	    <result column="AAA_COL2" property="aaaCol2"/> -->
+<!-- 	    <association property="tradeListDTO" javaType="trdList"></association> -->
+<!-- 	</resultMap> -->
+	
+<!-- 	<select id='goodsList' parameterType="" resultType="strPro"> -->
+<!-- 		select str_pro_image -->
+<!-- 		    , p.str_pro_name -->
+<!-- 		    , p.str_pro_remind -->
+<!-- 		    , p.str_pro_primecost -->
+<!-- 		    , p.str_pro_salescost -->
+<!-- 		    , t.trd_list_name -->
+<!-- 		from store_product p, trade_list t -->
+<!-- 		where p.trd_list_no = t.trd_list_no -->
+<!-- 	</select> -->
 </mapper>
