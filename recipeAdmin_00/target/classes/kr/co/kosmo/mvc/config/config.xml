@@ -8,6 +8,7 @@
  		<typeAlias type="kr.co.kosmo.mvc.dto.AdminScheduleDTO" alias="adSche"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.StoreProductDTO" alias="strPro"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.TradeListDTO" alias="trdList"/>
- 		<typeAlias alias="rpMem" type="kr.co.kosmo.mvc.dto.RecipeMemberDTO"/>
+ 		<typeAlias type="kr.co.kosmo.mvc.dto.RecipeMemberDTO" alias="rpMem"/>
+ 		<typeAlias type="kr.co.kosmo.mvc.dto.PageVO" alias="pvo" />
  	</typeAliases>
  </configuration>

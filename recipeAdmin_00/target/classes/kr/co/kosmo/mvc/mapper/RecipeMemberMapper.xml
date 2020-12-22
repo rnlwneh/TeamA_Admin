@@ -2,21 +2,123 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--   어진 -->
- <mapper namespace="recipeMember">
- 
- 	<select id="memlist" resultType="rpMem">
+<mapper namespace="recipeMember">
+
+	<select id="memlist" resultType="rpMem" parameterType="pvo">
+		select MEM_NO,
+		mem_id,
+		mem_pwd,
+		mem_name,
+		mem_nickname,
+		mem_juminnum,
+		MEM_EMAIL,
+		mem_phone,
+		to_char(mem_regdate,'yyyy-mm-dd') mem_regdate,
+		mem_pic,
+		kind_tag_no,
+		mem_grade_no,
+		mem_status,
+		mem_declare
+		from
+		(
+		select rownum r_num, a.* from
+		(
+		select * from member_info 
+				<trim prefix="WHERE" prefixOverrides="AND|OR">
+
+			<if
+				test="searchType=='mem_id' and keyword != null and keyword != '' ">
+
+				AND mem_id  like '%'||#{keyword}||'%'    
+			</if>
+
+			<if
+				test="searchType=='mem_email' and keyword != null and keyword != '' ">
+
+				AND mem_email like '%'||#{keyword}||'%'  
+
+			</if>
+
+			<if
+				test="searchType=='mem_grade_no' and keyword != null and keyword != '' ">
+
+				AND mem_grade_no  like '%'||#{keyword}||'%'  
+
+			</if>
+
+		</trim>
+		order by
+		MEM_NO desc
+		) a
+		) where r_num between #{start} and #{end}
+	</select>
+
+
+
+
+	<select id="viewDetail" resultType="rpMem"
+		parameterType="java.lang.Integer">
 		SELECT MEM_NO,
-		MEM_GRADE_NO,
-		MEM_ID,
-		MEM_EMAIL
-		FROM member_info ORDER BY MEM_NO
-		
-</select>
-<update id="memlistup">
+		mem_id,
+		mem_name,
+		mem_nickname,
+		mem_juminnum,
+		MEM_EMAIL,
+		mem_phone,
+		to_char(mem_regdate,'yyyy-mm-dd')
+		mem_regdate,
+		mem_pic,
+		mem_grade_no,
+		mem_status,
+		mem_declare
+		FROM
+		member_info WHERE MEM_NO = #{MEM_NO, jdbcType = VARCHAR}
+	</select>
+
+
+	<update id="memlistup" parameterType="rpMem">
+
+		update member_info
+		set
+		mem_id =#{mem_id},
+		mem_nickname =#{mem_nickname},
+		mem_email=#{mem_email}
+		where mem_no=#{mem_no}
+
+	</update>
+
+
+	<select id="totalCount" resultType="int">
+		select count(*) cnt from
+		member_info
+
+	<trim prefix="WHERE" prefixOverrides="AND|OR">
+
+			<if
+				test="searchType=='mem_id' and keyword != null and keyword != '' ">
+
+				AND mem_id  like '%'||#{keyword}||'%'    
+			</if>
+
+			<if
+				test="searchType=='mem_email' and keyword != null and keyword != '' ">
+
+				AND mem_email like '%'||#{keyword}||'%'  
+
+			</if>
+
+			<if
+				test="searchType=='mem_grade_no' and keyword != null and keyword != '' ">
+
+				AND mem_grade_no  like '%'||#{keyword}||'%'  
+
+			</if>
+
+		</trim>
 
 
 
-</update>
+	</select>
 
- </mapper>
+
+</mapper>

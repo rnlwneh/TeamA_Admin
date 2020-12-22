@@ -1,18 +1,32 @@
 package kr.co.kosmo.mvc.service;
 
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import kr.co.kosmo.mvc.dto.PageVO;
 import kr.co.kosmo.mvc.dto.RecipeMemberDTO;
 
-//¾îÁø
+
+
 public interface RecipeMemberBoardService {
 	
 	
 	RecipeMemberDTO getBoard(RecipeMemberDTO vo);
 
-	// ±Û ¸ñ·Ï Á¶È¸
+	// ê¸€ ëª©ë¡ ì¡°íšŒ
 	List<RecipeMemberDTO> getBoardList(RecipeMemberDTO vo);
 	
-	public List<RecipeMemberDTO> getMemberList();
 	
+	public List<RecipeMemberDTO> getMemberList(PageVO svo) ;
+	
+	
+	public RecipeMemberDTO getMemberDetail(int mem_no) ;
+
+	
+	public void update(RecipeMemberDTO vo);
+
+	
+	public int getTotalCount(); 
 }

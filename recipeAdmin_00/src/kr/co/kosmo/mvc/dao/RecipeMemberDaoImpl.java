@@ -1,14 +1,18 @@
 package kr.co.kosmo.mvc.dao;
 
+
 import java.util.List;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.kosmo.mvc.dto.PageVO;
 import kr.co.kosmo.mvc.dto.RecipeMemberDTO;
 
 
-//어진
+
 @Repository("recipeMemberDao")
 public class RecipeMemberDaoImpl implements RecipeMemberDao {
 
@@ -17,22 +21,32 @@ public class RecipeMemberDaoImpl implements RecipeMemberDao {
 	
 	@Override
 	public RecipeMemberDTO getBoard(RecipeMemberDTO vo) {
-		System.out.println("===> Mybatis RecipeMemberDTO() 호출");
 		return ss.selectOne("RecipeMemberDao.getBoard",vo);
 	}
 
 	@Override
 	public List<RecipeMemberDTO> getBoardList(RecipeMemberDTO vo) {
-		System.out.println("===> Mybatis List<RecipeMemberDTO>() 호출");
 		return ss.selectList("RecipeMemberDao.getBoardList",vo);
 	}
 
 	@Override
-	public List<RecipeMemberDTO> getMemberList() {
+	public List<RecipeMemberDTO> getMemberList(PageVO svo) {
 		// TODO Auto-generated method stub
-		return ss.selectList("recipeMember.memlist");
+		return ss.selectList("recipeMember.memlist",svo);
+	}
+	
+	@Override
+	public RecipeMemberDTO getMemberDetail(int mem_no) {
+		return ss.selectOne("recipeMember.viewDetail",mem_no);
+	}
+	@Override
+	public void update(RecipeMemberDTO vo) {
+	 	ss.update("recipeMember.memlistup", vo);
 	}
 
-
+	@Override
+	public int getTotalCount() {
+		return ss.selectOne("recipeMember.totalCount");
+	}
 
 }

@@ -1,13 +1,16 @@
 package kr.co.kosmo.mvc.service;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.co.kosmo.mvc.dao.RecipeMemberDaoImpl;
+import kr.co.kosmo.mvc.dto.PageVO;
 import kr.co.kosmo.mvc.dto.RecipeMemberDTO;
 
-//¾îÁø
 @Service("recipeMemberBoardService")
 public class RecipeMemberBoardServiceImpl implements RecipeMemberBoardService {
 
@@ -25,9 +28,29 @@ public class RecipeMemberBoardServiceImpl implements RecipeMemberBoardService {
 	}
 
 	@Override
-	public List<RecipeMemberDTO> getMemberList() {
+	public List<RecipeMemberDTO> getMemberList(PageVO svo){
 		// TODO Auto-generated method stub
-		return recipeMemberDao.getMemberList();
+		return recipeMemberDao.getMemberList(svo);
 	}
+	
+	@Override
+	public RecipeMemberDTO getMemberDetail(int mem_no) {
+
+	return recipeMemberDao.getMemberDetail(mem_no);
+
+	}
+	
+	@Override
+	public void update(RecipeMemberDTO vo) {
+		recipeMemberDao.update(vo);
+	}
+
+	@Override
+	public int getTotalCount() {
+	 return	recipeMemberDao.getTotalCount();
+		
+	}
+	
+	
 
 }

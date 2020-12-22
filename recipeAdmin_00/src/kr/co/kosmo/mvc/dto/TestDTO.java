@@ -1,6 +1,7 @@
 package kr.co.kosmo.mvc.dto;
 
-public class RecipeMemberDTO {
+
+public class TestDTO {
 	private int mem_no;
 	private String mem_id;
 	private String mem_pwd;
@@ -27,6 +28,12 @@ public class RecipeMemberDTO {
 	public void setMem_id(String mem_id) {
 		this.mem_id = mem_id;
 	}
+	public String getMem_nickname() {
+		return mem_nickname;
+	}
+	public void setMem_nickname(String mem_nickname) {
+		this.mem_nickname = mem_nickname;
+	}
 	public String getMem_pwd() {
 		return mem_pwd;
 	}
@@ -38,12 +45,6 @@ public class RecipeMemberDTO {
 	}
 	public void setMem_name(String mem_name) {
 		this.mem_name = mem_name;
-	}
-	public String getMem_nickname() {
-		return mem_nickname;
-	}
-	public void setMem_nickname(String mem_nickname) {
-		this.mem_nickname = mem_nickname;
 	}
 	public String getMem_juminnum() {
 		return mem_juminnum;
@@ -100,7 +101,6 @@ public class RecipeMemberDTO {
 	public void setKind_tag_no(int kind_tag_no) {
 		this.kind_tag_no = kind_tag_no;
 	}
-
 	
-
+	
 }
