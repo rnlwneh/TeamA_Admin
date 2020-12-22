@@ -23,7 +23,7 @@ public class TradeListController {
 		System.out.println("=====TradeListDao getTradeList() »£√‚");
 		List<TradeListDTO> trdList = tradeListdao.getTradeList();
 		mv.addObject("trdList", trdList);
-		mv.setViewName("clientList");
+		mv.setViewName("admin/clientList");
 		return mv;
 	}
 }

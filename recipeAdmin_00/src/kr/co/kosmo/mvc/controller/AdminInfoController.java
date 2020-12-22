@@ -39,7 +39,7 @@ public class AdminInfoController {
 		System.out.println("=====adminInfoDao adminList호출=====");
 		List<AdminInfoDTO> adminList = adminInfodao.adminList(vo);
 		System.out.println("=====mapper까지 찍고옴=====");
-		mv.setViewName("adminList");
+		mv.setViewName("admin/adminList");
 		mv.addObject("adminList", adminList);
 		return mv;
 	}
@@ -55,7 +55,7 @@ public class AdminInfoController {
 			System.out.println(ad_no);
 			adminInfodao.deleteAdmin(ad_no);
 		}
-		mv.setViewName("redirect:adminList");
+		mv.setViewName("redirect:admin/adminList");
 		return mv;
 	}
 	
@@ -68,7 +68,7 @@ public class AdminInfoController {
 			mv.setViewName("login");
 			mv.addObject("msg", "이메일과 비밀번호를 다시 확인해주세요");
 		}else {
-			mv.setViewName("indexA");
+			mv.setViewName("admin/indexA");
 			//세션 추가
 			session.setAttribute("ad_name", adminLogin.getAd_name());
 			session.setAttribute("ad_author", adminLogin.getAd_author());

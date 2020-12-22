@@ -24,7 +24,7 @@ public class MemberBoardController {
 		System.out.println("pathVal:");
 		List<RecipeMemberDTO> list = recipeMemberBoardService.getMemberList();
 		m.addAttribute("list", list);
-		return "tables";
+		return "admin/tables";
 	}
 	
 	@RequestMapping("/getBoard")

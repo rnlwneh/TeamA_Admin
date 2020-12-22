@@ -1,13 +1,100 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
-        <ul>
-            <li><a href="mykosta.kos?cmd=index">Home</a></li>
-            <!-- 세션이 있으면 :로그아웃, 세션이 없으면 : 로그인  -->
-            <li><a href="mykosta">로그인 </a></li>
-            <li><a href="surveyClient">설문조사 예제</a></li>
-            <li><a href="memberForm">회원가입예제</a></li>
-            <li><a href="chart1">chart1</a></li>
-            <li><a href="chart2">chart2</a></li>
-             <li><a href="chart3">chart3</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+<%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+
+        <div id="layoutSidenav_nav">
+			<nav class="sb-sidenav accordion sb-sidenav-dark"
+				id="sidenavAccordion">
+				<div class="sb-sidenav-menu">
+					<div class="nav">
+						<!--                             <div class="sb-sidenav-menu-heading">Core</div> -->
+						<a class="nav-link" href="indexA">
+							<div class="sb-nav-link-icon">
+								<i class="fas fa-tachometer-alt"></i>
+							</div> 메인
+						</a>
+
+						<div class="sb-sidenav-menu-heading">일정 관리</div>
+						<nav class="sb-sidenav-menu-nested nav">
+							<a href='adminSchedule2?ad_no=${ad_no }'><font size='2' color='gray'>달력</font></a>
+						</nav>
+
+						<c:set var="author" value="${ad_author }" />
+						<c:if test="${fn:contains(author, '사이트관리')}">
+
+							<div class="sb-sidenav-menu-heading">사이트 관리</div>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='adminBoardRegist'><font size='2' color='gray'>신고된
+										글 관리</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href=''><font size='2' color='gray'>사이트 카테고리 관리</font></a>
+							</nav>
+						</c:if>
+
+						<c:if test="${fn:contains(author, '스토어관리')}">
+							<div class="sb-sidenav-menu-heading">스토어 관리</div>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='orderProduct'><font size='2' color='gray'>발주하기</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='orderList'><font size='2' color='gray'>발주조회</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='sales'><font size='2' color='gray'>매출 현황</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='salesAnalysis'><font size='2' color='gray'>매출
+										분석</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='clientList'><font size='2' color='gray'>거래처목록</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href=''><font size='2' color='gray'>스토어 재고 현황</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='storeGoodsList'><font size='2' color='gray'>스토어
+										상품 관리</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='memberOrderList'><font size='2' color='gray'>고객
+										주문 관리</font></a>
+							</nav>
+						</c:if>
+
+						<c:if test="${fn:contains(author, '회원관리')}">
+							<div class="sb-sidenav-menu-heading">회원관리</div>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='newChief'><font size='2' color='gray'>셰프 신청
+										관리</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='tables'><font size='2' color='gray'>회원관리</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='chiefManage'><font size='2' color='gray'>셰프관리</font></a>
+							</nav>
+						</c:if>
+
+							<div class="sb-sidenav-menu-heading">관리자</div>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='adminList'><font size='2' color='gray'>관리자
+										목록</font></a>
+							</nav>
+							<nav class="sb-sidenav-menu-nested nav">
+								<a href='register'><font size='2' color='gray'>관리자
+										추가하기</font></a>
+							</nav>
+					</div>
+				</div>
+				<!--                     <div class="sb-sidenav-footer"> -->
+				<!--                         <div class="small">Logged in as:</div> -->
+				<!--                         Start Bootstrap -->
+				<!--                     </div> -->
+			</nav>
+		</div>
+
+		<!-- 공통사항 -->

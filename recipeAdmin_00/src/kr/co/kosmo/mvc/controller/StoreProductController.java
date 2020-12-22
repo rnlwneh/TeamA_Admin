@@ -27,7 +27,7 @@ public class StoreProductController {
 		System.out.println("=====StoreProductDao trdListName() 호출=====");
 		List<TradeListDTO> trdListName = storeProductDao.trdListName();
 		mv.addObject("trdListName", trdListName);
-		mv.setViewName("addStoreGoods");
+		mv.setViewName("admin/addStoreGoods");
 		return mv;
 	}
 	
@@ -47,7 +47,7 @@ public class StoreProductController {
 //		System.out.println(vo.getTrd_list_no());
 		System.out.println("=====StoreProductDao addStoreGoods() 호출=====");
 		storeProductDao.addStoreGoods(vo);
-		mv.setViewName("redirect:storeGoodsList");
+		mv.setViewName("redirect:admin/storeGoodsList");
 		return mv;
 	}
 }
