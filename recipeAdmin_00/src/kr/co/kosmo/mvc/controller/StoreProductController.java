@@ -1,5 +1,6 @@
 package kr.co.kosmo.mvc.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.kosmo.mvc.dao.StoreProductDao;
@@ -113,5 +115,48 @@ public class StoreProductController {
 			storeProductDao.deleteProduct(str_pro_no);
 		}
 	}
+	
+	@RequestMapping(value="/storeGoodsDetail")
+	public ModelAndView storeGoodsDetail(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		String str_pro_no = (String)request.getParameter("str_pro_no");
+		System.out.println("=====StoreProductDao storeGoodsDetail() 호출=====");
+		mv.addObject("goodsDetail", storeProductDao.storeGoodsDetail(str_pro_no));
+		System.out.println("=====StoreProductDao trdListName() 호출=====");
+		mv.addObject("trdListName",storeProductDao.trdListName());
+		mv.setViewName("admin/storeGoodsDetail");
+		return mv;
+	}
+	
+//	@RequestMapping(value="/updateStoreGoods")
+//	public ModelAndView updateStoreGoods(StoreProductDTO vo, MultipartFile file, HttpServletRequest request) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		String imageUrl = "D:\\bigdata\\workspace\\TeamA_Admin\\recipeAdmin_00\\WebContent\\resources\\image\\";
+//		String detailImageUrl = "D:\\bigdata\\workspace\\TeamA_Admin\\recipeAdmin_00\\WebContent\\resources\\detailImage\\";		
+//		String str_pro_image = (String)request.getParameter("str_pro_image");
+//		String str_pro_detail_image = (String)request.getParameter("str_pro_detail_image");
+//		
+//		// 새로운 파일이 등록되었는지 확인
+//		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
+//		// 기존 파일을 삭제
+//		new File( imageUrl+str_pro_image).delete();
+//		new File( detailImageUrl+str_pro_detail_image).delete();
+//		  
+//		// 새로 첨부한 파일을 등록
+//		vo.setStr_pro_image(str_pro_image);
+//		vo.setStr_pro_detail_image(str_pro_detail_image);
+//		  
+//		} else {  
+//		// 새로운 파일이 등록되지 않았다면 기존 이미지를 그대로 사용
+//		vo.setStr_pro_image(str_pro_image);
+//		vo.setStr_pro_detail_image(str_pro_detail_image);
+//		  
+//		}
+//		
+//		return mv;
+//		
+//	}
 	
 }

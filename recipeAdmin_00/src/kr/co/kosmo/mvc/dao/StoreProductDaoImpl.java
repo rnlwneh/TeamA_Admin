@@ -54,4 +54,10 @@ public class StoreProductDaoImpl implements StoreProductDao {
 //		System.out.println("////////////"+map.get("searchStatus")+"/////////////////");
 		return ss.selectOne("strProduct.totalCnt",map);
 	}
+
+	@Override
+	public StoreProductDTO storeGoodsDetail(String str_pro_no) {
+		System.out.println("=====StoreProductMapper goodsDetail »£√‚=====");
+		return ss.selectOne("strProduct.goodsDetail", str_pro_no);
+	}
 }

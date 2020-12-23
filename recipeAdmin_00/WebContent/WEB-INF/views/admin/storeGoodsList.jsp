@@ -108,7 +108,7 @@
 											<tr>
 												<td align='center' style="vertical-align:middle"><input type='checkbox' id='proCheck'><input type='hidden' value='${goodsList.str_pro_no }'></td>
 												<td width="15%">
-													<a href='productInfo?str_pro_no=${goodsList.str_pro_no }'>
+													<a href='storeGoodsDetail?str_pro_no=${goodsList.str_pro_no }'>
 														<div align="center">
 															<img src="${pageContext.request.contextPath}/resources/image/${goodsList.str_pro_image}" width="100px" >
 															<div align="center">${goodsList.str_pro_name }</div>

@@ -15,4 +15,5 @@ public interface StoreProductDao {
 	public void deleteProduct(String str_pro_no);
 	public HashMap<String,Object> storeInfo();
 	public int totalCnt(HashMap<String,String> map);
+	public StoreProductDTO storeGoodsDetail(String str_pro_no);
 }
