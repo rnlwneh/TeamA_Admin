@@ -1,7 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-
+<head>
+	<style>
+		textarea {
+			resize:none;
+			width:90%;
+		}
+	</style>
+</head>
 			<main>
 				<div class="container-fluid">
 					<h1 class="mt-4">스토어 상품 추가</h1>
@@ -91,7 +98,7 @@
 											</tr>
 											<tr>
 												<th>상품 설명</th>
-												<th><textarea id='' name='str_pro_content'></textarea></th>
+												<th><textarea id='' name='str_pro_content' rows='6'></textarea></th>
 											</tr>
 										</table>	
 									</div>
@@ -138,13 +145,17 @@
 		});
 		
 		$('#saveGoods').click(function(){
-			$('#str_pro_show').val(1);
-			document.strInfo.submit();
+			if(confirm("등록하시겠습니까?")){
+				$('#str_pro_show').val(1);
+				document.strInfo.submit();
+			}
 		})
 		
 		$('#tempSaveGoods').click(function(){
-			$('#str_pro_show').val(0);
-			document.strInfo.submit();
+			if(confirm("임시등록 하시겠습니까?")){
+				$('#str_pro_show').val(0);
+				document.strInfo.submit();
+			}
 		})
 	</script>
 	

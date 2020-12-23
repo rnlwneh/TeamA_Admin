@@ -55,7 +55,7 @@ public class AdminInfoController {
 			System.out.println(ad_no);
 			adminInfodao.deleteAdmin(ad_no);
 		}
-		mv.setViewName("redirect:admin/adminList");
+		mv.setViewName("redirect:adminList");
 		return mv;
 	}
 	

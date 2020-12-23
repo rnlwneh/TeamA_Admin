@@ -23,23 +23,131 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    , #{str_pro_show}
 		)
 	</insert>
-
-<!-- 	<resultMap type="AaaVo" id="AaaVo"> -->
-<!-- 		<id property="str_pro_no" column="str_pro_no" javaType="int"/> -->
-<!-- 	    <result column="AAA_UID" property="aaaUid"/> -->
-<!-- 	    <result column="AAA_COL1" property="aaaCol1"/> -->
-<!-- 	    <result column="AAA_COL2" property="aaaCol2"/> -->
-<!-- 	    <association property="tradeListDTO" javaType="trdList"></association> -->
-<!-- 	</resultMap> -->
 	
-<!-- 	<select id='goodsList' parameterType="" resultType="strPro"> -->
-<!-- 		select str_pro_image -->
-<!-- 		    , p.str_pro_name -->
-<!-- 		    , p.str_pro_remind -->
-<!-- 		    , p.str_pro_primecost -->
-<!-- 		    , p.str_pro_salescost -->
-<!-- 		    , t.trd_list_name -->
-<!-- 		from store_product p, trade_list t -->
-<!-- 		where p.trd_list_no = t.trd_list_no -->
-<!-- 	</select> -->
+	<select id="storeInfo" resultType="HashMap">
+		select 
+		    (select count(*) from store_product) "totcnt"
+		    ,(select count(*) from store_product where str_pro_show=1 and str_pro_remind!=0) "sellcnt"
+		    ,(select count(*) from store_product where str_pro_remind=0) "soldout"
+		    ,(select count(*) from store_product where str_pro_show=0) "wait"
+		from dual
+	</select>
+	
+	<select id="totalCnt" resultType="Integer" parameterType="HashMap">
+		select count(*) "cnt" from store_product
+		<trim prefix="WHERE" prefixOverrides="and|or">
+			<choose>
+				<when test='searchStatus=="" or searchStatus==null'>
+					<if test="searchProName!='' and searchProName!=null">
+						and str_pro_name like '%'||#{searchProName}||'%' 
+					</if>
+					<if test="searchTrdList!='' and searchTrdList!=null">
+						and trd_list_no like '%'||#{searchTrdList}||'%' 
+					</if>
+				</when>
+				<when test='searchStatus=="2"'>
+					and str_pro_remind = 0 
+					<if test="searchProName!='' and searchProName!=null">
+						and str_pro_name like '%'||#{searchProName}||'%' 
+					</if>
+					<if test="searchTrdList!='' and searchTrdList!=null">
+						and trd_list_no like '%'||#{searchTrdList}||'%' 
+					</if>
+				</when>
+				<when test='searchStatus=="1"'>
+					and str_pro_show = 1 and str_pro_remind != 0 
+					<if test="searchProName!='' and searchProName!=null">
+						and str_pro_name like '%'||#{searchProName}||'%' 
+					</if>
+					<if test="searchTrdList!='' and searchTrdList!=null">
+						and trd_list_no like '%'||#{searchTrdList}||'%' 
+					</if>
+				</when>
+				<when test='searchStatus=="0"'>
+					and str_pro_show = 0 and str_pro_remind != 0 
+					<if test="searchProName!='' and searchProName!=null">
+						and str_pro_name like '%'||#{searchProName}||'%' 
+					</if>
+					<if test="searchTrdList!='' and searchTrdList!=null">
+						and trd_list_no like '%'||#{searchTrdList}||'%' 
+					</if>
+				</when>
+			</choose>
+		</trim>
+	</select>
+
+	<resultMap type="strPro" id="strProList">
+		<id property="str_pro_no" column="str_pro_no" javaType="int"/>
+	    <result property="trd_list_no" column="trd_list_no"/>
+	    <result property="str_pro_image" column="str_pro_image"/>
+	    <result property="str_pro_name" column="str_pro_name"/>
+	    <result property="str_pro_remind" column="str_pro_remind"/>
+	    <result property="str_pro_primecost" column="str_pro_primecost"/>
+	    <result property="str_pro_salescost" column="str_pro_salescost"/>
+	    <result property="str_pro_show" column="str_pro_show"/>
+	    
+	    <association property="tradeListDTO" column="trd_list_no" javaType="trdList">
+	    	<id property="trd_list_no" column="trd_list_no"></id>
+	    	<result column="trd_list_name" property="trd_list_name"/>
+	    </association>
+	</resultMap>
+	
+	<select id='goodsList' parameterType="pvo" resultMap="strProList">
+	select * from(
+		select rownum r_num, a.* from
+		(select p.str_pro_no
+			, p.trd_list_no trd_list_no
+			, p.str_pro_image str_pro_image
+		    , p.str_pro_name str_pro_name
+		    , p.str_pro_remind str_pro_remind
+		    , p.str_pro_primecost str_pro_primecost
+		    , p.str_pro_salescost str_pro_salescost
+		    , p.str_pro_show str_pro_show
+		    , t.trd_list_name trd_list_name 
+		from store_product p, trade_list t
+		where p.trd_list_no = t.trd_list_no 
+		<choose>
+			<when test='searchStatus=="" or searchStatus==null'>
+				<if test="searchProName!='' and searchProName!=null">
+					and p.str_pro_name like '%'||#{searchProName}||'%' 
+				</if>
+				<if test="searchTrdList!='' and searchTrdList!=null">
+					and p.trd_list_no like '%'||#{searchTrdList}||'%' 
+				</if>
+			</when>
+			<when test='searchStatus == "2"'>
+				and p.str_pro_remind = 0 
+				<if test="searchProName!='' and searchProName!=null">
+					and p.str_pro_name like '%'||#{searchProName}||'%' 
+				</if>
+				<if test="searchTrdList!='' and searchTrdList!=null">
+					and p.trd_list_no like '%'||#{searchTrdList}||'%' 
+				</if>
+			</when>
+			<when test='searchStatus == "1"'>
+				and p.str_pro_show = 1 and p.str_pro_remind != 0 
+				<if test="searchProName!='' and searchProName!=null">
+					and p.str_pro_name like '%'||#{searchProName}||'%' 
+				</if>
+				<if test="searchTrdList!='' and searchTrdList!=null">
+					and p.trd_list_no like '%'||#{searchTrdList}||'%' 
+				</if>
+			</when>
+			<when test='searchStatus == "0"'>
+				and p.str_pro_show = 0 and p.str_pro_remind != 0 
+				<if test="searchProName!='' and searchProName!=null">
+					and p.str_pro_name like '%'||#{searchProName}||'%' 
+				</if>
+				<if test="searchTrdList!='' and searchTrdList!=null">
+					and p.trd_list_no like '%'||#{searchTrdList}||'%' 
+				</if>
+			</when>
+		</choose>
+		order by str_pro_no) a ) where r_num between #{start} and #{end}
+	</select>
+	
+	<delete id='delPro' parameterType="String">
+		delete store_product where str_pro_no=#{str_pro_no}
+	</delete>
+	
 </mapper>

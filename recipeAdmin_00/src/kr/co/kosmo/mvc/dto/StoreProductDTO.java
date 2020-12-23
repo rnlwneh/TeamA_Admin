@@ -2,6 +2,7 @@ package kr.co.kosmo.mvc.dto;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,7 +48,8 @@ public class StoreProductDTO {
 		this.file=file;
 		// 업로드 파일 접근
 		if(! file.isEmpty()){
-			this.str_pro_image = file.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			this.str_pro_image = uuid.toString()+file.getOriginalFilename();
 			
 			//***********************************************
 			// 해당 경로로 변경
@@ -72,7 +74,8 @@ public class StoreProductDTO {
 		this.detailFile=detailFile;
 		// 업로드 파일 접근
 		if(! detailFile.isEmpty()){
-			this.str_pro_detail_image = detailFile.getOriginalFilename();
+			UUID uuid = UUID.randomUUID();
+			this.str_pro_detail_image = uuid.toString()+detailFile.getOriginalFilename();
 			
 			//***********************************************
 			// 해당 경로로 변경

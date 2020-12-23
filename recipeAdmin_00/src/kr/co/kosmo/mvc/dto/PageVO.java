@@ -7,9 +7,11 @@ public class PageVO {
 		private int cntPage = 10;
 
 		private String searchType;
-
 		private String keyword;
 		
+		private String searchProName;
+		private String searchTrdList;
+		private String searchStatus;
 		
 		
 		public PageVO() {
@@ -22,9 +24,9 @@ public class PageVO {
 			memberStartEndPage(nowPage, cntPage);
 			memberStartEnd(nowPage, cntPerPage);
 		}
-		// 제일 마지막 페이지 계산
+		// �젣�씪 留덉�留� �럹�씠吏� 怨꾩궛
 		private void memberLastPage(int total, int cntPerPage) {
-			// 1.1page 올림처리 -> 2
+			// 1.1page �삱由쇱쿂由� -> 2
 			lastPage = (int) Math.ceil((double)total / (double)cntPerPage);
 		}
 
@@ -38,7 +40,7 @@ public class PageVO {
 				startPage = 1;
 			}
 		}
-			// rownum의 값의 범위를 지정함.
+			// rownum�쓽 媛믪쓽 踰붿쐞瑜� 吏��젙�븿.
 		private void memberStartEnd(int nowPage, int cntPerPage) {
 			end = nowPage * cntPerPage;
 			start = end - cntPerPage + 1;
@@ -119,6 +121,28 @@ public class PageVO {
 		public void setKeyword(String keyword) {
 			this.keyword = keyword;
 		}
+		
+		
+		
+		public String getSearchProName() {
+			return searchProName;
+		}
+		public void setSearchProName(String searchProName) {
+			this.searchProName = searchProName;
+		}
+		public String getSearchTrdList() {
+			return searchTrdList;
+		}
+		public void setSearchTrdList(String searchTrdList) {
+			this.searchTrdList = searchTrdList;
+		}
+		public String getSearchStatus() {
+			return searchStatus;
+		}
+		public void setSearchStatus(String searchStatus) {
+			this.searchStatus = searchStatus;
+		}
+		
 		
 		@Override
 		public String toString() {
