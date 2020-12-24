@@ -14,94 +14,64 @@
    
                 <main>
                     <div class="container-fluid">
-                        <h1 class="mt-4">셰프관리</h1>
+                        <h1 class="mt-4">클라스관리</h1>
                         <ol class="breadcrumb mb-4">
                         <li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
-                         <li class="breadcrumb-item"><a href="chiefManage">셰프관리</a></li>
+                         <li class="breadcrumb-item"><a href="chiefManage">클라스관리</a></li>
                         </ol>
                         
                         <div class="card mb-4">
                             <div class="card-header">
                                 <i class="fas fa-table mr-1"></i>
-                                셰프 목록
+                                클라스 목록
                             </div>
                             <div class="card-body">
                         
                                 <div class="table-responsive">
+            					<table class="table table-bordered" id="" width="100%"
+									cellspacing="0">
+									<thead>
+										<tr>
+											<th>번호</th>
+											<th>이미지</th>
+											<th>클라스명</th>
+											<th>멤버아이디</th>
+											<th>기간</th>
+										</tr>
+									</thead>
+									<c:forEach items="${cList}" var="cList">
+										<thead>
+											<tr>
+												<td>${cList.class_no}</td>
+												<td width="15%">
+													<a href='classListDetail?class_no=${cList.class_no}'>
+														<div align="center">
+															<img src="${pageContext.request.contextPath}/resources/image/${cList.class_info_pic}" width="100px" >
+															
+														</div>
+													</a>
+												</td>
+												<td>${cList.class_title}</td>
+										
+												<td><a
+													href='<c:url value='chiefDetail?mem_no=${cList.mem_no }'/>'
+													class="text-dark">${cList.mem_id }</a></td>
+												<td>${cList.class_period}</td>
+											</tr>
+										</thead>
+									</c:forEach>
+				
+								</table>
+
+
+
+							</div>
                                    
                                    
                                    
                                    
                                    
-                                        
-                 <script>
-                 
-                 
-                 
-             	var students =[];
-            	for( var i=1; i<=200; i++ ){
-            		students.push(		
-            			{ s_no:i
-            			, s_name: "오찡"+i
-            			,address:"서울시 어쩌고"
-            			,s_cnt:Math.round(Math.random())
-            			
-						}
-            		);
-         
-            
-            	}
-            	
-             	function randomItem(a) {
-          		  return a[Math.floor(Math.random() * a.length)];
-          		}
-          	
-        
-
-
-
-            	document.write("<table border=1 cellspacing=0 cellpadding=5>");
-            	document.write("<tr><th>번호<th>등급<th>닉네임<th>진행중인 클래스<th>처리<th>상세보기");
-            	for(var i=0; i<students.length; i++){
-        
-            		var rank= new Array('미슐랭셰프', '아임셰프');
-            	var bgcolor ="white";
-				var detail = "상세보기";
-				var chiefClass= new Array('양식','한식','베이킹','반찬'," ",' ','전통과자','하루집밥',' ');
-				var	lo = "location.href='chiefDetail'";
-            	document.write("<tr bgcolor="+bgcolor+">");
-                document.write("<td>"+(students[i].s_no)); 	
-              	document.write("<td>"+randomItem(rank));
-            	//	document.write("<td>"+rank);
-    
-            	document.write("<td>"+(students[i].s_name));
-            	document.write("<td>"+randomItem(chiefClass));
-            	document.write("<td>"+(students[i].s_cnt));
-            	document.write('<td><a href="chiefDetail">상세보기</a></td>');
-            	}
-            	document.write("</table>");
-
-
                          
-                                 
-                                   
-                                   
-                                   
-                                   
-                                </script>  
-                                   
-                                   
-                                
-                                 
-                                   
-                                   
-                                   
-                                   
-                                   
-                                   
-                                   
-                                   
-                                </div>
                             </div>
                         </div>
                     </div>

@@ -179,4 +179,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where str_pro_no = #{str_pro_no}
 	</select>
 	
+	<update id="updateStoreGoods" parameterType="strPro">
+		update store_product set 
+		    trd_list_no = #{trd_list_no}
+		    , str_pro_image = #{str_pro_image}
+		    , str_pro_detail_image = #{str_pro_detail_image}
+		    , str_pro_content = #{str_pro_content}
+		    , str_pro_name = #{str_pro_name}
+		    , str_pro_remind = #{str_pro_remind}
+		    , str_pro_primecost = #{str_pro_primecost}
+		    , str_pro_salescost = #{str_pro_salescost}
+		    , str_pro_show = #{str_pro_show}
+		where str_pro_no = #{str_pro_no}
+	</update>
+	
 </mapper>

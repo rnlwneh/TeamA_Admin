@@ -36,15 +36,32 @@ public class StoreProductDTO {
 	private int str_pro_salescost;
 	private int str_pro_show;
 	//================================================
+	private String pre_str_pro_image;
+	private String pre_str_pro_detail_image;
 	MultipartFile file;
 	MultipartFile detailFile;
 	
 	private TradeListDTO tradeListDTO;
 	
+	
+	public String getPre_str_pro_image(){
+		return pre_str_pro_image;
+	}
+	public void setPre_str_pro_image(String pre_str_pro_image) {
+		this.pre_str_pro_image = pre_str_pro_image;
+	}
+	public String getPre_str_pro_detail_image() {
+		return pre_str_pro_detail_image;
+	}
+	public void setPre_str_pro_detail_image(String pre_str_pro_detail_image) {
+		this.pre_str_pro_detail_image = pre_str_pro_detail_image;
+	}
+	
+	
 	public MultipartFile getFile() {
 		return file;
 	}
-	public void setFile(MultipartFile file) {
+	public void setFile(MultipartFile file) throws Exception {
 		this.file=file;
 		// 업로드 파일 접근
 		if(! file.isEmpty()){
@@ -68,9 +85,9 @@ public class StoreProductDTO {
 	}
 	
 	public MultipartFile getDetailFile() {
-		return file;
+		return detailFile;
 	}
-	public void setDetailFile(MultipartFile detailFile) {
+	public void setDetailFile(MultipartFile detailFile) throws Exception {
 		this.detailFile=detailFile;
 		// 업로드 파일 접근
 		if(! detailFile.isEmpty()){

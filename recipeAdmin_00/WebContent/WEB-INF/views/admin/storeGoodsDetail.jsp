@@ -26,7 +26,6 @@
 						</div>
 					</div>
 					<form name='strInfo' action='updateStoreGoods' method='post' enctype='multipart/form-data'>
-						<input type='hidden' name='str_pro_show' id='str_pro_show'>
 						<div align='right'style = "padding: 0 0 25px 0;">
 							<input type='button' id='updateGoods' value='변경하기'>
 						</div>
@@ -41,13 +40,16 @@
 											<table class="table table-bordered" id="" width="100%" cellspacing="0">
 												<tr>
 													<th>상품이름</th>
-													<th><input type='text' name='str_pro_name' value='${goodsDetail.str_pro_name }'></th>
+													<th>
+														<input type='text' name='str_pro_name' value='${goodsDetail.str_pro_name }'>
+														<input type='hidden' name='str_pro_no' value='${goodsDetail.str_pro_no }'>
+													</th>
 												</tr>
 												<tr>
 													<th>거래처</th>
 													<th>
-														<select name='trd_list_no'>
-															<option value=''>-거래처 선택-
+														<input type='hidden' id='trdListNo' value='${goodsDetail.trd_list_no }'>
+														<select name='trd_list_no' id='trd_list_no'>
 															<c:forEach items="${trdListName }" var='trdListName'>
 																<option value='${trdListName.trd_list_no }'>${trdListName.trd_list_name }
 															</c:forEach>
@@ -70,12 +72,12 @@
 													<th>썸네일 이미지</th>
 													<th>
 														<input type='file' id='img' name='file'>
-														<input type='hidden' name='str_pro_image' value='${goodsDetail.str_pro_image }'>
+														<input type='hidden' name='pre_str_pro_image' value='${goodsDetail.str_pro_image }'>
 													</th>
 												</tr>
 												<tr>
 													<th>썸네일 미리보기</th>
-													<th><div align='center' class="select_img"><img src="${pageContext.request.contextPath}/resources/image/${goodsDetail.str_pro_image }" /></div></th>
+													<th><div align='center' class="select_img"><img width='200' src="${pageContext.request.contextPath}/resources/image/${goodsDetail.str_pro_image }" /></div></th>
 												</tr>
 											</table>
 										</div>
@@ -94,12 +96,12 @@
 												<th>상세 이미지</th>
 												<th>
 													<input type='file' id='img2' name='detailFile'>
-													<input type='hidden' name='str_pro_detail_image' value='${goodsDetail.str_pro_detail_image }'>
+													<input type='hidden' name='pre_str_pro_detail_image' value='${goodsDetail.str_pro_detail_image }'>
 												</th>
 											</tr>
 											<tr>
 												<th>이미지 미리보기</th>
-												<th><div align='center' class="select_img2"><img src="${pageContext.request.contextPath}/resources/detailImage/${goodsDetail.str_pro_detail_image }" /></div></th>
+												<th><div align='center' class="select_img2"><img width='200' src="${pageContext.request.contextPath}/resources/detailImage/${goodsDetail.str_pro_detail_image }" /></div></th>
 											</tr>
 											<tr>
 												<th>상품 설명</th>
@@ -108,7 +110,8 @@
 											<tr>
 												<th>상품상태</th>
 												<th>
-													<select name='str_pro_show'>
+													<input type='hidden' id='strProShow' value='${goodsDetail.str_pro_show }'>
+													<select name='str_pro_show' id='str_pro_show'>
 														<option value='1'>판매등록
 														<option value='0'>판매보류
 													</select>
@@ -137,27 +140,39 @@
 <!-- 			</footer> -->
 	
 	<script>
-		$("#img").change(function(){
-			if(this.files && this.files[0]) {
-				var reader = new FileReader;
-				reader.onload = function(data) {
-					$(".select_img img").attr("src", data.target.result).width(200);        
+		$(document).ready(function(){
+			
+			var trdListNo = $('#trdListNo').val();
+			$("#trd_list_no option[value='"+trdListNo+"']").attr("selected", true);
+			
+			var strProShow = $('#strProShow').val();
+			$("#str_pro_show option[value='"+strProShow+"']").attr("selected", true);
+			
+			$("#img").change(function(){
+				if(this.files && this.files[0]) {
+					var reader = new FileReader;
+					reader.onload = function(data) {
+						$(".select_img img").attr("src", data.target.result).width(200);        
+					}
+					reader.readAsDataURL(this.files[0]);
 				}
-				reader.readAsDataURL(this.files[0]);
-			}
-		});
-		
-		$("#img2").change(function(){
-			if(this.files && this.files[0]) {
-				var reader = new FileReader;
-				reader.onload = function(data) {
-					$(".select_img2 img").attr("src", data.target.result).width(200);        
+			});
+			
+			$("#img2").change(function(){
+				if(this.files && this.files[0]) {
+					var reader = new FileReader;
+					reader.onload = function(data) {
+						$(".select_img2 img").attr("src", data.target.result).width(200);        
+					}
+					reader.readAsDataURL(this.files[0]);
 				}
-				reader.readAsDataURL(this.files[0]);
-			}
-		});
-		
-		$('#updateGoods').click(function(){
+			});
+			
+			$('#updateGoods').click(function(){
+				if(confirm("변경내용을 저장하시겠습니까?")){
+					document.strInfo.submit();
+				}
+			})
 			
 		})
 	</script>

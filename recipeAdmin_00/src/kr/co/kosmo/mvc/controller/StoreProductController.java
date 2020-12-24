@@ -126,37 +126,41 @@ public class StoreProductController {
 		System.out.println("=====StoreProductDao trdListName() 호출=====");
 		mv.addObject("trdListName",storeProductDao.trdListName());
 		mv.setViewName("admin/storeGoodsDetail");
+		System.out.println("detail호출 끝");
 		return mv;
 	}
 	
-//	@RequestMapping(value="/updateStoreGoods")
-//	public ModelAndView updateStoreGoods(StoreProductDTO vo, MultipartFile file, HttpServletRequest request) throws Exception{
-//		ModelAndView mv = new ModelAndView();
-//		
-//		String imageUrl = "D:\\bigdata\\workspace\\TeamA_Admin\\recipeAdmin_00\\WebContent\\resources\\image\\";
-//		String detailImageUrl = "D:\\bigdata\\workspace\\TeamA_Admin\\recipeAdmin_00\\WebContent\\resources\\detailImage\\";		
-//		String str_pro_image = (String)request.getParameter("str_pro_image");
-//		String str_pro_detail_image = (String)request.getParameter("str_pro_detail_image");
-//		
-//		// 새로운 파일이 등록되었는지 확인
-//		if(file.getOriginalFilename() != null && file.getOriginalFilename() != "") {
-//		// 기존 파일을 삭제
-//		new File( imageUrl+str_pro_image).delete();
-//		new File( detailImageUrl+str_pro_detail_image).delete();
-//		  
-//		// 새로 첨부한 파일을 등록
-//		vo.setStr_pro_image(str_pro_image);
-//		vo.setStr_pro_detail_image(str_pro_detail_image);
-//		  
-//		} else {  
-//		// 새로운 파일이 등록되지 않았다면 기존 이미지를 그대로 사용
-//		vo.setStr_pro_image(str_pro_image);
-//		vo.setStr_pro_detail_image(str_pro_detail_image);
-//		  
-//		}
-//		
-//		return mv;
-//		
-//	}
+	@RequestMapping(value="/updateStoreGoods")
+	public ModelAndView updateStoreGoods(StoreProductDTO vo){
+		ModelAndView mv = new ModelAndView();
+		
+		String imageUrl = "D:\\bigdata\\workspace\\TeamA_Admin\\recipeAdmin_00\\WebContent\\resources\\image\\";
+		String detailImageUrl = "D:\\bigdata\\workspace\\TeamA_Admin\\recipeAdmin_00\\WebContent\\resources\\detailImage\\";
+		String pre_str_pro_image = vo.getPre_str_pro_image();
+		String pre_str_pro_detail_image = vo.getPre_str_pro_detail_image();
+//		System.out.println("썸네일이미지이름:"+pre_str_pro_image);
+//		System.out.println("상세이미지이름:"+pre_str_pro_detail_image);
+//		System.out.println("경로:"+imageUrl+pre_str_pro_image);
+		// 새로운 파일이 등록되었는지 확인
+		if(! vo.getFile().isEmpty()) {
+			// 기존파일 삭제
+			new File(imageUrl+pre_str_pro_image).delete();	  
+			// 새파일 없으면 기존 사용  
+		}else{
+			vo.setStr_pro_image(pre_str_pro_image);
+		}
+		//상세이미지 확인
+		if(! vo.getDetailFile().isEmpty()) {
+			new File(detailImageUrl+pre_str_pro_detail_image).delete();
+		}else{
+			vo.setStr_pro_detail_image(pre_str_pro_detail_image);
+		}
+		
+		System.out.println("=====StoreProductDao updateGoodsList() 호출");
+		storeProductDao.updateStoreGoods(vo);
+		mv.setViewName("redirect:storeGoodsList");
+		return mv;
+		
+	}
 	
 }

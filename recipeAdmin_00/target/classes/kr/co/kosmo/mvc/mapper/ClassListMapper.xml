@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="classList">
+
+	<select id="classList" resultType="cList">
+		select c.class_no, c.class_info_pic, c.class_title, c.mem_no, m.mem_id, c.class_period
+		from class_info c, member_info m
+		where c.mem_no=m.mem_no
+	</select>
+
+
+</mapper>
+
+
+
+
+

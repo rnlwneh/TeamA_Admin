@@ -30,7 +30,7 @@
 										글 관리</font></a>
 							</nav>
 							<nav class="sb-sidenav-menu-nested nav">
-								<a href=''><font size='2' color='gray'>사이트 카테고리 관리</font></a>
+								<a href='#'><font size='2' color='gray'>사이트 카테고리 관리</font></a>
 							</nav>
 						</c:if>
 
@@ -53,7 +53,7 @@
 								<a href='clientList'><font size='2' color='gray'>거래처목록</font></a>
 							</nav>
 							<nav class="sb-sidenav-menu-nested nav">
-								<a href=''><font size='2' color='gray'>스토어 재고 현황</font></a>
+								<a href='#'><font size='2' color='gray'>스토어 재고 현황</font></a>
 							</nav>
 							<nav class="sb-sidenav-menu-nested nav">
 								<a href='storeGoodsList'><font size='2' color='gray'>스토어

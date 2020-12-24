@@ -60,4 +60,10 @@ public class StoreProductDaoImpl implements StoreProductDao {
 		System.out.println("=====StoreProductMapper goodsDetail 호출=====");
 		return ss.selectOne("strProduct.goodsDetail", str_pro_no);
 	}
+
+	@Override
+	public void updateStoreGoods(StoreProductDTO vo) {
+		System.out.println("=====StoreProductMapper updateStoreGoods 호출");
+		ss.update("strProduct.updateStoreGoods", vo);
+	}
 }

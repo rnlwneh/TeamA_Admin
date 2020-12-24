@@ -10,5 +10,6 @@
  		<typeAlias type="kr.co.kosmo.mvc.dto.TradeListDTO" alias="trdList"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.RecipeMemberDTO" alias="rpMem"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.PageVO" alias="pvo" />
+ 		<typeAlias type="kr.co.kosmo.mvc.dto.ClassListDTO" alias="cList" />
  	</typeAliases>
  </configuration>

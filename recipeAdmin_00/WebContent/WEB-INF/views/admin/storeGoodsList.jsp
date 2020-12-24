@@ -172,8 +172,7 @@
 				$('#proCheck:checked').each(function(){
 					no = no+","+$(this).next().val();
 				})
-				no = no.substr(1,)
-				alert(no)
+				no = no.substr(1,);
 				$.ajax({
 					url:"deleteProduct"
 					,data:{no:no}
