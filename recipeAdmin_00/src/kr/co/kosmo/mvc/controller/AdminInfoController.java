@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.kosmo.mvc.dao.AdminInfoDao;
+import kr.co.kosmo.mvc.dao.LoginLogDao;
 import kr.co.kosmo.mvc.dto.AdminInfoDTO;
 
 //µø¡÷
@@ -23,6 +24,8 @@ public class AdminInfoController {
 	
 	@Autowired
 	private AdminInfoDao adminInfodao;
+	@Autowired
+	private LoginLogDao loginLogDao;
 	
 	@ResponseBody
 	@RequestMapping(value="/addAdmin", method=RequestMethod.POST)
@@ -98,6 +101,17 @@ public class AdminInfoController {
 		session.removeAttribute("ad_author");
 		session.removeAttribute("ad_no");
 		mv.setViewName("login");
+		return mv;
+	}
+	
+	@RequestMapping(value="/adminLogDetail")
+	public ModelAndView adminLogDetail(HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView();
+		
+		int ad_no = Integer.parseInt(request.getParameter("ad_no"));
+		System.out.println(ad_no+"===========");
+		mv.addObject("adLogDetail", loginLogDao.adLogDetail(ad_no));
+		mv.setViewName("admin/adminLogDetail");
 		return mv;
 	}
 }

@@ -16,7 +16,7 @@ import kr.co.kosmo.mvc.dto.LoginLogDTO;
 
 @Component
 @Aspect
-public class MyAspect {
+public class LoginLogAspect {
 
 	@Autowired
 	private LoginLogDao loginLogDao;
@@ -44,7 +44,7 @@ public class MyAspect {
 					if (ad_no != 0) {
 						// 데이터베이스에 저장할 값을 세팅
 						vo.setAd_no(ad_no);
-						vo.setLog_status("login");
+						vo.setLog_status("로그인");
 						vo.setLog_reip(request.getRemoteAddr());
 						vo.setLog_uagent("web");
 						loginLogDao.addLoginLog(vo);
@@ -64,7 +64,7 @@ public class MyAspect {
 					if (ad_no != 0) { // 세션이 존재할 때 처리 
 						// 데이터베이스에 저장할 값을 세팅
 						vo.setAd_no(ad_no);
-						vo.setLog_status("logout");
+						vo.setLog_status("로그아웃");
 						vo.setLog_reip(request.getRemoteAddr());
 						vo.setLog_uagent("web");
 						loginLogDao.addLoginLog(vo);

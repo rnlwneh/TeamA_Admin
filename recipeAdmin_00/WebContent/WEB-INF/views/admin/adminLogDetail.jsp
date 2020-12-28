@@ -9,10 +9,11 @@
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
 						<li class="breadcrumb-item"><a href="adminList">관리자 목록</a></li>
+						<li class="breadcrumb-item"><a href="adminList">관리자 로그내역</a></li>
 					</ol>
 					<div class="card mb-4">
 						<div class="card-body">
-							관리자 목록
+							관리자 로그인/로그아웃 내역
 							<!--                                 <a target="_blank" href="https://datatables.net/">official DataTables documentation</a> -->
 
 						</div>
@@ -27,37 +28,24 @@
 									cellspacing="0">
 									<thead>
 										<tr>
-											<th></th>
-											<th>관리자명</th>
-											<th>이메일</th>
-											<th>관리 권한</th>
-											<th>연락처</th>
-											<th>최근 로그인 시간</th>
-											<th>최근 로그아웃 시간</th>
-											<th>등록 날짜</th>
+											<th>일시</th>
+											<th>상태</th>
+											<th>결과</th>
+											<th>아이피</th>
 										</tr>
 									</thead>
 
 									<tbody>
-										<c:forEach items='${adminList }' var='adminList'
-											varStatus='status'>
+										<c:forEach items='${adLogDetail }' var='adLogDetail'>
 											<tr>
-												<td><input type='checkbox' id='adminCheck'> <input
-													type='hidden' value='${adminList.ad_no }'></td>
-												<td><a href='adminLogDetail?ad_no=${adminList.ad_no }'>${adminList.ad_name }</a></td>
-												<td>${adminList.ad_email }</td>
-												<td>${adminList.ad_author }</td>
-												<td>${adminList.ad_phone }</td>
-												<td>${adminList.ad_logintime }</td>
-												<td>${adminList.ad_logouttime }</td>
-												<td>${adminList.ad_regdate }</td>
+												<td>${adLogDetail.log_logtime }</td>
+												<td>${adLogDetail.log_status }</td>
+												<td>성공</td>
+												<td>${adLogDetail.log_reip }</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
-								<div float='right'>
-									<input id='delBtn' type='button' value='선택된 관리자 권한삭제'>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -80,22 +68,9 @@
 
 	<script>
         
-        	$(document).ready(function(){
-        		$('#delBtn').click(function(){
-        			if(confirm("선택된 관리자를 삭제하시겠습니까?")){
-        				var adminNo = "";
-            			$('#adminCheck:checked').each(function(){
-            				adminNo = adminNo +","+$(this).next().val();
-            			})
-            			adminNo = adminNo.substr(1,);
-            			location.href='deleteAdmin?adminNo='+adminNo
-        			}else{
-        				return;
-        			}
-        		})
-        	})
+
         
-        </script>
+    </script>
 
 
 	<!--         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script> -->

@@ -14,5 +14,15 @@
 			, sysdate
 		)
 	</insert>
+	
+	<select id="adLogDetail" parameterType="int" resultType="loginLog">
+		select 
+			log_logtime
+			, log_status
+			, log_reip
+		from loginlog 
+		where ad_no=#{ad_no} 
+		order by log_logtime desc
+	</select>
 
 </mapper>
