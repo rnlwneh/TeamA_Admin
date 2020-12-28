@@ -63,25 +63,6 @@ public class StoreProductDTO {
 	}
 	public void setFile(MultipartFile file) throws Exception {
 		this.file=file;
-		// 업로드 파일 접근
-		if(! file.isEmpty()){
-			UUID uuid = UUID.randomUUID();
-			this.str_pro_image = uuid.toString()+file.getOriginalFilename();
-			
-			//***********************************************
-			// 해당 경로로 변경
-			File f = new File("D:\\bigdata\\workspace\\TeamA_Admin\\recipeAdmin_00\\WebContent\\resources\\image\\"+str_pro_image);
-			
-			try {
-				file.transferTo(f);
-				
-			} catch (IllegalStateException e) {				
-				e.printStackTrace();
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	public MultipartFile getDetailFile() {
@@ -89,25 +70,6 @@ public class StoreProductDTO {
 	}
 	public void setDetailFile(MultipartFile detailFile) throws Exception {
 		this.detailFile=detailFile;
-		// 업로드 파일 접근
-		if(! detailFile.isEmpty()){
-			UUID uuid = UUID.randomUUID();
-			this.str_pro_detail_image = uuid.toString()+detailFile.getOriginalFilename();
-			
-			//***********************************************
-			// 해당 경로로 변경
-			File f = new File("D:\\bigdata\\workspace\\TeamA_Admin\\recipeAdmin_00\\WebContent\\resources\\detailImage\\"+str_pro_detail_image);
-			
-			try {
-				detailFile.transferTo(f);
-				
-			} catch (IllegalStateException e) {				
-				e.printStackTrace();
-			} catch (IOException e) {
-				
-				e.printStackTrace();
-			}
-		}
 	}
 	
 	
