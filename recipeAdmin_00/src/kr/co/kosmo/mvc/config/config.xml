@@ -11,5 +11,6 @@
  		<typeAlias type="kr.co.kosmo.mvc.dto.RecipeMemberDTO" alias="rpMem"/>
  		<typeAlias type="kr.co.kosmo.mvc.dto.PageVO" alias="pvo" />
  		<typeAlias type="kr.co.kosmo.mvc.dto.ClassListDTO" alias="cList" />
+ 		<typeAlias type="kr.co.kosmo.mvc.dto.LoginLogDTO" alias="loginLog" />
  	</typeAliases>
  </configuration>

@@ -60,7 +60,7 @@ public class AdminInfoController {
 	}
 	
 	@RequestMapping(value="/loginCheck", method=RequestMethod.POST)
-	public ModelAndView loginCheck(HttpSession session, HttpServletRequest request, AdminInfoDTO vo) {
+	public ModelAndView log_loginCheck(HttpSession session, HttpServletRequest request, AdminInfoDTO vo) {
 		ModelAndView mv = new ModelAndView();
 		
 		AdminInfoDTO adminLogin = adminInfodao.adminLogin(vo);
@@ -70,6 +70,7 @@ public class AdminInfoController {
 		}else {
 			mv.setViewName("admin/indexA");
 			//技记 眠啊
+			System.out.println("=====技记眠啊=====");
 			session.setAttribute("ad_name", adminLogin.getAd_name());
 			session.setAttribute("ad_author", adminLogin.getAd_author());
 			session.setAttribute("ad_no", adminLogin.getAd_no());
@@ -78,7 +79,7 @@ public class AdminInfoController {
 	}
 	
 	@RequestMapping(value="/ad_logout")
-	public ModelAndView logout(HttpSession session) {
+	public ModelAndView log_logout(HttpSession session, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView();
 		
 		try {
@@ -92,6 +93,7 @@ public class AdminInfoController {
 			return mv;
 		}
 		//技记昏力
+		System.out.println("=====技记昏力=====");
 		session.removeAttribute("ad_name");
 		session.removeAttribute("ad_author");
 		session.removeAttribute("ad_no");
