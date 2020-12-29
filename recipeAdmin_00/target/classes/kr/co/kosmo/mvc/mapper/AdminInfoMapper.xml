@@ -10,6 +10,10 @@
   		, #{ad_pwd}, #{ad_author}, sysdate, sysdate, sysdate)
   	</insert>
   	
+  	<select id="ad_no" parameterType="String" resultType="int">
+  		select ad_no from admin_info where ad_email=#{ad_email}
+  	</select>
+  	
   	<select id='adminList' resultType='adInfo'>
   		select ad_no, ad_name, ad_phone, ad_email, ad_pwd, ad_author, ad_logintime, ad_logouttime, ad_regdate 
   		from admin_info 

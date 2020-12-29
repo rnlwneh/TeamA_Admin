@@ -24,9 +24,7 @@ public class PageVO {
 			memberStartEndPage(nowPage, cntPage);
 			memberStartEnd(nowPage, cntPerPage);
 		}
-		// �젣�씪 留덉�留� �럹�씠吏� 怨꾩궛
 		private void memberLastPage(int total, int cntPerPage) {
-			// 1.1page �삱由쇱쿂由� -> 2
 			lastPage = (int) Math.ceil((double)total / (double)cntPerPage);
 		}
 
@@ -40,7 +38,6 @@ public class PageVO {
 				startPage = 1;
 			}
 		}
-			// rownum�쓽 媛믪쓽 踰붿쐞瑜� 吏��젙�븿.
 		private void memberStartEnd(int nowPage, int cntPerPage) {
 			end = nowPage * cntPerPage;
 			start = end - cntPerPage + 1;

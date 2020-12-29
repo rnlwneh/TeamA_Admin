@@ -48,6 +48,11 @@ public class AdminInfoDaoImpl implements AdminInfoDao{
 		System.out.println("=== 로그아웃 시간 저장 ===");
 		ss.update("adminInfo.logoutTime", vo);
 	}
+
+	@Override
+	public int ad_no(String ad_email) {
+		return ss.selectOne("adminInfo.ad_no", ad_email);
+	}
 	
 	
 }

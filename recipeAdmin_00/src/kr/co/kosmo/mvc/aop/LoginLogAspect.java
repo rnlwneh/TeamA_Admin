@@ -10,8 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
+import kr.co.kosmo.mvc.dao.AdminInfoDao;
 import kr.co.kosmo.mvc.dao.LoginLogDao;
 import kr.co.kosmo.mvc.dto.LoginLogDTO;
+
+
+
 
 
 @Component
@@ -20,6 +24,9 @@ public class LoginLogAspect {
 
 	@Autowired
 	private LoginLogDao loginLogDao;
+	
+	@Autowired
+	private AdminInfoDao adminInfoDao;
 
 	// * kr.co.kosmo.mvc.controller.LoginCheckController.loginf*(..)
 	@Around("execution(* kr.co.kosmo.mvc.controller.AdminInfoController.log_*(..))")
@@ -38,14 +45,28 @@ public class LoginLogAspect {
 				if (fd[0] instanceof HttpSession && fd[1] instanceof HttpServletRequest) {
 					HttpSession session = (HttpSession) fd[0];
 					HttpServletRequest request = (HttpServletRequest) fd[1];
-					int ad_no = (int) session.getAttribute("ad_no");
-					System.out.println("mmmmmmmmmmmmmmmm"+ad_no+"mmmmmmmmmmmmmmmm");
+					String ad_email = (String) session.getAttribute("ad_email");
+					System.out.println("mmmmmmmmmmmmmmmm"+ad_email+"mmmmmmmmmmmmmmmm");
 					// 세션의 값을 얻어와서 존재할 경우만
-					if (ad_no != 0) {
+					if (ad_email!=null) {
 						// 데이터베이스에 저장할 값을 세팅
+						vo.setAd_no((int)session.getAttribute("ad_no"));
+						vo.setLog_status("로그인");
+						System.out.println("//////////"+getClientIpAddr(request));
+						vo.setLog_reip(getClientIpAddr(request));
+						vo.setLog_login_fl("y");
+						vo.setLog_uagent("web");
+						loginLogDao.addLoginLog(vo);
+					}else {
+						System.out.println(1);
+						ad_email = (String)request.getParameter("ad_email");
+						System.out.println(ad_email);
+						int ad_no = adminInfoDao.ad_no(ad_email);
 						vo.setAd_no(ad_no);
 						vo.setLog_status("로그인");
-						vo.setLog_reip(request.getRemoteAddr());
+						System.out.println("//////////"+getClientIpAddr(request));
+						vo.setLog_reip(getClientIpAddr(request));
+						vo.setLog_login_fl("n");
 						vo.setLog_uagent("web");
 						loginLogDao.addLoginLog(vo);
 					}
@@ -65,7 +86,9 @@ public class LoginLogAspect {
 						// 데이터베이스에 저장할 값을 세팅
 						vo.setAd_no(ad_no);
 						vo.setLog_status("로그아웃");
-						vo.setLog_reip(request.getRemoteAddr());
+						System.out.println("//////////"+getClientIpAddr(request));
+						vo.setLog_reip(getClientIpAddr(request));
+						vo.setLog_login_fl("y");
 						vo.setLog_uagent("web");
 						loginLogDao.addLoginLog(vo);
 					}
@@ -80,4 +103,27 @@ public class LoginLogAspect {
 		return rpath;
 
 	}
+	
+	//ip받아오기
+	public static String getClientIpAddr(HttpServletRequest request) {
+	    String ip = request.getHeader("X-Forwarded-For"); 
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	        ip = request.getHeader("Proxy-Client-IP");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	        ip = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	        ip = request.getHeader("HTTP_CLIENT_IP");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	        ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+	        ip = request.getRemoteAddr();
+	    } 
+	    return ip;
+	}
 }
+
+

@@ -5,6 +5,7 @@ create table loginlog(
         , ad_no number(2)
         , log_reip varchar2(20)
         , log_uagent varchar2(20)
+        , log_login_fl char(1)
         , log_status varchar2(6)
         , log_logtime varchar2(20)
  */
@@ -13,6 +14,7 @@ public class LoginLogDTO {
 	private int ad_no;
 	private String log_reip;
 	private String log_uagent;
+	private String log_login_fl;
 	private String log_status;
 	private String log_logtime;
 	//========================================
@@ -43,6 +45,12 @@ public class LoginLogDTO {
 	}
 	public String getLog_status() {
 		return log_status;
+	}
+	public String getLog_login_fl() {
+		return log_login_fl;
+	}
+	public void setLog_login_fl(String log_login_fl) {
+		this.log_login_fl = log_login_fl;
 	}
 	public void setLog_status(String log_status) {
 		this.log_status = log_status;

@@ -40,12 +40,20 @@
 											<tr>
 												<td>${adLogDetail.log_logtime }</td>
 												<td>${adLogDetail.log_status }</td>
-												<td>성공</td>
+												<td>
+													<c:if test="${adLogDetail.log_login_fl eq 'n'}">
+														<font color='red'>실패</font>
+													</c:if>
+													<c:if test="${adLogDetail.log_login_fl eq 'y'}">
+														성공
+													</c:if>
+												</td>
 												<td>${adLogDetail.log_reip }</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
+								<div><%@include file="../loginLogPageProcess.jsp"%></div>
 							</div>
 						</div>
 					</div>

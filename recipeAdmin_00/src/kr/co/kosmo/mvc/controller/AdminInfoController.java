@@ -1,6 +1,7 @@
 package kr.co.kosmo.mvc.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,12 +12,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.kosmo.mvc.dao.AdminInfoDao;
 import kr.co.kosmo.mvc.dao.LoginLogDao;
 import kr.co.kosmo.mvc.dto.AdminInfoDTO;
+import kr.co.kosmo.mvc.dto.PageVO;
 
 //悼林
 @Controller
@@ -75,6 +78,7 @@ public class AdminInfoController {
 			//技记 眠啊
 			System.out.println("=====技记眠啊=====");
 			session.setAttribute("ad_name", adminLogin.getAd_name());
+			session.setAttribute("ad_email", adminLogin.getAd_email());
 			session.setAttribute("ad_author", adminLogin.getAd_author());
 			session.setAttribute("ad_no", adminLogin.getAd_no());
 		}
@@ -98,6 +102,7 @@ public class AdminInfoController {
 		//技记昏力
 		System.out.println("=====技记昏力=====");
 		session.removeAttribute("ad_name");
+		session.removeAttribute("ad_email");
 		session.removeAttribute("ad_author");
 		session.removeAttribute("ad_no");
 		mv.setViewName("login");
@@ -105,12 +110,21 @@ public class AdminInfoController {
 	}
 	
 	@RequestMapping(value="/adminLogDetail")
-	public ModelAndView adminLogDetail(HttpServletRequest request) {
+	public ModelAndView adminLogDetail(HttpServletRequest request
+				,PageVO pvo,
+				@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
+				@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage) {
 		ModelAndView mv = new ModelAndView();
 		
 		int ad_no = Integer.parseInt(request.getParameter("ad_no"));
-		System.out.println(ad_no+"===========");
-		mv.addObject("adLogDetail", loginLogDao.adLogDetail(ad_no));
+		int total = loginLogDao.logCnt(ad_no);
+		pvo = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
+		HashMap<String,Integer> map = new HashMap<String,Integer>();
+		map.put("ad_no", ad_no);
+		map.put("start", pvo.getStart());
+		map.put("end", pvo.getEnd());	
+		mv.addObject("adLogDetail", loginLogDao.adLogDetail(map));
+		mv.addObject("paging",pvo);
 		mv.setViewName("admin/adminLogDetail");
 		return mv;
 	}

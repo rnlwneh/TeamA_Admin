@@ -1,5 +1,6 @@
 package kr.co.kosmo.mvc.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -21,9 +22,15 @@ public class LoginLogDaoImpl implements LoginLogDao{
 	}
 
 	@Override
-	public List<LoginLogDTO> adLogDetail(int ad_no) {
+	public List<LoginLogDTO> adLogDetail(HashMap<String,Integer> logCntMap) {
 		System.out.println("=====LoginLogMapper adLogDetail 호출=====");
-		return ss.selectList("loginLog.adLogDetail", ad_no);
+		return ss.selectList("loginLog.adLogDetail", logCntMap);
+	}
+
+	@Override
+	public int logCnt(int ad_no) {
+		System.out.println("=====LoginLogMapper logCnt 호출=====");
+		return ss.selectOne("loginLog.logCnt", ad_no);
 	}
 
 }

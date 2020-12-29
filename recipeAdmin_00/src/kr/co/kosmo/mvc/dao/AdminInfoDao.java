@@ -11,4 +11,5 @@ public interface AdminInfoDao{
 	public void deleteAdmin(String vo);
 	public AdminInfoDTO adminLogin(AdminInfoDTO vo);
 	public void logOut(Object vo);
+	public int ad_no(String ad_email);
 }

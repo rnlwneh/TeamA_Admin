@@ -10,19 +10,26 @@
 			, #{ad_no}
 			, #{log_reip}
 			, #{log_uagent}
+			, #{log_login_fl}
 			, #{log_status}
 			, sysdate
 		)
 	</insert>
 	
-	<select id="adLogDetail" parameterType="int" resultType="loginLog">
-		select 
-			log_logtime
-			, log_status
-			, log_reip
-		from loginlog 
-		where ad_no=#{ad_no} 
-		order by log_logtime desc
+	<select id="adLogDetail" parameterType="HashMap" resultType="loginLog">
+		select * from( select rownum r_num, a.* from(
+		    select 
+		        log_logtime
+		        , log_status
+		        , log_reip
+		        , log_login_fl
+		    from loginlog 
+		    where ad_no=#{ad_no}
+		order by log_logtime desc) a ) where r_num between  #{start} and #{end}
+	</select>
+	
+	<select id="logCnt" parameterType="int" resultType="int">
+		select count(*) from loginlog where ad_no=#{ad_no}
 	</select>
 
 </mapper>

@@ -111,15 +111,9 @@
 						<div class="card-body">
 							<canvas id="myBarChart" width="100%" height="30"></canvas>
 						</div>
-						<div class="card-footer small text-muted">Updated yesterday
-							at 11:59 PM</div>
-					</div>
-
-
-
-
-
-
+<!-- 						<div class="card-footer small text-muted">Updated yesterday -->
+<!-- 							at 11:59 PM</div> -->
+<!-- 					</div> -->
 
 				</div>
 			</main>
@@ -136,8 +130,8 @@
 <!-- 				</div> -->
 <!-- 			</footer> -->
 
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-		crossorigin="anonymous"></script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" -->
+<!-- 		crossorigin="anonymous"></script> -->
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
 		crossorigin="anonymous"></script>

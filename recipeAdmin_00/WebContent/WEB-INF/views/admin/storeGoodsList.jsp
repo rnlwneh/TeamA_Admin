@@ -141,7 +141,7 @@
 										</c:forEach>
 									</tbody>
 								</table>
-								<div><%@include file="../StrProPageProcess.jsp"%></div>
+								<div><%@include file="../strProPageProcess.jsp"%></div>
 							</div>
 						</div>
 					</div>
