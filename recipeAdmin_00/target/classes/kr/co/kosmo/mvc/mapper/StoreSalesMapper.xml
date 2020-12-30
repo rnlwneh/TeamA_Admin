@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="strSales">
+
+	<select id="salesPerDate" parameterType="String" resultType="HashMap">
+		select to_char(count(*)) "ord_cnt"
+			, to_char(nvl(sum(sp.str_pro_salescost*so.str_ord_cnt),0)) "cost_sum"
+			, substr(to_char(so.str_ord_date,'YYYY-MM-DD HH24:mi:ss'),1,13) "str_ord_date" 
+	    from store_order so, store_product sp 
+	    where so.str_pro_no = sp.str_pro_no 
+	    	and substr(to_char(so.str_ord_date,'YYYY-MM-DD HH24:mi:ss'),1,10)=#{date}
+	    group by substr(to_char(so.str_ord_date,'YYYY-MM-DD HH24:mi:ss'),1,13)
+	    order by substr(to_char(so.str_ord_date,'YYYY-MM-DD HH24:mi:ss'),1,13)
+	</select>
+	
+<!-- 	<select id='test' resultType="HashMap"> -->
+<!-- 		select count(*) "ord_cnt" -->
+<!-- 			, nvl(sum(sp.str_pro_salescost*so.str_ord_cnt),0) "cost_sum" -->
+<!-- 			, substr(to_char(so.str_ord_date),1,13) "str_ord_date"  -->
+<!-- 	    from store_order so, store_product sp  -->
+<!-- 	    where so.str_pro_no = sp.str_pro_no  -->
+<!--         group by substr(to_char(so.str_ord_date),1,13) -->
+<!-- 	</select> -->
+
+</mapper>
