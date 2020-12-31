@@ -5,6 +5,11 @@
 
 	<head>
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+
+		<script src="https://d3js.org/d3.v3.min.js"></script>     
+		
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
     	<style>
     		 table.searchTable {
 			    width: 400px;
@@ -121,12 +126,7 @@
 
 
 					<div class="card mb-4">
-						<div class="card-header">
-							<i class="fas fa-chart-area mr-1"></i> 시간별 매출
-						</div>
-						<div class="card-body">
-							<canvas id="myBarChart" width="100%" height="30"></canvas>
-						</div>
+						<div id="myBarChart"></div>
 <!-- 						<div class="card-footer small text-muted">Updated yesterday -->
 <!-- 							at 11:59 PM</div> -->
 <!-- 					</div> -->
@@ -154,6 +154,8 @@
 
     
 <script>
+
+//datepicker 한글변환
 $(function() {
   $( "#searchDate" ).datepicker({
     dateFormat: 'yy-mm-dd',
@@ -169,33 +171,39 @@ $(function() {
   });
 });
 
-//전역변수 선언
-var today = new Date();
-var year = today.getFullYear();
-var month = today.getMonth() + 1;
-var date = today.getDate()
-var hour = today.getHours()
+
+//숫자 3개마다 ,를 집어넣음 num:숫자문자
+function commaNum( num ){
+	var arr = [];
+	var numStr = ""
+	for(var i = num.length-1; i >= 0; i = i-3){
+		if(i > 2){
+			arr.push( num.substr(i-2, 3) )
+		}
+		else{
+			arr.push( num.substr(0,i+1) )
+		}
+	}
+	arr.reverse();
+	numStr =  arr.join(",");
+	return numStr;
+}
+
 
 function salesAjaxF(searchDate){
 	$.ajax({
 		url:"searchDate?searchDate="+searchDate
 		,success:function(searchDateList){
-			$('[id^=sales]').text('');
-			$('[id^=ordCnt]').text('');
-			$('[id^=totSales]').text('');
-			$('[id^=totOrdCnt]').text('');
-			$('[id^=avgSales]').text('');
 			var totSales = 0;
 			var totOrdCnt = 0;
-			var tempCnt = 0;
+			var list=['매출액'];
+			var list2=['주문수'];
 			for(var i=0;i<searchDateList.length;i++){
-				var cnt = tempCnt+"";
-				if(tempCnt<10){
-					cnt = 0+cnt;
-				}
 				var hh = searchDateList[i]['str_ord_date'].substr(11,2);
 				var sales = searchDateList[i]['cost_sum'];
 				var ordCnt = searchDateList[i]['ord_cnt'];
+				list.push(sales)
+				list2.push(ordCnt)
 				totSales = totSales + parseInt(sales,10);
 				totOrdCnt = totOrdCnt + parseInt(ordCnt,10);
 				var avgSales = "0"
@@ -203,62 +211,82 @@ function salesAjaxF(searchDate){
 					avgSales = (parseInt(sales,10)/parseInt(ordCnt,10)).toString();
 				}
 				
-				if(cnt!=hh){
-					var realCnt = parseInt(cnt);
-					var between = parseInt(hh)-realCnt;
-					if(cnt=='00'){
-						for(var j=0; j<between; j++){
-							var emptyHh = realCnt+j;
-							if(emptyHh<10){
-								emptyHh = "0"+emptyHh;
-							}
-							$('#sales'+emptyHh).text(0+"원");
-							$('#ordCnt'+emptyHh).text(0+"회");
-							$('#totSales'+emptyHh).text(0+"원");
-							$('#totOrdCnt'+emptyHh).text(0+"회");
-							$('#avgSales'+emptyHh).text(0+"원");
-						}
-					}else{
-						for(var j=0; j<between;j++){
-							var emptyHh = realCnt+j;
-							if(emptyHh<10){
-								emptyHh = "0"+emptyHh;
-							}
-							$('#sales'+emptyHh).text(0+"원");
-							$('#ordCnt'+emptyHh).text(0+"회");
-							if((parseInt(emptyHh,10)-1)>=10){
-								$('#totSales'+emptyHh).text($('#totSales'+(parseInt(emptyHh,10)-1)).text());
-								$('#totOrdCnt'+emptyHh).text($('#totOrdCnt'+(parseInt(emptyHh,10)-1)).text());
-							}else{
-								$('#totSales'+emptyHh).text($('#totSales0'+(parseInt(emptyHh,10)-1)).text());
-								$('#totOrdCnt'+emptyHh).text($('#totOrdCnt0'+(parseInt(emptyHh,10)-1)).text());
-							}
-							$('#avgSales'+emptyHh).text(0+"원");
-						}
-					}
-					tempCnt = parseInt(hh,10)
-				}
-				$('#sales'+hh).text(sales+"원");
-				$('#ordCnt'+hh).text(ordCnt+"회");
-				$('#totSales'+hh).text(totSales+"원");
-				$('#totOrdCnt'+hh).text(totOrdCnt+"회");
-				$('#avgSales'+hh).text(avgSales+"원");
-				tempCnt++
+				$('#sales'+hh).text(commaNum(sales)+"원");
+				$('#ordCnt'+hh).text(commaNum(ordCnt)+"회");
+				$('#totSales'+hh).text(commaNum(totSales+"")+"원");
+				$('#totOrdCnt'+hh).text(commaNum(totOrdCnt+"")+"회");
+				$('#avgSales'+hh).text(commaNum(avgSales)+"원");
 			}		//for(var i=0;i<searchDateList.length;i++){
+			//alert(list)
+			
+			//그래프
+			var chart = c3.generate({
+			    bindto: '#myBarChart',
+			    data: {
+			      columns: [
+			       	list,
+			        list2
+			      ],
+			      axes: {
+			    	매출액: 'y2'
+			      },
+			      types: {
+			    	매출액: 'bar'
+			      }
+			    },
+			    axis: {
+			      y: {
+			        label: {
+			          text: '주문횟수(회)',
+			          position: 'outer-middle'
+			        },
+			        tick: {
+			          format: d3.format(",회") // ADD
+			        }
+			      },
+			      y2: {
+			        show: true,
+			        label: {
+			          text: '매출액(원)',
+			          position: 'outer-middle'
+			        },
+			        tick: {
+			          format: d3.format(",원") // ADD
+			        }
+			      }
+			    }
+			});		//var chart = c3.generate({
+	
 		}		//,success:function(searchDateList){
 		,error : function(request,status,error){
 			$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
 		}
 	})		//$.ajax({
 }		//function salesAjaxF(){
+	
+
+	
+//전역변수 선언
+var today = new Date();
+var year = today.getFullYear();
+var month = today.getMonth() + 1;
+var date = today.getDate()
+var hour = today.getHours()
 
 $(document).ready(function(){
 	$('#searchDate').val(year+"-"+month+"-"+date)
 	var todayDate = $('#searchDate').val();
+	//오늘 날짜로 실행
 	salesAjaxF(todayDate);
 	$('#searchBtn').click(function(){
+		$('[id^=sales]').text('');
+		$('[id^=ordCnt]').text('');
+		$('[id^=totSales]').text('');
+		$('[id^=totOrdCnt]').text('');
+		$('[id^=avgSales]').text('');
 		var searchDate = $('#searchDate').val().trim();
 		//alert(searchDate);
+		//검색날짜로 실행
 		salesAjaxF(searchDate);	
 	})		
 })		
@@ -272,7 +300,6 @@ $(document).ready(function(){
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 	<script src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/demo/chart-bar-demo.js"></script>
 
 </body>
 </html>

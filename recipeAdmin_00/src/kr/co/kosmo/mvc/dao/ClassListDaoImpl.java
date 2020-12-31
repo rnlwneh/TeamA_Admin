@@ -15,9 +15,37 @@ public class ClassListDaoImpl implements ClassListDao {
 	@Autowired
 	private SqlSessionTemplate ss;
 
+	
+	
 	@Override
-	public List<ClassListDTO> getClassList() {
-		return ss.selectList("classList.classList");
+	public List<ClassListDTO> getClassAll() {
+		return ss.selectList("classList.classAll");
 	}
+
+	@Override
+	public List<ClassListDTO> getNewClass(int admin_app) {
+		return ss.selectList("classList.newClass",admin_app);
+	
+	}
+
+	@Override
+	public ClassListDTO getClassDetail(String class_no) {
+		return ss.selectOne("classList.classDetail",class_no);
+		
+	}
+
+
+	@Override
+	public void updateClass(ClassListDTO vo) {
+		ss.update("classList.classUpdate",vo);
+		
+	}
+
+
+
+
+
+
+
 
 }

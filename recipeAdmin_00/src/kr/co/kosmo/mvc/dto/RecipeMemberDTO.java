@@ -15,6 +15,7 @@ public class RecipeMemberDTO {
 	private String mem_status;
 	private int mem_declare;
 	private int kind_tag_no;
+	
 	public int getMem_no() {
 		return mem_no;
 	}

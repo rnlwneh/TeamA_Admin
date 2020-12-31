@@ -5,11 +5,106 @@
 
 <mapper namespace="classList">
 
-	<select id="classList" resultType="cList">
-		select c.class_no, c.class_info_pic, c.class_title, c.mem_no, m.mem_id, c.class_period
+
+
+	<resultMap type="cList" id="cList">
+		<id property="class_no" column="class_no" javaType="int" />
+		<result property="mem_no" column="mem_no" javaType="int" />
+		<result property="class_title" column="class_title" />
+		<result property="class_thumbnail" column="class_thumbnail" />
+		<result property="class_content" column="class_content" />
+		<result property="class_recipe_video"
+			column="class_recipe_video" />
+		<result property="mate_name" column="mate_name" />
+		<result property="mate_cnt" column="mate_cnt" />
+		<result property="step" column="step" />
+		<result property="class_price" column="class_price" />
+		<result property="class_period" column="class_period" />
+		<result property="class_cooktime" column="class_cooktime" />
+		<result property="class_detail_info" column="class_detail_info" />
+		<result property="kind_tag_no" column="kind_tag_no"
+			javaType="int" />
+		<result property="material_tag_no" column="material_tag_no"
+			javaType="int" />
+		<result property="theme_tag_no" column="theme_tag_no"
+			javaType="int" />
+		<result property="class_uploadtime" column="class_uploadtime" />
+		<result property="view_cnt" column="view_cnt" />
+		<result property="admin_app" column="admin_app" />
+
+
+
+		<association property="member" column="mem_no"
+			javaType="rpMem">
+			<id property="mem_no" column="mem_no" />
+			<id property="mem_id" column="mem_id" />
+			<result property="mem_nickname" column="mem_nickname" />
+			<result property="mem_pic" column="mem_pic" />
+			<result property="mem_email" column="mem_email" />
+		</association>
+
+
+	</resultMap>
+
+<select id="classAll" resultMap="cList">
+		select c.class_no,
+		c.class_thumbnail,
+		c.class_title, c.mem_no, m.mem_id, c.class_period, c.admin_app
 		from class_info c, member_info m
 		where c.mem_no=m.mem_no
 	</select>
+	
+	
+	<select id="newClass" resultMap="cList" parameterType="cList">
+		select c.class_no,
+		c.class_thumbnail,
+		c.class_title, c.mem_no, m.mem_id, c.class_period , c.admin_app
+		from class_info c, member_info m
+		where c.mem_no=m.mem_no and c.admin_app=#{admin_app}
+	</select>
+
+
+	<select id="classDetail" resultMap="cList"
+		parameterType="String">
+
+		select
+		class_no,mem_no,
+		class_title,class_thumbnail,
+		class_content,
+		class_recipe_video,mate_name,
+		mate_cnt,step,
+		class_price,class_period,
+		class_cooktime,class_detail_info,
+		class_thumbnail,kind_tag_no,
+		theme_tag_no,material_tag_no,to_char(class_uploadtime,'yyyy-mm-dd')
+		from class_info WHERE class_no =
+		#{class_no}
+
+	</select>
+
+
+
+	<update id="classUpdate" parameterType="cList">
+
+		update class_info set 
+		class_title=#{class_title},
+		class_thumbnail=#{class_thumbnail},
+		class_content=#{class_content},
+		class_recipe_video=#{class_recipe_video},
+		mate_name=#{mate_name},
+		mate_cnt=#{mate_cnt},
+		step=#{step},
+		class_price=#{class_price},
+		class_period=#{class_period},
+		class_cooktime=#{class_cooktime},
+		class_detail_info=#{class_detail_info},
+		kind_tag_no=#{kind_tag_no},
+		theme_tag_no=#{theme_tag_no},
+		material_tag_no=#{material_tag_no},
+		admin_app=#{admin_app}
+		WHERE class_no=#{class_no}
+
+	</update>
 
 
 </mapper>

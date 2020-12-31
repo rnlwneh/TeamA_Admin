@@ -52,6 +52,8 @@ public class MemberBoardController {
 		return "redirect:tables";
 	}
 
+
+	
 	@RequestMapping(value = "/tables", method = RequestMethod.GET)
 	public String listSearch(PageVO svo, Model model,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
