@@ -450,19 +450,9 @@
 		
 		//새일정 저장
 		$('#saveSche').click(function(){
-			var scheDay = $('#scheDay').val();
-			var scheYear = scheDay.substr(0,4);
-			var scheMonth = scheDay.substr(5,2);
-			var scheDate = scheDay.substr(8,2);
-			if(scheMonth<10){
-				scheMonth = "0"+scheMonth;
-			}if(scheDate<10){
-				scheDate = "0"+scheDate;
-			}
-			
+			var ad_sche_date = $('#scheDay').val().trim();
 			var ad_no = $('#ad_no').val();
 			var ad_sche_imp = $('#ad_sche_imp').val();
-			var ad_sche_date = scheYear + "-" + scheMonth + "-" + scheDate;
 			var ad_sche_title = $('#ad_sche_title').val().trim();
 			var ad_sche_detail = $('#ad_sche_detail').val().trim();
 			var ad_sche_hour = $('#scheHour').val();
@@ -470,7 +460,7 @@
 				ad_sche_hour = "0"+ad_sche_hour;
 			}
 			
-			if(scheDay=='' || scheDay==null){
+			if(ad_sche_date=='' || scheDay==null){
 				alert('날짜를 입력하세요')
 				return;
 			}

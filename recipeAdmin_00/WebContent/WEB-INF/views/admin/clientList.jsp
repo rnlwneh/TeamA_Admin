@@ -39,7 +39,7 @@ table, th, td {
 											<th>거래처 담당자</th>
 											<th>담당자 번호</th>
 											<th>발주요일</th>
-											<th>납품날짜</th>
+											<th>납품요일</th>
 										</tr>
 										
 										<c:forEach items="${trdList }" var="trdList">

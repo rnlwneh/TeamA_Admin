@@ -40,10 +40,10 @@
 							<nav class="sb-sidenav-menu-nested nav">
 								<a href='sales'><font size='2' color='gray'>매출 현황</font></a>
 							</nav>
-							<nav class="sb-sidenav-menu-nested nav">
-								<a href='salesAnalysis'><font size='2' color='gray'>매출
-										분석</font></a>
-							</nav>
+<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
+<!-- 								<a href='salesAnalysis'><font size='2' color='gray'>매출 -->
+<!-- 										분석</font></a> -->
+<!-- 							</nav> -->
 							<nav class="sb-sidenav-menu-nested nav">
 								<a href='clientList'><font size='2' color='gray'>거래처목록</font></a>
 							</nav>
