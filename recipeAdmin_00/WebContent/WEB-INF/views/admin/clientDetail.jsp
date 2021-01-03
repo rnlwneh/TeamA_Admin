@@ -77,30 +77,29 @@ table, th, td {
 													<table class="table no-m">
 														<thead>
 															<tr>
-																<th class="col-md-2">상품명</th>
-																<th class="col-md-2">수량</th>
-																<th class="col-md-2">돈</th>
-																<th class="col-md-2">%</th>
+																<th>상품명</th>
+																<th>수량</th>
+																<th>돈</th>
+																<th>%</th>
 															</tr>
 														</thead>
 														<tbody>
 															<tr>
-																<td><span class="pd-l-sm"></span>사과</td>
+																<td>사과</td>
 																<td>200</td>
 																<td>573000</td>
-																<td>
+																<td>90%
 																	<div class="progress progress-sm no-m">
 																		<div class="progress-bar progress-bar-success"
 																			role="progressbar" aria-valuenow="40"
 																			aria-valuemin="0" aria-valuemax="100"
-																			style="width: 40%">
-																			<span class="sr-only">40% Complete (success)</span>
+																			style="width: 90%">
 																		</div>
 																	</div>
 																</td>
 															</tr>
 															<tr>
-																<td><span class="pd-l-sm"></span>배</td>
+																<td></span>배</td>
 																<td>78</td>
 																<td>1,1380</td>
 																<td>
@@ -115,7 +114,7 @@ table, th, td {
 																</td>
 															</tr>
 															<tr>
-																<td><span class="pd-l-sm"></span>복숭아</td>
+																<td>복숭아</td>
 																<td>89</td>
 																<td>488000</td>
 																<td>
@@ -129,7 +128,7 @@ table, th, td {
 																</td>
 															</tr>
 															<tr>
-																<td><span class="pd-l-sm"></span>포도</td>
+																<td>포도</td>
 																<td>100</td>
 																<td>1,29000</td>
 																<td>
@@ -145,7 +144,7 @@ table, th, td {
 																</td>
 															</tr>
 															<tr>
-																<td><span class="pd-l-sm"></span>귤</td>
+																<td>귤</td>
 																<td>50</td>
 																<td>47800</td>
 																<td>

@@ -7,9 +7,9 @@
 		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
 
-		<script src="https://d3js.org/d3.v3.min.js"></script>     
-		
+		<script src="https://d3js.org/d3.v3.min.js"></script>     		
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+		
     	<style>
     		 table.searchTable {
 			    width: 400px;
@@ -271,9 +271,14 @@ var today = new Date();
 var year = today.getFullYear();
 var month = today.getMonth() + 1;
 var date = today.getDate()
-var hour = today.getHours()
 
 $(document).ready(function(){
+	if(parseInt(month) < 10){
+		month = "0"+month;
+	}
+	if(parseInt(date) < 10){
+		date = "0"+date;
+	}
 	$('#searchDate').val(year+"-"+month+"-"+date)
 	var todayDate = $('#searchDate').val();
 	//오늘 날짜로 실행

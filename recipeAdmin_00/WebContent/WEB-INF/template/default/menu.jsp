@@ -16,11 +16,6 @@
 							</div> 메인
 						</a>
 
-						<div class="sb-sidenav-menu-heading">일정 관리</div>
-						<nav class="sb-sidenav-menu-nested nav">
-							<a href='adminSchedule2?ad_no=${ad_no }'><font size='2' color='gray'>달력</font></a>
-						</nav>
-
 						<c:set var="author" value="${ad_author }" />
 						<c:if test="${fn:contains(author, '사이트관리')}">
 
@@ -51,9 +46,6 @@
 							</nav>
 							<nav class="sb-sidenav-menu-nested nav">
 								<a href='clientList'><font size='2' color='gray'>거래처목록</font></a>
-							</nav>
-							<nav class="sb-sidenav-menu-nested nav">
-								<a href='#'><font size='2' color='gray'>스토어 재고 현황</font></a>
 							</nav>
 							<nav class="sb-sidenav-menu-nested nav">
 								<a href='storeGoodsList'><font size='2' color='gray'>스토어

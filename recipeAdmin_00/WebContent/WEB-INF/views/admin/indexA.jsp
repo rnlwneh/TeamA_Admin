@@ -1,603 +1,526 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+    <head>    
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css"/>
+        <style type="text/css">
+			.cal_top{
+			    text-align: center;
+			    font-size: 30px;
+			}
+			.cal{
+			    text-align: center;    
+			}
+			table.calendar{
+			    border: 1px solid black;
+			    text-align: left;
+			}
+			table.calendar td{
+			    vertical-align: top;
+			    border: 1px solid #dddddd;
+			    width: 200px;
+			}
+			table.detSche{
+			    border: 1px solid black;
+			    text-align: left;
+			}
+			table.detSche td{
+				vertical-align: top;
+			    border: 1px solid black;
+			    width: 200px;
+			}
+			textarea {
+		        width: 90%;
+		        height: 80px;
+		        resize:none;
+		    }
+		    table#scheTable td,th{
+		    	text-align: center;
+		    	vertical-align: middle;
+		    }
+		</style>
+    </head>
+    
+                <main>
+                    <div class="container-fluid">
+                        <h1 class="mt-4">${ad_name } 님의 일정</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Primary Card</div>
+<!--                                     <div class="card-footer d-flex align-items-center justify-content-between"> -->
+<!--                                         <a class="small text-white stretched-link" href="#">상세보기</a> -->
+<!--                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
+<!--                                     </div> -->
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Warning Card</div>
+<!--                                     <div class="card-footer d-flex align-items-center justify-content-between"> -->
+<!--                                         <a class="small text-white stretched-link" href="#">상세보기</a> -->
+<!--                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
+<!--                                     </div> -->
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Success Card</div>
+<!--                                     <div class="card-footer d-flex align-items-center justify-content-between"> -->
+<!--                                         <a class="small text-white stretched-link" href="#">상세보기</a> -->
+<!--                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
+<!--                                     </div> -->
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Danger Card</div>
+<!--                                     <div class="card-footer d-flex align-items-center justify-content-between"> -->
+<!--                                         <a class="small text-white stretched-link" href="#">상세보기</a> -->
+<!--                                         <div class="small text-white"><i class="fas fa-angle-right"></i></div> -->
+<!--                                     </div> -->
+                                </div>
+                            </div>
+                        </div>
+                        
+                         <div class='detailSchedule'></div>
+	                    
+	                    <div>&nbsp</div>
+	                    
+                        <div class="card mb-4">
+                            <div class="card-body">
+  
+							    <div class="xxx"></div>
+                                
+                            </div>
+                            
+                        </div>
+                        	<div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="scheTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                            	<th>중요도</th>
+                                                <th>날짜</th>
+                                                <th>일정</th>
+                                                <th>상세내용</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        	<input type='hidden' id='ad_no' value='${ad_no }'/>
+                                            <tr>
+                                            	<td>
+                                            		<select id='ad_sche_imp'>
+						                        		<option value='primary'>primary</option>
+						                        		<option value='warning'>warning</option>
+						                        		<option value='success'>success</option>
+						                        		<option value='danger'>danger</option>
+						                        	</select>
+                                            	</td>
+                                                <td>
+                                                	<input type='text' id='scheDay'>
+				                          			<select id='scheHour'>
+				                          				<c:forEach var="item" begin="0" end="23" step="1">
+				                          					<option value='${item }'>${item }시</option>
+				                          				</c:forEach>
+				                          			</select>
+                                                </td>
+                                                <td>
+                                                	<input id='ad_sche_title' type='text'>
+                                                </td>
+                                                <td>
+                                                	<textarea id='ad_sche_detail' cols='30' rows='3'></textarea>
+                                                </td>
+                                            </tr>
+                                           
+                                        </tbody>
+                                    </table>
+                                    <div align='right'><input id='saveSche' type='button' value='등록하기'></div>
+                                </div>
+                            </div>
+                        
+	                    
+	                    <div id='errr'></div>
+                        <div>&nbsp</div>
+                       
+                        
+                        
+                        
+<!--                         <div style="height: 100vh"></div> -->
+<!--                         <div class="card mb-4"><div class="card-body">When scrolling, the navigation stays at the top of the page. This is the end of the static navigation demo.</div></div> -->
+                    </div>
+                </main>
+<!--                 <footer class="py-4 bg-light mt-auto"> -->
+<!--                     <div class="container-fluid"> -->
+<!--                         <div class="d-flex align-items-center justify-content-between small"> -->
+<!--                             <div class="text-muted">Copyright &copy; Your Website 2020</div> -->
+<!--                             <div> -->
+<!--                                 <a href="#">Privacy Policy</a> -->
+<!--                                 &middot; -->
+<!--                                 <a href="#">Terms &amp; Conditions</a> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </footer> -->
 
-			<main>
-				<div class="container-fluid">
-					<h1 class="mt-4">${ad_name } 관리자</h1>
-					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
-					</ol>
-					<div class="row">
-						<div class="col-xl-3 col-md-6">
-							<div class="card bg-primary text-white mb-4">
-								<div class="card-body">Primary Card</div>
-								<div
-									class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="#">View
-										Details</a>
-									<div class="small text-white">
-										<i class="fas fa-angle-right"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-md-6">
-							<div class="card bg-warning text-white mb-4">
-								<div class="card-body">Warning Card</div>
-								<div
-									class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="#">View
-										Details</a>
-									<div class="small text-white">
-										<i class="fas fa-angle-right"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-md-6">
-							<div class="card bg-success text-white mb-4">
-								<div class="card-body">Success Card</div>
-								<div
-									class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="#">View
-										Details</a>
-									<div class="small text-white">
-										<i class="fas fa-angle-right"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-3 col-md-6">
-							<div class="card bg-danger text-white mb-4">
-								<div class="card-body">Danger Card</div>
-								<div
-									class="card-footer d-flex align-items-center justify-content-between">
-									<a class="small text-white stretched-link" href="#">View
-										Details</a>
-									<div class="small text-white">
-										<i class="fas fa-angle-right"></i>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xl-6">
-							<div class="card mb-4">
-								<div class="card-header">
-									<!--                                         <i class="fas fa-chart-area mr-1"></i> -->
-									매입현황
-								</div>
-								<div class="card-body">
-									<canvas id="myAreaChart" width="100%" height="40"></canvas>
-								</div>
-							</div>
-						</div>
-						<div class="col-xl-6">
-							<div class="card mb-4">
-								<div class="card-header">
-									<!--                                         <i class="fas fa-chart-bar mr-1"></i> -->
-									매출현황
-								</div>
-								<div class="card-body">
-									<canvas id="myBarChart2" width="100%" height="40"></canvas>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card mb-4">
-						<div class="card-header">
-							<i class="fas fa-table mr-1"></i> 회원 목록
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
-									cellspacing="0">
-									<thead>
-										<tr>
-											<th>회원명</th>
-											<th>사용자 구분</th>
-											<th>Office</th>
-											<th>Age</th>
-											<th>가입 일자</th>
-											<th>Salary</th>
-										</tr>
-									</thead>
-									<!--                                         <tfoot> -->
-									<!--                                             <tr> -->
-									<!--                                                 <th>Name</th> -->
-									<!--                                                 <th>Position</th> -->
-									<!--                                                 <th>Office</th> -->
-									<!--                                                 <th>Age</th> -->
-									<!--                                                 <th>Start date</th> -->
-									<!--                                                 <th>Salary</th> -->
-									<!--                                             </tr> -->
-									<!--                                         </tfoot> -->
-									<tbody>
-										<tr>
-											<td>Tiger Nixon</td>
-											<td>System Architect</td>
-											<td>Edinburgh</td>
-											<td>61</td>
-											<td>2011/04/25</td>
-											<td>$320,800</td>
-										</tr>
-										<tr>
-											<td>Garrett Winters</td>
-											<td>Accountant</td>
-											<td>Tokyo</td>
-											<td>63</td>
-											<td>2011/07/25</td>
-											<td>$170,750</td>
-										</tr>
-										<tr>
-											<td>Ashton Cox</td>
-											<td>Junior Technical Author</td>
-											<td>San Francisco</td>
-											<td>66</td>
-											<td>2009/01/12</td>
-											<td>$86,000</td>
-										</tr>
-										<tr>
-											<td>Cedric Kelly</td>
-											<td>Senior Javascript Developer</td>
-											<td>Edinburgh</td>
-											<td>22</td>
-											<td>2012/03/29</td>
-											<td>$433,060</td>
-										</tr>
-										<tr>
-											<td>Airi Satou</td>
-											<td>Accountant</td>
-											<td>Tokyo</td>
-											<td>33</td>
-											<td>2008/11/28</td>
-											<td>$162,700</td>
-										</tr>
-										<tr>
-											<td>Brielle Williamson</td>
-											<td>Integration Specialist</td>
-											<td>New York</td>
-											<td>61</td>
-											<td>2012/12/02</td>
-											<td>$372,000</td>
-										</tr>
-										<tr>
-											<td>Herrod Chandler</td>
-											<td>Sales Assistant</td>
-											<td>San Francisco</td>
-											<td>59</td>
-											<td>2012/08/06</td>
-											<td>$137,500</td>
-										</tr>
-										<tr>
-											<td>Rhona Davidson</td>
-											<td>Integration Specialist</td>
-											<td>Tokyo</td>
-											<td>55</td>
-											<td>2010/10/14</td>
-											<td>$327,900</td>
-										</tr>
-										<tr>
-											<td>Colleen Hurst</td>
-											<td>Javascript Developer</td>
-											<td>San Francisco</td>
-											<td>39</td>
-											<td>2009/09/15</td>
-											<td>$205,500</td>
-										</tr>
-										<tr>
-											<td>Sonya Frost</td>
-											<td>Software Engineer</td>
-											<td>Edinburgh</td>
-											<td>23</td>
-											<td>2008/12/13</td>
-											<td>$103,600</td>
-										</tr>
-										<tr>
-											<td>Jena Gaines</td>
-											<td>Office Manager</td>
-											<td>London</td>
-											<td>30</td>
-											<td>2008/12/19</td>
-											<td>$90,560</td>
-										</tr>
-										<tr>
-											<td>Quinn Flynn</td>
-											<td>Support Lead</td>
-											<td>Edinburgh</td>
-											<td>22</td>
-											<td>2013/03/03</td>
-											<td>$342,000</td>
-										</tr>
-										<tr>
-											<td>Charde Marshall</td>
-											<td>Regional Director</td>
-											<td>San Francisco</td>
-											<td>36</td>
-											<td>2008/10/16</td>
-											<td>$470,600</td>
-										</tr>
-										<tr>
-											<td>Haley Kennedy</td>
-											<td>Senior Marketing Designer</td>
-											<td>London</td>
-											<td>43</td>
-											<td>2012/12/18</td>
-											<td>$313,500</td>
-										</tr>
-										<tr>
-											<td>Tatyana Fitzpatrick</td>
-											<td>Regional Director</td>
-											<td>London</td>
-											<td>19</td>
-											<td>2010/03/17</td>
-											<td>$385,750</td>
-										</tr>
-										<tr>
-											<td>Michael Silva</td>
-											<td>Marketing Designer</td>
-											<td>London</td>
-											<td>66</td>
-											<td>2012/11/27</td>
-											<td>$198,500</td>
-										</tr>
-										<tr>
-											<td>Paul Byrd</td>
-											<td>Chief Financial Officer (CFO)</td>
-											<td>New York</td>
-											<td>64</td>
-											<td>2010/06/09</td>
-											<td>$725,000</td>
-										</tr>
-										<tr>
-											<td>Gloria Little</td>
-											<td>Systems Administrator</td>
-											<td>New York</td>
-											<td>59</td>
-											<td>2009/04/10</td>
-											<td>$237,500</td>
-										</tr>
-										<tr>
-											<td>Bradley Greer</td>
-											<td>Software Engineer</td>
-											<td>London</td>
-											<td>41</td>
-											<td>2012/10/13</td>
-											<td>$132,000</td>
-										</tr>
-										<tr>
-											<td>Dai Rios</td>
-											<td>Personnel Lead</td>
-											<td>Edinburgh</td>
-											<td>35</td>
-											<td>2012/09/26</td>
-											<td>$217,500</td>
-										</tr>
-										<tr>
-											<td>Jenette Caldwell</td>
-											<td>Development Lead</td>
-											<td>New York</td>
-											<td>30</td>
-											<td>2011/09/03</td>
-											<td>$345,000</td>
-										</tr>
-										<tr>
-											<td>Yuri Berry</td>
-											<td>Chief Marketing Officer (CMO)</td>
-											<td>New York</td>
-											<td>40</td>
-											<td>2009/06/25</td>
-											<td>$675,000</td>
-										</tr>
-										<tr>
-											<td>Caesar Vance</td>
-											<td>Pre-Sales Support</td>
-											<td>New York</td>
-											<td>21</td>
-											<td>2011/12/12</td>
-											<td>$106,450</td>
-										</tr>
-										<tr>
-											<td>Doris Wilder</td>
-											<td>Sales Assistant</td>
-											<td>Sidney</td>
-											<td>23</td>
-											<td>2010/09/20</td>
-											<td>$85,600</td>
-										</tr>
-										<tr>
-											<td>Angelica Ramos</td>
-											<td>Chief Executive Officer (CEO)</td>
-											<td>London</td>
-											<td>47</td>
-											<td>2009/10/09</td>
-											<td>$1,200,000</td>
-										</tr>
-										<tr>
-											<td>Gavin Joyce</td>
-											<td>Developer</td>
-											<td>Edinburgh</td>
-											<td>42</td>
-											<td>2010/12/22</td>
-											<td>$92,575</td>
-										</tr>
-										<tr>
-											<td>Jennifer Chang</td>
-											<td>Regional Director</td>
-											<td>Singapore</td>
-											<td>28</td>
-											<td>2010/11/14</td>
-											<td>$357,650</td>
-										</tr>
-										<tr>
-											<td>Brenden Wagner</td>
-											<td>Software Engineer</td>
-											<td>San Francisco</td>
-											<td>28</td>
-											<td>2011/06/07</td>
-											<td>$206,850</td>
-										</tr>
-										<tr>
-											<td>Fiona Green</td>
-											<td>Chief Operating Officer (COO)</td>
-											<td>San Francisco</td>
-											<td>48</td>
-											<td>2010/03/11</td>
-											<td>$850,000</td>
-										</tr>
-										<tr>
-											<td>Shou Itou</td>
-											<td>Regional Marketing</td>
-											<td>Tokyo</td>
-											<td>20</td>
-											<td>2011/08/14</td>
-											<td>$163,000</td>
-										</tr>
-										<tr>
-											<td>Michelle House</td>
-											<td>Integration Specialist</td>
-											<td>Sidney</td>
-											<td>37</td>
-											<td>2011/06/02</td>
-											<td>$95,400</td>
-										</tr>
-										<tr>
-											<td>Suki Burks</td>
-											<td>Developer</td>
-											<td>London</td>
-											<td>53</td>
-											<td>2009/10/22</td>
-											<td>$114,500</td>
-										</tr>
-										<tr>
-											<td>Prescott Bartlett</td>
-											<td>Technical Author</td>
-											<td>London</td>
-											<td>27</td>
-											<td>2011/05/07</td>
-											<td>$145,000</td>
-										</tr>
-										<tr>
-											<td>Gavin Cortez</td>
-											<td>Team Leader</td>
-											<td>San Francisco</td>
-											<td>22</td>
-											<td>2008/10/26</td>
-											<td>$235,500</td>
-										</tr>
-										<tr>
-											<td>Martena Mccray</td>
-											<td>Post-Sales support</td>
-											<td>Edinburgh</td>
-											<td>46</td>
-											<td>2011/03/09</td>
-											<td>$324,050</td>
-										</tr>
-										<tr>
-											<td>Unity Butler</td>
-											<td>Marketing Designer</td>
-											<td>San Francisco</td>
-											<td>47</td>
-											<td>2009/12/09</td>
-											<td>$85,675</td>
-										</tr>
-										<tr>
-											<td>Howard Hatfield</td>
-											<td>Office Manager</td>
-											<td>San Francisco</td>
-											<td>51</td>
-											<td>2008/12/16</td>
-											<td>$164,500</td>
-										</tr>
-										<tr>
-											<td>Hope Fuentes</td>
-											<td>Secretary</td>
-											<td>San Francisco</td>
-											<td>41</td>
-											<td>2010/02/12</td>
-											<td>$109,850</td>
-										</tr>
-										<tr>
-											<td>Vivian Harrell</td>
-											<td>Financial Controller</td>
-											<td>San Francisco</td>
-											<td>62</td>
-											<td>2009/02/14</td>
-											<td>$452,500</td>
-										</tr>
-										<tr>
-											<td>Timothy Mooney</td>
-											<td>Office Manager</td>
-											<td>London</td>
-											<td>37</td>
-											<td>2008/12/11</td>
-											<td>$136,200</td>
-										</tr>
-										<tr>
-											<td>Jackson Bradshaw</td>
-											<td>Director</td>
-											<td>New York</td>
-											<td>65</td>
-											<td>2008/09/26</td>
-											<td>$645,750</td>
-										</tr>
-										<tr>
-											<td>Olivia Liang</td>
-											<td>Support Engineer</td>
-											<td>Singapore</td>
-											<td>64</td>
-											<td>2011/02/03</td>
-											<td>$234,500</td>
-										</tr>
-										<tr>
-											<td>Bruno Nash</td>
-											<td>Software Engineer</td>
-											<td>London</td>
-											<td>38</td>
-											<td>2011/05/03</td>
-											<td>$163,500</td>
-										</tr>
-										<tr>
-											<td>Sakura Yamamoto</td>
-											<td>Support Engineer</td>
-											<td>Tokyo</td>
-											<td>37</td>
-											<td>2009/08/19</td>
-											<td>$139,575</td>
-										</tr>
-										<tr>
-											<td>Thor Walton</td>
-											<td>Developer</td>
-											<td>New York</td>
-											<td>61</td>
-											<td>2013/08/11</td>
-											<td>$98,540</td>
-										</tr>
-										<tr>
-											<td>Finn Camacho</td>
-											<td>Support Engineer</td>
-											<td>San Francisco</td>
-											<td>47</td>
-											<td>2009/07/07</td>
-											<td>$87,500</td>
-										</tr>
-										<tr>
-											<td>Serge Baldwin</td>
-											<td>Data Coordinator</td>
-											<td>Singapore</td>
-											<td>64</td>
-											<td>2012/04/09</td>
-											<td>$138,575</td>
-										</tr>
-										<tr>
-											<td>Zenaida Frank</td>
-											<td>Software Engineer</td>
-											<td>New York</td>
-											<td>63</td>
-											<td>2010/01/04</td>
-											<td>$125,250</td>
-										</tr>
-										<tr>
-											<td>Zorita Serrano</td>
-											<td>Software Engineer</td>
-											<td>San Francisco</td>
-											<td>56</td>
-											<td>2012/06/01</td>
-											<td>$115,000</td>
-										</tr>
-										<tr>
-											<td>Jennifer Acosta</td>
-											<td>Junior Javascript Developer</td>
-											<td>Edinburgh</td>
-											<td>43</td>
-											<td>2013/02/01</td>
-											<td>$75,650</td>
-										</tr>
-										<tr>
-											<td>Cara Stevens</td>
-											<td>Sales Assistant</td>
-											<td>New York</td>
-											<td>46</td>
-											<td>2011/12/06</td>
-											<td>$145,600</td>
-										</tr>
-										<tr>
-											<td>Hermione Butler</td>
-											<td>Regional Director</td>
-											<td>London</td>
-											<td>47</td>
-											<td>2011/03/21</td>
-											<td>$356,250</td>
-										</tr>
-										<tr>
-											<td>Lael Greer</td>
-											<td>Systems Administrator</td>
-											<td>London</td>
-											<td>21</td>
-											<td>2009/02/27</td>
-											<td>$103,500</td>
-										</tr>
-										<tr>
-											<td>Jonas Alexander</td>
-											<td>Developer</td>
-											<td>San Francisco</td>
-											<td>30</td>
-											<td>2010/07/14</td>
-											<td>$86,500</td>
-										</tr>
-										<tr>
-											<td>Shad Decker</td>
-											<td>Regional Director</td>
-											<td>Edinburgh</td>
-											<td>51</td>
-											<td>2008/11/13</td>
-											<td>$183,000</td>
-										</tr>
-										<tr>
-											<td>Michael Bruce</td>
-											<td>Javascript Developer</td>
-											<td>Singapore</td>
-											<td>29</td>
-											<td>2011/06/27</td>
-											<td>$183,000</td>
-										</tr>
-										<tr>
-											<td>Donna Snider</td>
-											<td>Customer Support</td>
-											<td>New York</td>
-											<td>27</td>
-											<td>2011/01/25</td>
-											<td>$112,000</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-			</main>
-<!-- 			<footer class="py-4 bg-light mt-auto"> -->
-<!-- 				<div class="container-fluid"> -->
-<!-- 					<div -->
-<!-- 						class="d-flex align-items-center justify-content-between small"> -->
-<!-- 						<div class="text-muted">Copyright &copy; Your Website 2020</div> -->
-<!-- 						<div> -->
-<!-- 							<a href="#">Privacy Policy</a> &middot; <a href="#">Terms -->
-<!-- 								&amp; Conditions</a> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 			</footer> -->
+        
+        
+<script>
+        
+  	//datepicker 한글변환
+    $(function() {
+      $( "#scheDay" ).datepicker({
+        dateFormat: 'yy-mm-dd',
+        prevText: '이전 달',
+        nextText: '다음 달',
+        monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+        dayNames: ['일','월','화','수','목','금','토'],
+        dayNamesShort: ['일','월','화','수','목','금','토'],
+        dayNamesMin: ['일','월','화','수','목','금','토'],
+        showMonthAfterYear: true,
+        yearSuffix: '년'
+      });
+    });	
+        
+        
+      	//달력 그리기============================================================
+	function printCalender( className, year, month ){
 
-<!-- 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script> -->
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/chart-area-demo.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/chart-bar-demo.js"></script>
-	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-	<script src="${pageContext.request.contextPath}/resources/js/datatables-demo.js"></script>
+		year = parseInt(year,10);
+		month = parseInt(month,10);
+	
+		var lastMonth_lastDay = new Date(year, month-1, 0).getDay();
+		var lastMonth_lastDate =  new Date(year, month-1, 0).getDate();
+		var thisMonth_firstDay = new Date(year, month-1, 1).getDay();
+		var thisMonth_lastDate = new Date(year, month, 0).getDate();
+		var lastMonth_startDate = lastMonth_lastDate - lastMonth_lastDay;
+									
+		var month2 = ""
 
+		if(month < 10){
+			month2 = "0"+month;
+		}else{
+			month2 = month+"";
+		}
+
+		var arr = []
+		arr.push("<table class='calendar' cellpadding=4>")
+		arr.push( "<div class='cal_top'>" )
+		arr.push(" 		<span id='last' style='cursor:pointer'>&lt;&lt; </span>")
+		arr.push("		" + year + "년 " + month2 + "월 ")
+		arr.push("		<span id='next' style='cursor:pointer'>&gt;&gt;</span>")
+		arr.push("</div>")
+		arr.push("<tr><th>일<th>월<th>화<th>수<th>목<th>금<th>토")
+
+		var thisMonth_date = 1;
+		var nextMonth_date = 1;
+
+		for(var i = 0; i < 6; i++){
+			arr.push("<tr height='100'>");
+
+			for(var j = 0; j <=6; j++){
+				//일요일 빨간색, 토요일 파란색, 나머지 색x
+				if(j == 6){
+					arr.push("<td bgcolor=skyblue>");
+				}else if(j == 0){
+					arr.push("<td bgcolor=pink>");
+				}else{
+					arr.push("<td>");
+				}
+
+				//첫주 출력
+				if( i == 0 && thisMonth_firstDay <= j ){
+					arr.push("<div>" + thisMonth_date + "</div>");
+					arr.push("<div class='cal_schedule'></div>");
+					arr.push("<div class='cal_schedule2'></div>");
+					thisMonth_date++;
+				}
+				//둘째주 부터 이번달 마지막일 까지 출력
+				else if(i != 0 && thisMonth_date <= thisMonth_lastDate){
+					arr.push("<div>" + thisMonth_date + "</div>");
+					arr.push("<div class='cal_schedule'></div>");
+					arr.push("<div class='cal_schedule2'></div>");
+					thisMonth_date++;
+				}
+			}
+			//마지막 날짜를 찍고 한주가 끝났으면 끝
+			if(thisMonth_date > thisMonth_lastDate){ break; }
+		}
+		arr.push("</table>")
+		
+		//미리 만들어둔 div태그에 html코드 입력
+		$("."+className).html( arr.join("") );
+	}		//function print_calender( className, year, month ){
+		
+	//상세보기 함수========================================================================================
+	function detailClick(className,scheduleList){
+		$('.'+className).click(function(){
+			var pkNo = $(this).find('#pkNo').val();
+			var date = $('.'+className).index($(this))+1;
+			var thisHour = $(this).text().substr(1,2);
+			for(var i=0; i<scheduleList.length; i++){
+				var ad_sche_date = scheduleList[i].ad_sche_date;
+				var scheYear = ad_sche_date.substr(0,4);
+				var scheMonth = ad_sche_date.substr(5,2);
+				var scheDate = ad_sche_date.substr(8,2);
+				if(scheDate.substr(0,1)==='0'){
+					scheDate = scheDate.substr(1,);
+				}
+				var ad_sche_title = scheduleList[i].ad_sche_title;
+				var scheHour = scheduleList[i].ad_sche_hour;
+				var color = 'blue';
+				if(scheduleList[i].ad_sche_imp==='warning'){
+					color='yellow';
+				}else if(scheduleList[i].ad_sche_imp==='success'){
+					color='green';
+				}else if(scheduleList[i].ad_sche_imp==='danger'){
+					color='red'
+				}
+				var scheDetail = scheduleList[i].ad_sche_detail;
+				var ad_sche_no = scheduleList[i].ad_sche_no;
+				
+				if(parseInt(pkNo)===ad_sche_no){
+					if(scheDate.length==1){
+						scheDate = "0"+scheDate;
+					}
+					var detailSchHtml = "";
+					detailSchHtml += "<div class='card-body'>";
+					detailSchHtml += "		<div class='table-responsive'>";
+					detailSchHtml += "			<table class='table table-bordered' id='scheTable' width='100%' cellspacing='0'>";
+					detailSchHtml += "				<thead>";
+					detailSchHtml += "					<tr><th>일정<th>일시<th>상세내용<th>중요도";
+					detailSchHtml += "				</thead>";
+					detailSchHtml += "				<input id='ad_sche_no' type='hidden' value="+ad_sche_no+">";
+					detailSchHtml += "				<tbody>";
+					detailSchHtml += "					<tr><td><font size='5' color="+color+">●</font><font color='black'>"+scheHour+"시 "+ad_sche_title+"</font><td>"+scheMonth+"월 "+scheDate+"일 "+scheHour+"시 <td>"+scheDetail;
+					detailSchHtml += "						<td><select id='ad_sche_imp'>";
+					detailSchHtml += "							<option value="+scheduleList[i].ad_sche_imp+" selected disabled hidden>"+scheduleList[i].ad_sche_imp+"</option>";
+					detailSchHtml += "							<option value='primary'>primary</option>";
+					detailSchHtml += "							<option value='warning'>warning</option>";
+					detailSchHtml += "							<option value='success'>success</option>";
+					detailSchHtml += "							<option value='danger'>danger</option>";
+					detailSchHtml += "						</select>";
+					detailSchHtml += "				</tbody>";
+					detailSchHtml += "			</table>";
+					detailSchHtml += "			&nbsp<div align='right'><input type='button' id='updateSche' value='변경'>";
+					detailSchHtml += "			&nbsp<input type='button' id='deleteSche' value='삭제'></div>";
+					detailSchHtml += "		</div>";
+					detailSchHtml += "</div>";
+					var beforeHtml = $('.detailSchedule').html()
+					$('.detailSchedule').html(detailSchHtml);
+					if(beforeHtml===$('.detailSchedule').html()){
+						$('.detailSchedule').html("")
+					}
+					//삭제버튼 누를시
+					$('#deleteSche').click(function(){
+						if(confirm("정말 삭제하시겠습니까?")){
+							var scheNo = $('#ad_sche_no').val();
+							$.ajax({
+								url:"deleteSchedule?ad_sche_no="+scheNo
+								,success : function(){
+									var ad_no = $('#ad_no').val();
+									alert("삭제가 완료되었습니다!");
+									location.href="indexA";
+								}
+								,error : function(request,status,error){
+									$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+								}
+							})
+						}
+					})		//$('#deleteSche').click(function(){
+					
+					//변경버튼 누를시
+					$('#updateSche').click(function(){
+						if(confirm("변경하시겠습니까?")){
+							var scheNo = $('#ad_sche_no').val();
+							var scheImp = $('#ad_sche_imp').val();
+							$.ajax({
+								url:"updateSchedule?ad_sche_no="+scheNo+"&ad_sche_imp="+scheImp
+								,success : function(){
+									var ad_no = $('#ad_no').val();
+									alert("변경이 완료되었습니다!");
+									location.href="indexA";
+								}
+								,error : function(request,status,error){
+									$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+								}
+							})
+						}
+					})		//$('#updateSche').click(function(){
+				}		//if(parseInt(pkNo)===ad_sche_no){
+			}		//for(var i=0; i<scheduleList.length; i++){
+		})		//$('.cal_schedule').click(function(){
+	}		//function detailClick(){
+		
+	//일정적기 함수===================================================================================
+	function scheduleWrite(scheduleList){
+		for(var i=0; i<scheduleList.length; i++){
+			//alert(scheduleList[i].ad_sche_date)
+			var ad_sche_date = scheduleList[i].ad_sche_date;
+			var scheYear = ad_sche_date.substr(0,4);
+			var scheMonth = ad_sche_date.substr(5,2);
+			var scheDate = ad_sche_date.substr(8,2);
+			var scheHour = scheduleList[i].ad_sche_hour;
+			var ad_sche_title = scheduleList[i].ad_sche_title;
+			if(scheDate.substr(0,1)==='0'){
+				scheDate = scheDate.substr(1,);
+			}
+			var color = 'blue';
+			if(scheduleList[i].ad_sche_imp==='warning'){
+				color='yellow';
+			}else if(scheduleList[i].ad_sche_imp==='success'){
+				color='green';
+			}else if(scheduleList[i].ad_sche_imp==='danger'){
+				color='red'
+			}
+			if(parseInt(scheYear)===year && parseInt(scheMonth)===month){
+				if($('.cal_schedule').eq(scheDate-1).html().trim()===''){
+					$('.cal_schedule').eq(scheDate-1).html("<input id='pkNo' type='hidden' value="+scheduleList[i].ad_sche_no+"><p style='cursor:pointer'><font size='5' color="+color+">●</font><font color='black'>"+scheHour+"시 "+ad_sche_title+"</font></p>")
+				}else{
+					$('.cal_schedule2').eq(scheDate-1).html("<input id='pkNo' type='hidden' value="+scheduleList[i].ad_sche_no+"><p style='cursor:pointer'><font size='5' color="+color+">●</font><font color='black'>"+scheHour+"시 "+ad_sche_title+"</font></p>")
+				}
+			}
+		}		//for(var i=0; i<scheduleList.length; i++){
+	}		//function scheduleWrite(scheduleList){
+		
+	//ajax를 통해 달력을 그린뒤 일정출력,상세보기========================================================
+	function ajaxF(){
+		//로그인한 관리자 일정만 뽑아오기위해
+		var ad_no = $('#ad_no').val();
+		//달력그리기
+		printCalender( "xxx", year, month );
+		$.ajax({
+			url:"scheduleList"
+			,success : function(scheduleList){
+				//달력에 일정 적기
+				scheduleWrite(scheduleList);					
+				//일정 눌렀을 때 상세보기
+				detailClick('cal_schedule',scheduleList);
+				detailClick('cal_schedule2',scheduleList);
+			}
+			,error : function(request,status,error){
+				$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+			}
+		})		//$.ajax({
+	}		//function ajaxF(){
+	
+	//화살표 왼쪽오른쪽 누를때=========================================================================
+	function lastNextClick(){
+		$(document).ready(function(){
+			$("#next").click(function(){
+				if(month === 12){
+					year++;
+					month = 1;
+				}else{
+					month++;
+				}
+				ajaxF();
+				lastNextClick();
+			})
+			$("#last").click(function(){
+				if(month === 1){
+					year--;
+					month = 12;
+				}else{
+					month--;
+				}
+				ajaxF();
+				lastNextClick();
+			})
+		})
+	}
+          //=================================================================================================
+		
+	//전역변수 선언 (오늘날짜 년/월)
+	var today = new Date();
+	var year = today.getFullYear();
+	var month = today.getMonth() + 1;	
+		
+	$(document).ready(function(){
+		//이번달 달력을 그린뒤 이번달 일정 출력
+		ajaxF();
+		
+		//달력그린뒤 일정출력한 새로운body를 다시읽기위해 호출
+		lastNextClick();
+		
+		//새일정 저장
+		$('#saveSche').click(function(){
+			var scheDay = $('#scheDay').val();
+			var scheYear = scheDay.substr(0,4);
+			var scheMonth = scheDay.substr(5,2);
+			var scheDate = scheDay.substr(8,2);
+			if(scheMonth<10){
+				scheMonth = "0"+scheMonth;
+			}if(scheDate<10){
+				scheDate = "0"+scheDate;
+			}
+			
+			var ad_no = $('#ad_no').val();
+			var ad_sche_imp = $('#ad_sche_imp').val();
+			var ad_sche_date = scheYear + "-" + scheMonth + "-" + scheDate;
+			var ad_sche_title = $('#ad_sche_title').val().trim();
+			var ad_sche_detail = $('#ad_sche_detail').val().trim();
+			var ad_sche_hour = $('#scheHour').val();
+			if(ad_sche_hour<10){
+				ad_sche_hour = "0"+ad_sche_hour;
+			}
+			
+			if(scheDay=='' || scheDay==null){
+				alert('날짜를 입력하세요')
+				return;
+			}
+			if(ad_sche_title=='' || ad_sche_title==null){
+				alert('일정을 입력하세요')
+				return;
+			}
+			if(ad_sche_detail=='' || ad_sche_detail==null){
+				alert('상세내용을 입력하세요')
+				return;
+			}
+			$.ajax({
+				url : "addSchedule"
+				,type : "POST"
+				,data : {
+					ad_no:ad_no
+					,ad_sche_imp:ad_sche_imp
+					,ad_sche_date:ad_sche_date
+					,ad_sche_hour:ad_sche_hour
+					,ad_sche_title:ad_sche_title
+					,ad_sche_detail:ad_sche_detail
+				}
+				,success : function(){
+					alert("일정이 추가되었습니다.")
+					location.href="indexA"
+				}
+				,error : function(request,status,error){
+					$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+				}
+			})		//$.ajax({
+		})		//$('#saveSche').click(function(){
+	})		//$(document).ready(function(){									
+	
+
+</script>
+        
+        
+        
+        
+        
+        
+        
+<!--         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" crossorigin="anonymous"></script> -->
+		
+		<script src="//code.jquery.com/jquery.min.js"></script>
+		<script src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/scripts.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/datatables-demo.js"></script>
+    </body>
+</html>

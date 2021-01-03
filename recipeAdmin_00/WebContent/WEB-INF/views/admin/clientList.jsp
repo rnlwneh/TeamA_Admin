@@ -27,6 +27,11 @@ table, th, td {
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
+								<div align='right'>
+									<input type='button' id='deleteBtn' value='선택상품삭제'>&nbsp
+									<input type='button' id='addStoreGoods' value='상품추가'>
+								</div>
+								<div>&nbsp</div>
 								<div class="table-responsive">
 									<table class="table table-bordered">
 										<tr>
