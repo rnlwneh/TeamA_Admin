@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="strOrdList">
+
+	<resultMap type="strOrd" id="strOrderListMap">
+		<id property="str_ord_no" column="str_ord_no"/>
+		<result property="str_ord_cnt" column="str_ord_cnt"/>
+		<result property="str_ord_addr" column="str_ord_addr"/>
+		<result property="str_ord_date" column="str_ord_date"/>
+		
+		<association property="storeProductDTO" javaType="strPro">
+			<id property="str_pro_no" column="str_pro_no"/>
+			<result property="str_pro_image" column="str_pro_image"/>
+			<result property="str_pro_name" column="str_pro_name"/>
+			<result property="str_pro_primecost" column="str_pro_primecost"/>
+		</association>
+		
+		<association property="recipeMemberDTO" javaType="rpMem">
+			<id property="mem_no" column="mem_no"/>
+			<result property="mem_name" column="mem_name"/>
+		</association>
+	</resultMap>
+	
+	<select id="strOrdTot" parameterType="pvo" resultType="int">
+		select count(*) 
+		from member_info m, store_product sp, store_order so
+		where m.mem_no = so.mem_no
+			and so.str_pro_no = sp.str_pro_no
+			<if test="startSearchDate!='' and startSearchDate!=null">
+			    <![CDATA[
+			    and so.str_ord_date >= to_date(#{startSearchDate},'yyyy-mm-dd')
+			    ]]>
+		    </if>
+		    <if test="endSearchDate!='' and endSearchDate!=null">
+			    <![CDATA[
+			    and so.str_ord_date <= to_date(#{endSearchDate},'yyyy-mm-dd')+0.9999
+			    ]]>
+			</if>
+			 <if test="mem_name!='' and mem_name!=null">
+		    	and m.mem_name like '%'||#{mem_name}||'%'
+		    </if>
+		     <if test="str_pro_name!='' and str_pro_name!=null">
+		    	and sp.str_pro_name like '%'||#{str_pro_name}||'%'
+		    </if>
+	</select>
+
+	<select id="strOrderList" parameterType="pvo" resultMap="strOrderListMap">
+		select * from( select rownum r_num, a.* from(
+			select m.mem_no
+			    , so.str_ord_no
+			    , sp.str_pro_no
+			    , m.mem_name
+			    , sp.str_pro_image
+			    , sp.str_pro_name
+			    , sp.str_pro_primecost
+			    , so.str_ord_cnt
+			    , so.str_ord_addr
+			    , so.str_ord_date
+			from member_info m, store_product sp, store_order so
+			where m.mem_no = so.mem_no
+			    and so.str_pro_no = sp.str_pro_no
+			    <if test='startSearchDate!="" and startSearchDate!=null'>
+			    	<![CDATA[
+				    and so.str_ord_date >= to_date(#{startSearchDate},'yyyy-mm-dd')
+				    ]]>
+			    </if>
+			    <if test='endSearchDate!="" and endSearchDate!=null'>
+				    <![CDATA[
+				    and so.str_ord_date <= to_date(#{endSearchDate},'yyyy-mm-dd')+0.9999
+				    ]]>
+				</if>
+				 <if test='mem_name!="" and mem_name!=null'>
+			    	and m.mem_name like '%'||#{mem_name}||'%'
+			    </if>
+			     <if test='str_pro_name!="" and str_pro_name!=null'>
+			    	and sp.str_pro_name like '%'||#{str_pro_name}||'%'
+			    </if>
+			order by so.str_ord_date desc
+		) a ) where r_num between #{start} and #{end}
+	</select>
+
+</mapper>

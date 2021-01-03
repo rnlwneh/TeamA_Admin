@@ -116,9 +116,9 @@
 													</a>
 												</td>
 												<td align='center' style="vertical-align:middle;"><a href='clientDetail?trd_list_no=${goodsList.trd_list_no }'>${goodsList.tradeListDTO.trd_list_name }</a></td>
-												<td align='center' style="vertical-align:middle;">${goodsList.str_pro_remind }개</td>
-												<td align='center' style="vertical-align:middle;">${goodsList.str_pro_primecost }원</td>
-												<td align='center' style="vertical-align:middle;">${goodsList.str_pro_salescost }원</td>
+												<td align='center' style="vertical-align:middle;" id='goodsCnt'>${goodsList.str_pro_remind }</td>
+												<td align='center' style="vertical-align:middle;" id='goodsPrime'>${goodsList.str_pro_primecost }</td>
+												<td align='center' style="vertical-align:middle;" id='goodsSales'>${goodsList.str_pro_salescost }</td>
 												<td align='center' style="vertical-align:middle;">
 													<c:set var="show" value="${goodsList.str_pro_show }" />
 													<c:set var="remind" value="${goodsList.str_pro_remind }" />
@@ -162,40 +162,70 @@
 
 	<div id='errr'></div>
 	<script>
-		$('#addStoreGoods').click(function(){
-			location.href='addStoreGoods'
-		})
-		
-		$('#deleteBtn').click(function(){
-			if(confirm("정말 삭제하시겠습니까?")){
-				var no = "";
-				$('#proCheck:checked').each(function(){
-					no = no+","+$(this).next().val();
-				})
-				no = no.substr(1,);
-				$.ajax({
-					url:"deleteProduct"
-					,data:{no:no}
-					,success:function(){
-						alert("삭제가 완료되었습니다.")
-						location.href="storeGoodsList"
-					}
-					,error : function(request,status,error){
-						$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
-					}
-				})
+	
+		//숫자 3개마다 ,를 집어넣음 num:숫자문자
+		function commaNum( num ){
+			var arr = [];
+			var numStr = ""
+			for(var i = num.length-1; i >= 0; i = i-3){
+				if(i > 2){
+					arr.push( num.substr(i-2, 3) )
+				}
+				else{
+					arr.push( num.substr(0,i+1) )
+				}
 			}
-		})
-		
-		$('#searchBtn').click(function(){
-			var searchProName = $('#searchProName').val().trim();
-			var searchTrdList = $('#searchTrdList').val();
-			var searchStatus = $('#searchStatus').val();
-			var url = "storeGoodsList?searchProName="+searchProName+"&searchTrdList="+searchTrdList+"&searchStatus="+searchStatus
+			arr.reverse();
+			numStr =  arr.join(",");
+			return numStr;
+		}
+	
+		$(document).ready(function(){
 			
-			location.href=url;
+			$('[id^=goodsCnt]').each(function(){
+				$(this).text(commaNum($(this).text())+"개")
+			})
+			$('[id^=goodsPrime]').each(function(){
+				$(this).text(commaNum($(this).text())+"원")
+			})
+			$('[id^=goodsSales]').each(function(){
+				$(this).text(commaNum($(this).text())+"원")
+			})
+			
+			$('#addStoreGoods').click(function(){
+				location.href='addStoreGoods'
+			})
+			
+			$('#deleteBtn').click(function(){
+				if(confirm("정말 삭제하시겠습니까?")){
+					var no = "";
+					$('#proCheck:checked').each(function(){
+						no = no+","+$(this).next().val();
+					})
+					no = no.substr(1,);
+					$.ajax({
+						url:"deleteProduct"
+						,data:{no:no}
+						,success:function(){
+							alert("삭제가 완료되었습니다.")
+							location.href="storeGoodsList"
+						}
+						,error : function(request,status,error){
+							$('#errr').html("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error)
+						}
+					})
+				}
+			})
+			
+			$('#searchBtn').click(function(){
+				var searchProName = $('#searchProName').val().trim();
+				var searchTrdList = $('#searchTrdList').val();
+				var searchStatus = $('#searchStatus').val();
+				var url = "storeGoodsList?searchProName="+searchProName+"&searchTrdList="+searchTrdList+"&searchStatus="+searchStatus
+				
+				location.href=url;
+			})
 		})
-		
 		
 	</script>
 	
@@ -216,5 +246,3 @@
 		crossorigin="anonymous"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/js/datatables-demo.js"></script>
-</body>
-</html>

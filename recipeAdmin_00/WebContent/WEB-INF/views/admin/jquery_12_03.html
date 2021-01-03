@@ -1,0 +1,403 @@
+<html>
+<meta charset="UTF-8">
+<head>
+	<script>
+		
+		//점수를 받아 학점을 리턴하는 함수
+		function hakjum( num ){
+			var score = num;
+			var hakjum = "F";
+
+			if(score >= 90){
+				hakjum = "A";
+			}
+			else if(score >= 80){
+				hakjum = "B";
+			}
+			else if(score >= 70){
+				hakjum = "C";
+			}
+			else if(score >= 60){
+				hakjum = "D";
+			}
+			return hakjum;
+		}
+
+		//cnt와 td태그를 넣으면 배경색을 바꿔주는 함수
+		function bgColor( cnt,td_tag ){
+			var cnt = cnt;
+			if(cnt%2 == 0){
+				td_tag.css( {"background-color":"#ffffcc"} );
+			}
+			else{
+				td_tag.css( {"background-color":""} );
+			}
+			return;
+		}
+
+		//입력한 값이 tr태그안의 td에 있는지 확인하는 함수
+		function true_false( text1,text2,text3,keyword ){
+			var flag = false;
+			if(text1.indexOf(keyword) >= 0 
+			|| text2.indexOf(keyword) >= 0 
+			|| text3.indexOf(keyword) >= 0 ){
+				flag = true;
+			}
+			return flag;
+		}
+
+		//체크박스관리하는 jquery객체 매위주와 tr태그와 학점을 넣으면 체크된 학점에 해당하는지 확인하는 함수
+		function hakjum_check( jq_checkbox, thisTrObj, hakjums){
+			var flag = false;
+			var jq_checkbox = jq_checkbox
+			var thisTrObj = thisTrObj
+			for(i = 0; i < jq_checkbox.length; i++){
+				if( jq_checkbox.eq(i).filter(":checked").val() == hakjums ){
+					flag = true;
+					break;
+				}
+			}
+			return flag;
+		}
+
+	</script>
+
+
+
+	<style>.style1{ background-color:#00f; color:#fff; }</style>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script>
+
+		$(document).ready( function(){
+			$(".hakjum").prop("checked",true);
+			$(".sexual").prop("checked",true);
+
+			var obj = $(".sungjuk");
+			obj.find("tbody tr:odd td").css( {"background-color":"#ffffcc"} )
+			//---------------------------------------------
+			//class=search 가진 태그에 click 이벤트가 일어나면
+			//키워드를 가지고 검색한 후 검색된 행만 보여주는 코딩 실행
+			//---------------------------------------------
+			$(".search").click( function(){
+				obj.find("tbody tr:odd td").css( {"background-color":"#ffffcc"} )
+				obj.find("tbody tr:even td").css( {"background-color":""} )
+				
+				//왼 오 상자에 입력한값 받기
+				var keyword1 = $(".keyword1").val();
+				var keyword2 = $(".keyword2").val();
+				
+				//입력양식과 학점체크를 모두 하지않았으면 초기화
+				if( keyword1.split(" ").join("") == "" &&  keyword2.split(" ").join("") == "" && $(".hakjum").filter(":checked").length == 0 ){
+					alert("검색 데이터가 없습니다.");
+					$(".keyword1").val("");
+					$(".keyword2").val("");
+					$(".keyword1").focus();
+					return;
+				}
+
+				
+				//양쪽 입력상자에 공백제거
+				keyword1 = $.trim(keyword1);
+				keyword2 = $.trim(keyword2);
+
+				//양쪽 입력상자 모두 대문자로
+				keyword1 = keyword1.toUpperCase();
+				keyword2 = keyword2.toUpperCase();
+
+				var trsObj = obj.find("tbody tr");
+				trsObj.hide();
+				var cnt = 0;
+
+				//class=sungjuk 가진 태그 후손의 tbody 태그 후손의 tr에 차례대로 접근해서
+				//tr 내부에 데이터를 검색하는 익명함수를 실행한다
+				trsObj.each( function(){
+					var flag=false;
+
+					//지정 tr을 관리하는 메위주 저장
+					var thisTrObj = $(this);
+			
+					//td1 2 3 Text에 후손td[0] [1] [2]의 데이터를 대문자로 바꿔서 저장
+					var td1Text = thisTrObj.find("td:eq(0)").text().toUpperCase();
+					var td2Text = thisTrObj.find("td:eq(1)").text().toUpperCase();
+					var td3Text = thisTrObj.find("td:eq(2)").text().toUpperCase();
+					var td4Text = thisTrObj.find("td:eq(3)").text().toUpperCase();
+					td4Text = $.trim(td4Text);
+
+					//평균점수로 학점 출력
+					var score = thisTrObj.find("td:eq(2)").text();
+					var hakjums = hakjum(score);
+
+					//앞이 공백이고 뒤에 문자가있으면 뒤쪽으로만 검색
+					if(keyword1 == "" && keyword2 != ""){
+						if( true_false(td1Text, td2Text, td3Text, keyword2) ){
+							if( hakjum_check(  $(".hakjum"), thisTrObj, hakjums ) ){ 
+								if($(".sexual:eq(0)").is(":checked") && td4Text == "남" ){
+									
+									flag=true;
+								}
+								else if( $(".sexual:eq(1)").is(":checked") && td4Text == "여"){
+									flag=true;
+								}
+							}
+						}
+					}
+
+					//앞에 문자가 있고 뒤에 공백이면 앞쪽으로만 검색
+					else if(keyword2 == "" && keyword1 != ""){
+						if( true_false(td1Text, td2Text, td3Text, keyword1) ){
+							if( hakjum_check(  $(".hakjum"), thisTrObj, hakjums ) ){ 
+								if($(".sexual:eq(0)").is(":checked") && td4Text == "남" ){
+									flag=true;
+								}
+								else if( $(".sexual:eq(1)").is(":checked") && td4Text == "여"){
+									flag=true;
+								}
+							}
+						}
+					}
+					
+					//앞뒤 문자가 둘다 없을경우
+					else if(keyword2 == "" && keyword1 == ""){
+						if( true_false(td1Text, td2Text, td3Text, keyword1) ){
+							if( hakjum_check(  $(".hakjum"), thisTrObj, hakjums ) ){ 
+								if($(".sexual:eq(0)").is(":checked") && td4Text == "남" ){
+									flag=true;
+								}
+								else if( $(".sexual:eq(1)").is(":checked") && td4Text == "여"){
+									flag=true;
+								}
+							}
+						}
+					}
+
+					//앞뒤 둘다 있을경우
+					else{
+
+						//or일 경우
+						if($(".addr").val() == "or"){
+							if( 
+									( true_false(td1Text, td2Text, td3Text, keyword1) )
+								|| 
+									( true_false(td1Text, td2Text, td3Text, keyword2) )
+							){
+								if( hakjum_check(  $(".hakjum"), thisTrObj, hakjums ) ){ 
+									if($(".sexual:eq(0)").is(":checked") && td4Text == "남" ){
+										flag=true;
+									}
+									else if( $(".sexual:eq(1)").is(":checked") && td4Text == "여"){
+										flag=true;
+									}
+								}
+							}
+						}
+
+						//and일경우
+						else{
+							if( 
+									( true_false(td1Text, td2Text, td3Text, keyword1) )
+								&&
+									( true_false(td1Text, td2Text, td3Text, keyword2) )
+							){
+								if( hakjum_check(  $(".hakjum"), thisTrObj, hakjums ) ){ 
+									if($(".sexual:eq(0)").is(":checked") && td4Text == "남" ){
+										flag=true;
+									}
+									else if( $(".sexual:eq(1)").is(":checked") && td4Text == "여"){
+										flag=true;
+									}
+								}
+							}
+						}
+					}
+
+					if(flag){
+						cnt++;
+						bgColor( cnt, thisTrObj.find("td") );
+						thisTrObj.show();
+					}
+
+				});		//trsObj.each( function(){
+
+			});		//$(".search").click( function(){
+
+
+
+			//-----------------------------------------
+			//class=allSearch 가진 태그에 click 이벤트가 일어나면
+			//모든 행을 보여주는 코딩 실행
+			//-----------------------------------------
+			$(".allSearch").click( function(){
+				$(".sungjuk tbody").find("td").attr("bgcolor","");
+				//모든tr보이기
+				$(".sungjuk tbody tr").show();
+				$(".keyword1").val("");
+				$(".keyword2").val("");
+				$(".keyword1").focus();
+				obj.find("tbody tr:odd td").css( {"background-color":"#ffffcc"} )
+				obj.find("tbody tr:even td").css( {"background-color":""} )
+				$(".hakjum").prop("checked",true);
+				$(".sexual").prop("checked",true);
+
+				$(".sungjuk tr:eq(0) th").each( function(){
+					var txt = $(this).text();
+					txt = $.trim(txt);
+					txt = txt.replace("▲","");
+					txt = txt.replace("▼","");
+					$(this).text( txt );
+				});
+
+			});
+			
+			//class=allHakjum 가진 태그에 click 이벤트가 일어나면
+			//모든 학점체크박스에 체크
+			$(".allHakjum").click( function(){
+				$(".hakjum").prop("checked",true);
+			});
+
+
+
+			$(".sungjuk tr:eq(0) th").click( function(){
+				$(".sungjuk tbody").find("td").attr("bgcolor","");
+
+				var thisThObj = $(this);
+				var ascDesc = "";
+
+				thisThObj.siblings().each( function(){
+
+					var txt = $(this).text();
+					txt = $.trim(txt);
+					txt = txt.replace("▲","");
+					txt = txt.replace("▼","");
+
+					$(this).text( txt );
+
+				})//thisThObj.siblings().each( function(){
+
+				var txt = thisThObj.text();
+
+				if(txt.indexOf("▲") > 0){
+					txt = txt.replace("▲","▼");
+					ascDesc = "desc";
+				}
+
+				else if(txt.indexOf("▼") > 0){
+					txt = txt.replace("▼","▲");
+					ascDesc = "asc";
+				}
+
+				else{
+					txt = txt + "▲";
+					ascDesc = "asc";
+				}
+				$(this).text( txt );
+
+				var allTrObj = $(".sungjuk tbody:eq(0)").children();
+				var trObjs = [];
+
+				allTrObj.each( function(){
+					trObjs.push( $(this) );
+				});
+				
+
+				var thIndex = $(this).index();
+
+					for(j = 0; j < trObjs.length-1; j++){
+						for(k = j+1; k < trObjs.length; k++){
+
+							var td1Text = trObjs[j].children("td").eq(thIndex).text();
+							td1Text = ($.trim(td1Text)).toLowerCase();
+							if( thIndex == 2 || thIndex == 0 ){ td1Text = parseInt(td1Text,10); }
+
+							var td2Text = trObjs[k].children("td").eq(thIndex).text();
+							td2Text = ($.trim(td2Text)).toLowerCase();
+							if( thIndex == 2 || thIndex == 0 ){ td2Text = parseInt(td2Text,10); }
+
+							if(ascDesc == "desc" && td1Text < td2Text){
+								var tmp = trObjs[j];
+								trObjs[j] = trObjs[k];
+								trObjs[k] = tmp;
+							}
+
+							else if(ascDesc == "asc" && td1Text > td2Text){
+								var tmp = trObjs[j];
+								trObjs[j] = trObjs[k];
+								trObjs[k] = tmp;
+							}
+						}
+					}
+
+
+					$(".sungjuk tbody:eq(0)").empty();
+				
+					for(var j = 0; j < trObjs.length; j++){
+						$(".sungjuk tbody:eq(0)").append( trObjs[j] );
+					}
+					$(".sungjuk tbody:eq(0) tr td").css( {"background-color":""} )
+					$(".sungjuk tbody:eq(0) tr:even td").css( {"background-color":"#ffffcc"} )
+					$(".sungjuk tbody:eq(0) tr:odd td").css( {"background-color":""} )
+						
+
+
+			});		//$(".sungjuk tr:eq(0) th").click( function(){
+
+		});		//$(document).ready( function(){
+			
+
+	</script>
+
+</head>
+<body><center>
+	<!-------------------------------------------------------------->
+	키워드 : <input type="text" name="keyword1" class="keyword1">
+	<!-------------------------------------------------------------->
+	<select name="addr" class="addr">
+		<option value="or">or
+		<option value="and">and
+	<!-------------------------------------------------------------->
+	<input type="text" name="keyword2" class="keyword2"><br><br>
+	<!-------------------------------------------------------------->
+	<input type="checkbox" name="hakjum" class="hakjum" value="A">A학점
+	<input type="checkbox" name="hakjum" class="hakjum" value="B">B학점
+	<input type="checkbox" name="hakjum" class="hakjum" value="C">C학점
+	<input type="checkbox" name="hakjum" class="hakjum" value="D">D학점
+	<input type="checkbox" name="hakjum" class="hakjum" value="F">F학점
+	<input type="button" value="모든학점" class="allHakjum"><br><br>
+	<!-------------------------------------------------------------->
+	<input type="checkbox" name="sexual" class="sexual" value="남">남
+	<input type="checkbox" name="sexual" class="sexual" value="여">여<br><br>
+	<!-------------------------------------------------------------->
+	<input type="button" value="검색" class="search">
+	<input type="button" value="모두검색" class="allSearch"><br><br>
+	<!-------------------------------------------------------------->
+	<table border="1" cellpadding=5 class="sungjuk">
+		<thead>
+			<tr bgcolor="lightblue">
+				<th style="cursor:pointer">번호
+				<th style="cursor:pointer">이름
+				<th style="cursor:pointer">평균
+				<th style="cursor:pointer">성별
+			</tr>
+		</thead>
+			<tbody>
+				<tr><td>101<td>Johnx<td>87<td>남
+				<tr><td>102<td>Naman<td>90<td>여
+				<tr><td>103<td>Chirag<td>85<td>남
+				<tr><td>104<td>David<td>92<td>남
+				<tr><td>105<td>Kelly<td>81<td>여
+				<tr><td>106<td>Charled<td>77<td>여
+				<tr><td>107<td>Jerry<td>91<td>여
+				<tr><td>108<td>Beth<td>87<td>남
+				<tr><td>109<td>Caroline<td>82<td>여
+				<tr><td>110<td>Hanen<td>71<td>남
+				<tr><td>111<td>Douglas<td>57<td>남
+				<tr><td>112<td>Tim<td>86<td>남
+				<tr><td>113<td>Michael<td>68<td>여
+				<tr><td>114<td>Kimbley<td>88<td>여
+				<tr><td>115<td>Christinax<td>72<td>남
+				<tr><td>116<td>유원영<td>100<td>남
+				<tr><td>117<td>강다니엘<td>20<td>여
+			</tbody>
+		</thead>
+	</table>
+
+</body>
