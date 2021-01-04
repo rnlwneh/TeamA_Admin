@@ -95,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    <result property="str_pro_salescost" column="str_pro_salescost"/>
 	    <result property="str_pro_show" column="str_pro_show"/>
 	    
-	    <association property="tradeListDTO" column="trd_list_no" javaType="trdList">
+	    <association property="tradeListDTO" javaType="trdList">
 	    	<id property="trd_list_no" column="trd_list_no"></id>
 	    	<result column="trd_list_name" property="trd_list_name"/>
 	    </association>

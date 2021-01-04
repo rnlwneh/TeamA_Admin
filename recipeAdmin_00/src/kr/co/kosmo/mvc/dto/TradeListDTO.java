@@ -20,6 +20,10 @@ public class TradeListDTO {
 	private String trd_list_orderdate;
 	private String trd_list_receivedate;
 	
+	//===================================
+	private StoreProductDTO storeProductDTO;
+	private int sum_cnt;
+	
 	
 	public int getTrd_list_no() {
 		return trd_list_no;
@@ -56,5 +60,19 @@ public class TradeListDTO {
 	}
 	public void setTrd_list_receivedate(String trd_list_receivedate) {
 		this.trd_list_receivedate = trd_list_receivedate;
+	}
+	
+	//===============================================================
+	public StoreProductDTO getStoreProductDTO() {
+		return storeProductDTO;
+	}
+	public void setStoreProductDTO(StoreProductDTO storeProductDTO) {
+		this.storeProductDTO = storeProductDTO;
+	}
+	public int getSum_cnt() {
+		return sum_cnt;
+	}
+	public void setSum_cnt(int sum_cnt) {
+		this.sum_cnt = sum_cnt;
 	}
 }

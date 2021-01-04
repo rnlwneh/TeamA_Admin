@@ -109,18 +109,11 @@ public class StoreProductController {
 			@RequestParam(required = false) String searchTrdList,
 			@RequestParam(required = false) String searchStatus) {
 		ModelAndView mv = new ModelAndView();
-
-//		System.out.println(searchProName+"=====");
-//		System.out.println(searchTrdList+"=====");
-//		System.out.println(searchStatus+"=====");
 		
 		HashMap<String,String> map = new HashMap<String,String>();
 		map.put("searchProName", searchProName);
 		map.put("searchTrdList", searchTrdList);
 		map.put("searchStatus", searchStatus);
-//		System.out.println(map.get("searchProName")+"=====");
-//		System.out.println(map.get("searchTrdList")+"=====");
-//		System.out.println(map.get("searchStatus")+"=====");
 		System.out.println("=====StoreProductDao totalCnt()호출=====");
 		int total = storeProductDao.totalCnt(map);
 		System.out.println("=====총갯수 : "+total+"=====");
@@ -130,16 +123,13 @@ public class StoreProductController {
 		pvo.setSearchProName(searchProName);
 		pvo.setSearchTrdList(searchTrdList);
 		pvo.setSearchStatus(searchStatus);
-//		System.out.println("===searchProName:"+pvo.getSearchProName());
-//		System.out.println("===searchTrdList:"+pvo.getSearchTrdList());
-//		System.out.println("===searchStatus:"+pvo.getSearchStatus());
 		
 		mv.addObject("paging",pvo);
-		System.out.println("=====StoreProductDao storeInfo() 호출=====");
+//		System.out.println("=====StoreProductDao storeInfo() 호출=====");
 		mv.addObject("storeInfo",storeProductDao.storeInfo());
-		System.out.println("=====StoreProductDao storeGoodsList() 호출=====");
+//		System.out.println("=====StoreProductDao storeGoodsList() 호출=====");
 		mv.addObject("goodsList", storeProductDao.storeGoodsList(pvo));
-		System.out.println("=====StoreProductDao trdListName() 호출=====");
+//		System.out.println("=====StoreProductDao trdListName() 호출=====");
 		mv.addObject("trdListName",storeProductDao.trdListName());
 		mv.addObject("total", total);
 		mv.setViewName("admin/storeGoodsList");
@@ -194,10 +184,7 @@ public class StoreProductController {
 		
 		String pre_str_pro_image = vo.getPre_str_pro_image();
 		String pre_str_pro_detail_image = vo.getPre_str_pro_detail_image();
-//		System.out.println("썸네일이미지이름:"+pre_str_pro_image);
-//		System.out.println("상세이미지이름:"+pre_str_pro_detail_image);
-//		System.out.println("경로:"+imageUrl+pre_str_pro_image);
-		
+		//파일이름 중복방지
 		UUID uuid = UUID.randomUUID();
 		// 썸네일 이미지 확인
 		if(! file.isEmpty()) {
@@ -211,7 +198,7 @@ public class StoreProductController {
 			// 파일 업로드 실행 
 			File f = new File(path.toString()); //실제 이미지가 저장될 경로
 			try {
-				file.transferTo(f);//스프링의 transferTo를 호출해서 이미지를 저장장소에 복사 
+				file.transferTo(f);//이미지를 저장장소에 복사 
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
@@ -221,17 +208,15 @@ public class StoreProductController {
 		}
 		//상세이미지 확인
 		if(! detailFile.isEmpty()) {
-			//기존파일 삭제 후 새로 저장
 			new File(detailPath.toString()+pre_str_pro_detail_image).delete();
-			String str_pro_detail_img = uuid.toString() + detailFile.getOriginalFilename(); //업로드 된 이미지 이름		
+			String str_pro_detail_img = uuid.toString() + detailFile.getOriginalFilename();	
 			detailPath.append(str_pro_detail_img);
 			vo.setStr_pro_detail_image(str_pro_detail_img);
 			System.out.println("DeFullPath :"+detailPath);
 			
-			// 파일 업로드 실행 
-			File df = new File(detailPath.toString()); //실제 이미지가 저장될 경로
+			File df = new File(detailPath.toString());
 			try {
-				detailFile.transferTo(df);//스프링의 transferTo를 호출해서 이미지를 저장장소에 복사 
+				detailFile.transferTo(df);
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}

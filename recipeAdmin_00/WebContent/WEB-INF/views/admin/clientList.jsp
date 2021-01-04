@@ -79,7 +79,7 @@ table, th, td {
 			var idx = $('[id^=detailTrdList]').index($(this));
 			var trdListNo = $('[id=trdListNo]').eq(idx).val();
 			//alert(trdListNo)
-			location.href='clientDetail'
+			location.href='clientDetail?trd_list_no='+trdListNo;
 		})
 		$('#addClientList').click(function(){
 			

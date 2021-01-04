@@ -1,5 +1,6 @@
 package kr.co.kosmo.mvc.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -19,5 +20,23 @@ public class TradeListDaoImpl implements TradeListDao {
 	public List<TradeListDTO> getTradeList() {
 		System.out.println("=====TradeListMapper tradeList호출=====");
 		return ss.selectList("tradeList.tradeList");
+	}
+
+	@Override
+	public TradeListDTO trdDetail(int trd_list_no) {
+		System.out.println("=====TradeListMapper trdDetail 호출=====");
+		return ss.selectOne("tradeList.trdDetail", trd_list_no);
+	}
+
+	@Override
+	public List<HashMap<String, String>> trdDetailInfo(int trd_list_no) {
+		System.out.println("=====TradeListMapper trdDetailInfo 호출=====");
+		return ss.selectList("tradeList.trdDetailInfo", trd_list_no);
+	}
+
+	@Override
+	public int trdTotSell() {
+		System.out.println("=====TradeListMapper trdTotSell 호출=====");
+		return ss.selectOne("tradeList.trdTotSell");
 	}
 }

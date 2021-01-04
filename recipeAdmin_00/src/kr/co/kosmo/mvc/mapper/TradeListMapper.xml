@@ -5,9 +5,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="tradeList">
 
 	<select id="tradeList" resultType="trdList">
-		select trd_list_no, trd_list_name, trd_list_mng_name
-			, trd_list_mng_phone, trd_list_orderdate, trd_list_receivedate 
+		select trd_list_no
+			, trd_list_name
+			, trd_list_mng_name
+			, trd_list_mng_phone
+			, trd_list_orderdate
+			, trd_list_receivedate 
 		from trade_list
+	</select>
+	
+	<select id="trdDetail" resultType="trdList" parameterType="int">
+		select trd_list_no 
+		    ,trd_list_name 
+		    , trd_list_mng_name
+		    , trd_list_mng_phone
+		    , substr(to_char(trd_list_orderdate),1,10) "trd_list_orderdate"
+		from trade_list
+		where trd_list_no=#{trd_list_no}
+	</select>
+	
+	<select id="trdDetailInfo" parameterType="int" resultType="HashMap">
+		select * from (select a.*,rownum r_num from
+			(select tl.trd_list_no "trd_list_no"
+			    , sp.str_pro_no  "str_pro_no"
+			    , sp.str_pro_name "str_pro_name"
+			    , sp.str_pro_primecost "str_pro_primecost"
+			    , nvl(sum(so.str_ord_cnt),0) "sum_cnt"
+			from store_order so, store_product sp, trade_list tl
+			where so.str_pro_no(+) = sp.str_pro_no
+			    and sp.trd_list_no = tl.trd_list_no
+			group by sp.str_pro_name, sp.str_pro_no, sp.str_pro_primecost, tl.trd_list_no
+			having tl.trd_list_no = #{trd_list_no}
+			order by "sum_cnt" desc
+			    , sp.str_pro_primecost desc) a ) where r_num between 1 and 5
+	</select>
+	
+	<select id="trdTotSell" resultType="int">
+		select sum(str_pro_primecost*str_ord_cnt) "total"
+		from
+		    (select sp.str_pro_primecost 
+		        , so.str_ord_cnt
+		    from store_product sp, store_order so
+		    where sp.str_pro_no = so.str_pro_no)
 	</select>
 	
 </mapper>

@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="strSales">
 
 	<select id="salesPerDate" parameterType="String" resultType="HashMap">
-		<![CDATA[
+		
 		select nvl(ord_cnt,'0') "ord_cnt" 
 		    , nvl(cost_sum,'0') "cost_sum" 
 		    , hh "str_ord_date" 
@@ -20,13 +20,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			    order by substr(to_char(so.str_ord_date,'YYYY-MM-DD HH24:mi:ss'),1,13)) a 
 		       , 
 		(SELECT #{date}||
+			<![CDATA[
                 case when level-1<10 then ' 0'||TO_CHAR(LEVEL-1) 
+            ]]>
                     else ' '||TO_CHAR(LEVEL-1) 
                 end hh 
+            <![CDATA[
             FROM DUAL CONNECT BY LEVEL <= 24) b 
+            ]]>
 		where a.str_ord_date(+) = b.hh 
 		order by "str_ord_date"
-		]]>
+		
 	</select>
 	
 <!-- 	<select id='test' resultType="HashMap"> -->

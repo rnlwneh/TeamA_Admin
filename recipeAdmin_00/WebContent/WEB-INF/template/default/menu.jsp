@@ -31,12 +31,12 @@
 
 						<c:if test="${fn:contains(author, '스토어관리')}">
 							<div class="sb-sidenav-menu-heading">스토어 관리</div>
-							<nav class="sb-sidenav-menu-nested nav">
-								<a href='orderProduct'><font size='2' color='gray'>발주하기</font></a>
-							</nav>
-							<nav class="sb-sidenav-menu-nested nav">
-								<a href='orderList'><font size='2' color='gray'>발주조회</font></a>
-							</nav>
+<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
+<!-- 								<a href='orderProduct'><font size='2' color='gray'>발주하기</font></a> -->
+<!-- 							</nav> -->
+<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
+<!-- 								<a href='orderList'><font size='2' color='gray'>발주조회</font></a> -->
+<!-- 							</nav> -->
 							<nav class="sb-sidenav-menu-nested nav">
 								<a href='sales'><font size='2' color='gray'>매출 현황</font></a>
 							</nav>

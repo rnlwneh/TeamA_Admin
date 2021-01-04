@@ -26,37 +26,33 @@ table, th, td {
 
 		<div class="card mb-4">
 			<div class="card-header">
-				<i class="fas fa-table mr-1"></i> {이름}거래처
+				<i class="fas fa-table mr-1"></i> ${trdDetail.trd_list_name }
 			</div>
 			<div class="card-body">
 
 
-				<section class="panel">
+				
 
 
 					<form role="form" class="parsley-form" data-parsley-validate>
 
 						<div class="row">
 							<div class="col-lg-6">
-
-								<div class="form-group">
-									<label>거래처번호</label> <input class="form-control" type="text"
-										placeholder="1" disabled="">
-
-								</div>
-
-
-
-								<div class="form-group">
+								<div class="form-group"><br>
 									<label>거래처명</label> <input class="form-control" type="text"
-										placeholder="싱싱과일" disabled="">
-
+										placeholder="${trdDetail.trd_list_name }">
 								</div>
-
 								<div class="form-group">
-									<label>거래시작연도</label> <input class="form-control" type="text"
-										placeholder="2010.03.23" disabled="">
-
+									<label>담당자</label> <input class="form-control" type="text"
+										placeholder="${trdDetail.trd_list_mng_name }">
+								</div>
+								<div class="form-group">
+									<label>담당자 번호</label> <input class="form-control" type="text"
+										placeholder="${trdDetail.trd_list_mng_phone }">
+								</div>
+								<div class="form-group">
+									<label>거래시작일</label> <input class="form-control" type="text"
+										placeholder="${trdDetail.trd_list_orderdate }">
 								</div>
 
 
@@ -77,133 +73,46 @@ table, th, td {
 											<thead>
 												<tr>
 													<th>상품명</th>
-													<th>수량</th>
-													<th>돈</th>
-													<th>%</th>
+													<th>판매수량</th>
+													<th>판매수익</th>
+													<th>수익지분</th>
 												</tr>
 											</thead>
 											<tbody>
-												<tr>
-													<td>사과</td>
-													<td>200</td>
-													<td>573000</td>
-													<td>90%
-														<div class="progress progress-sm no-m">
-															<div class="progress-bar progress-bar-success"
-																role="progressbar" aria-valuenow="40" aria-valuemin="0"
-																aria-valuemax="100" style="width: 90%"></div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td></span>배</td>
-													<td>78</td>
-													<td>1,1380</td>
-													<td>
-														<div class="progress progress-sm no-m">
-															<div class="progress-bar progress-bar-danger"
-																role="progressbar" aria-valuenow="23" aria-valuemin="0"
-																aria-valuemax="100" style="width: 23%">
-																<span class="sr-only">23% Complete (success)</span>
+												<c:forEach items="${trdDetailInfo }" var="trdDetailInfo">
+													<tr>
+														<td><a href='storeGoodsDetail?str_pro_no=${trdDetailInfo.str_pro_no }'>${trdDetailInfo.str_pro_name }</a></td>
+														<td>${trdDetailInfo.sum_cnt }</td>
+														<td>${trdDetailInfo.sum_cnt*trdDetailInfo.str_pro_primecost }</td>
+														<td>${trdDetailInfo.sum_cnt*trdDetailInfo.str_pro_primecost*100/trdTotSell }%
+															<div class="progress progress-sm no-m">
+																<div class="progress-bar progress-bar-success"
+																	role="progressbar" aria-valuemin="0"
+																	aria-valuemax="100" style="width: ${trdDetailInfo.sum_cnt*trdDetailInfo.str_pro_primecost*100/trdTotSell }%"></div>
 															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>복숭아</td>
-													<td>89</td>
-													<td>488000</td>
-													<td>
-														<div class="progress progress-sm no-m">
-															<div class="progress-bar" role="progressbar"
-																aria-valuenow="78" aria-valuemin="0" aria-valuemax="100"
-																style="width: 78%">
-																<span class="sr-only">78% Complete (success)</span>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>포도</td>
-													<td>100</td>
-													<td>1,29000</td>
-													<td>
-														<div
-															class="progress progress-sm progress-striped active no-m">
-															<div class="progress-bar progress-bar-success"
-																role="progressbar" aria-valuenow="56" aria-valuemin="0"
-																aria-valuemax="100" style="width: 56%">
-																<span class="sr-only">56% Complete (success)</span>
-															</div>
-														</div>
-													</td>
-												</tr>
-												<tr>
-													<td>귤</td>
-													<td>50</td>
-													<td>47800</td>
-													<td>
-														<div class="progress progress-sm progress-striped no-m">
-															<div class="progress-bar progress-bar-warning"
-																role="progressbar" aria-valuenow="49" aria-valuemin="0"
-																aria-valuemax="100" style="width: 49%">
-																<span class="sr-only">49% Complete (success)</span>
-															</div>
-														</div>
-													</td>
-												</tr>
-
+														</td>
+													</tr>
+												</c:forEach>
 											</tbody>
 										</table>
 									</div>
 								</section>
-
 							</div>
-
-
-
-
-
-
-
-							<br>
-
 						</div>
 					</form>
 			</div>
 		</div>
-
-
-
-
-
-
 	</div>
-
-
-
-	</section>
 	<br>
 	<div class="col-md-12">
 		<div class="demo-button">
-			<label></label>
-			<div>
+			<div align='center'>
 				<button type="button" class="btn btn-danger" style="width: 45%;"
-					onclick="location.href='clientList'">정지하기</button>
-
+					onclick="location.href='clientList'">정지하기</button>&emsp;&emsp;&emsp;&emsp;&emsp;
 				<button style="width: 45%;" type="button" class="btn btn-success"
 					onclick="location.href='clientList'">Save</button>
 			</div>
 		</div>
-	</div>
-
-	</div>
-
-
-
-
-
-	</div>
 	</div>
 </main>
 <!-- 			<footer class="py-4 bg-light mt-auto"> -->
