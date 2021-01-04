@@ -11,4 +11,5 @@ public interface TradeListDao {
 	public TradeListDTO trdDetail(int trd_list_no);
 	public List<HashMap<String,String>> trdDetailInfo(int trd_list_no);
 	public int trdTotSell();
+	public void addTrdList(TradeListDTO vo);
 }

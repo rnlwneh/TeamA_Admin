@@ -85,16 +85,6 @@ public class StoreProductController {
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-//		System.out.println(vo.getStr_pro_content());
-//		System.out.println(vo.getStr_pro_detail_image());
-//		System.out.println(vo.getStr_pro_image());
-//		System.out.println(vo.getStr_pro_name());
-//		System.out.println(vo.getStr_pro_no());
-//		System.out.println(vo.getStr_pro_primecost());
-//		System.out.println(vo.getStr_pro_remind());
-//		System.out.println(vo.getStr_pro_salescost());
-//		System.out.println(vo.getStr_pro_show());
-//		System.out.println(vo.getTrd_list_no());
 		System.out.println("=====StoreProductDao addStoreGoods() »£√‚=====");
 		storeProductDao.addStoreGoods(vo);
 		mv.setViewName("redirect:storeGoodsList");

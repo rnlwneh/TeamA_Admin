@@ -2,12 +2,12 @@
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<c:url var="tables" value="/tables"></c:url>
+<c:url var="memberList" value="/memberList"></c:url>
 
 <script>
 	$(document).on('click', '#btnSearch', function(e) {
 		e.preventDefault();
-		var url = "${tables}";
+		var url = "${memberList}";
 		url = url + "?searchType=" + $('#searchType').val();
 		url = url + "&keyword=" + $('#keyword').val();
 		location.href =encodeURI( url);
@@ -25,7 +25,7 @@
 					<h1 class="mt-4">회원관리</h1>
 					<ol class="breadcrumb mb-4">
 						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
-						<li class="breadcrumb-item active"><a href="tables">회원관리</a></li>
+						<li class="breadcrumb-item active"><a href="memberList">회원관리</a></li>
 					</ol>
 
 					<div class="card mb-4">

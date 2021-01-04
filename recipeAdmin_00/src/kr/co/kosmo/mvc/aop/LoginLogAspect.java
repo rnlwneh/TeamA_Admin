@@ -28,7 +28,6 @@ public class LoginLogAspect {
 	@Autowired
 	private AdminInfoDao adminInfoDao;
 
-	// * kr.co.kosmo.mvc.controller.LoginCheckController.loginf*(..)
 	@Around("execution(* kr.co.kosmo.mvc.controller.AdminInfoController.log_*(..))")
 	public ModelAndView loginLogger(ProceedingJoinPoint jp) {
 		// ÀÎÀÚ°ª

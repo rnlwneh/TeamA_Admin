@@ -4,6 +4,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tradeList">
 
+	<insert id="addTrdList" parameterType="trdList">
+		insert into trade_list values(
+			trd_list_no_sq.nextval
+			, #{trd_list_name}
+			, #{trd_list_mng_name}
+			, #{trd_list_mng_phone}
+			, sysdate
+			, sysdate)
+	</insert>
+
 	<select id="tradeList" resultType="trdList">
 		select trd_list_no
 			, trd_list_name

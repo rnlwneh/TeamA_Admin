@@ -49,12 +49,12 @@ public class MemberBoardController {
 	public String updateval(RecipeMemberDTO vo) {
 		System.out.println("===>" + vo.getMem_no());
 		recipeMemberBoardService.update(vo);
-		return "redirect:tables";
+		return "redirect:memberList";
 	}
 
 
 	
-	@RequestMapping(value = "/tables", method = RequestMethod.GET)
+	@RequestMapping(value = "/memberList", method = RequestMethod.GET)
 	public String listSearch(PageVO svo, Model model,
 			@RequestParam(value = "nowPage", required = false, defaultValue = "1") String nowPage,
 			@RequestParam(value = "cntPerPage", required = false, defaultValue = "10") String cntPerPage,
@@ -73,7 +73,7 @@ public class MemberBoardController {
 		// System.out.println("End :"+vo.getEnd());
 		model.addAttribute("paging", svo);
 		model.addAttribute("list", recipeMemberBoardService.getMemberList(svo));
-		return "admin/tables";
+		return "admin/memberList";
 	}
 
 }

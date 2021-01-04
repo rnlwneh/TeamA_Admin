@@ -39,4 +39,10 @@ public class TradeListDaoImpl implements TradeListDao {
 		System.out.println("=====TradeListMapper trdTotSell 호출=====");
 		return ss.selectOne("tradeList.trdTotSell");
 	}
+
+	@Override
+	public void addTrdList(TradeListDTO vo) {
+		System.out.println("=====TradeListMapper addTrdList 호출=====");
+		ss.insert("tradeList.addTrdList", vo);
+	}
 }

@@ -20,40 +20,74 @@ table, th, td {
 						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
 						<li class="breadcrumb-item active"><a href="tables">거래처목록</a></li>
 					</ol>
+				</div>
 
-					<div class="card mb-4">
-						<div class="card-header">
-							<i class="fas fa-table mr-1"></i> 거래처목록
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<div align='right'>
-<!-- 									<input type='button' id='deleteBtn' value='선택상품삭제'>&nbsp -->
-									<input type='button' id='addClientList' value='거래처추가'>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="container-fluid">
+					
+
+								<div class="card mb-4">
+									<div class="card-header">
+										<i class="fas fa-table mr-1"></i> 거래처목록
+									</div>
+									<div class="card-body">
+										<div class="table-responsive">
+											<div>&nbsp</div>
+											<div class="table-responsive">
+												<table class="table table-bordered">
+													<tr align='center'>
+														<th>거래처명</th>
+														<th>거래처 담당자</th>
+														<th>담당자 번호</th>
+														<th>거래시작일</th>
+													</tr>
+													
+													<c:forEach items="${trdList }" var="trdList">
+														<tr style="cursor: pointer" id='detailTrdList$' align='center'>
+															<td>${trdList.trd_list_name }</td>
+															<input type='hidden' id='trdListNo' value='${trdList.trd_list_no }'>
+															<td>${trdList.trd_list_mng_name }</td>
+															<td>${trdList.trd_list_mng_phone }</td>
+															<td id="startDate">${trdList.trd_list_orderdate }</td>
+														</tr>
+													</c:forEach>
+													
+												</table>
+											</div>
+										</div>
+									</div>
 								</div>
-								<div>&nbsp</div>
-								<div class="table-responsive">
-									<table class="table table-bordered">
-										<tr>
-											<th>거래처명</th>
-											<th>거래처 담당자</th>
-											<th>담당자 번호</th>
-											<th>발주요일</th>
-											<th>납품요일</th>
-										</tr>
-										
-										<c:forEach items="${trdList }" var="trdList">
-											<tr style="cursor: pointer" id='detailTrdList$'>
-												<td>${trdList.trd_list_name }</td>
-												<input type='hidden' id='trdListNo' value='${trdList.trd_list_no }'>
-												<td>${trdList.trd_list_mng_name }</td>
-												<td>${trdList.trd_list_mng_phone }</td>
-												<td>${trdList.trd_list_orderdate }</td>
-												<td>${trdList.trd_list_receivedate }</td>
-											</tr>
-										</c:forEach>
-										
-									</table>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="card mb-4">
+								<div class="card-header">
+									<i class="fas fa-table mr-1"></i> 거래처 추가하기
+								</div>
+								<div class="card-body">
+									<div class="table-responsive">
+										<div class="table-responsive">
+											<form name="addList" action="addClientList">
+												<table class="table table-bordered">
+													<tr align='center'>
+														<th>거래처명</th>
+														<th>거래처 담당자</th>
+														<th>담당자 번호</th>
+													</tr>
+													<tr align='center'>
+														<td><input type="text" name="trd_list_name" id="trd_list_name"></td>
+														<td><input type="text" name="trd_list_mng_name" id="trd_list_mng_name"></td>
+														<td><input type="text" name="trd_list_mng_phone" id="trd_list_mng_phone"></td>
+													</tr>
+												</table>
+												<div align='right'>
+													<input type='button' id='submitBtn' value='추가'>
+												</div>
+											</form>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -74,17 +108,28 @@ table, th, td {
 <!-- 			</footer> -->
 
 	
-	<script>
+<script>
+	$(document).ready(function(){
 		$('[id^=detailTrdList]').click(function(){
 			var idx = $('[id^=detailTrdList]').index($(this));
 			var trdListNo = $('[id=trdListNo]').eq(idx).val();
 			//alert(trdListNo)
 			location.href='clientDetail?trd_list_no='+trdListNo;
 		})
-		$('#addClientList').click(function(){
-			
+		$('#submitBtn').click(function(){
+			if(confirm("추가하시겠습니까?")){
+				document.addList.submit();
+			}
 		})
-	</script>
+		$('[id^=startDate]').each(function(){
+			var date = $(this).text().trim();
+			date = date.split(" ")[0]
+			date = date.split("-")
+			date = date[0]+"년 "+date[1]+"월 "+date[2]+"일 ";
+			$(this).text(date);
+		})
+	})
+</script>
 	
 	
 <!-- 	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" -->

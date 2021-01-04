@@ -892,11 +892,11 @@
 					<hr>
 				</div>
             		<div class="buttonWrap">
-            <label>
+           
              <input type="radio" id="admin_app" name="admin_app" value="2"  data-parsley-required="true" data-parsley-trigger="change">클래스를 반려합니다.  
                &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input type="radio" id="admin_app" name="admin_app" value="1"  data-parsley-required="true" data-parsley-trigger="change">클래스를 승인합니다.
            
-            </label>
+           
             
             <span id="admin_app_check" class="adminText"></span>
             </div>

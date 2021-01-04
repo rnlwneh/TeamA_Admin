@@ -17,17 +17,17 @@
 						</a>
 
 						<c:set var="author" value="${ad_author }" />
-						<c:if test="${fn:contains(author, '사이트관리')}">
+<%-- 						<c:if test="${fn:contains(author, '사이트관리')}"> --%>
 
-							<div class="sb-sidenav-menu-heading">사이트 관리</div>
-							<nav class="sb-sidenav-menu-nested nav">
-								<a href='adminBoardRegist'><font size='2' color='gray'>신고된
-										글 관리</font></a>
-							</nav>
-							<nav class="sb-sidenav-menu-nested nav">
-								<a href='#'><font size='2' color='gray'>사이트 카테고리 관리</font></a>
-							</nav>
-						</c:if>
+<!-- 							<div class="sb-sidenav-menu-heading">사이트 관리</div> -->
+<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
+<!-- 								<a href='adminBoardRegist'><font size='2' color='gray'>신고된 -->
+<!-- 										글 관리</font></a> -->
+<!-- 							</nav> -->
+<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
+<!-- 								<a href='#'><font size='2' color='gray'>사이트 카테고리 관리</font></a> -->
+<!-- 							</nav> -->
+<%-- 						</c:if> --%>
 
 						<c:if test="${fn:contains(author, '스토어관리')}">
 							<div class="sb-sidenav-menu-heading">스토어 관리</div>
@@ -64,13 +64,14 @@
 										관리</font></a>
 							</nav>
 							<nav class="sb-sidenav-menu-nested nav">
-								<a href='tables'><font size='2' color='gray'>회원관리</font></a>
+								<a href='memberList'><font size='2' color='gray'>회원관리</font></a>
 							</nav>
 							<nav class="sb-sidenav-menu-nested nav">
-								<a href='chiefManage'><font size='2' color='gray'>셰프관리</font></a>
+								<a href='newClass'><font size='2' color='gray'>클래스관리</font></a>
 							</nav>
 						</c:if>
-
+						
+						<c:if test="${fn:contains(author, '관리자')}">
 							<div class="sb-sidenav-menu-heading">관리자</div>
 							<nav class="sb-sidenav-menu-nested nav">
 								<a href='adminList'><font size='2' color='gray'>관리자
@@ -80,6 +81,7 @@
 								<a href='register'><font size='2' color='gray'>관리자
 										추가하기</font></a>
 							</nav>
+						</c:if>
 					</div>
 				</div>
 				<!--                     <div class="sb-sidenav-footer"> -->

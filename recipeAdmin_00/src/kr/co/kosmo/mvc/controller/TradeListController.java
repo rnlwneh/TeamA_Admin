@@ -41,4 +41,13 @@ public class TradeListController {
 		mv.setViewName("admin/clientDetail");
 		return mv;
 	}
+	
+	@RequestMapping(value="/addClientList")
+	public ModelAndView addClient(TradeListDTO vo) {
+		ModelAndView mv = new ModelAndView();
+		
+		tradeListdao.addTrdList(vo);
+		mv.setViewName("redirect:clientList");
+		return mv;
+	}
 }

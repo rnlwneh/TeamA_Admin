@@ -82,8 +82,8 @@ table, th, td {
 												<c:forEach items="${trdDetailInfo }" var="trdDetailInfo">
 													<tr>
 														<td><a href='storeGoodsDetail?str_pro_no=${trdDetailInfo.str_pro_no }'>${trdDetailInfo.str_pro_name }</a></td>
-														<td>${trdDetailInfo.sum_cnt }</td>
-														<td>${trdDetailInfo.sum_cnt*trdDetailInfo.str_pro_primecost }</td>
+														<td id="salesCnt">${trdDetailInfo.sum_cnt }</td>
+														<td id="salesCost">${trdDetailInfo.sum_cnt*trdDetailInfo.str_pro_primecost }</td>
 														<td>${trdDetailInfo.sum_cnt*trdDetailInfo.str_pro_primecost*100/trdTotSell }%
 															<div class="progress progress-sm no-m">
 																<div class="progress-bar progress-bar-success"
@@ -104,16 +104,16 @@ table, th, td {
 		</div>
 	</div>
 	<br>
-	<div class="col-md-12">
-		<div class="demo-button">
-			<div align='center'>
-				<button type="button" class="btn btn-danger" style="width: 45%;"
-					onclick="location.href='clientList'">정지하기</button>&emsp;&emsp;&emsp;&emsp;&emsp;
-				<button style="width: 45%;" type="button" class="btn btn-success"
-					onclick="location.href='clientList'">Save</button>
-			</div>
-		</div>
-	</div>
+<!-- 	<div class="col-md-12"> -->
+<!-- 		<div class="demo-button"> -->
+<!-- 			<div align='center'> -->
+<!-- 				<button type="button" class="btn btn-danger" style="width: 45%;" -->
+<!-- 					onclick="location.href='clientList'">정지하기</button>&emsp;&emsp;&emsp;&emsp;&emsp; -->
+<!-- 				<button style="width: 45%;" type="button" class="btn btn-success" -->
+<!-- 					onclick="location.href='clientList'">Save</button> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+<!-- 	</div> -->
 </main>
 <!-- 			<footer class="py-4 bg-light mt-auto"> -->
 <!-- 				<div class="container-fluid"> -->
@@ -128,6 +128,36 @@ table, th, td {
 
 <!-- 				</div> -->
 <!-- 			</footer> -->
+
+<script>
+	
+	//숫자 3개마다 ,를 집어넣음 num:숫자문자
+	function commaNum( num ){
+		var arr = [];
+		var numStr = ""
+		for(var i = num.length-1; i >= 0; i = i-3){
+			if(i > 2){
+				arr.push( num.substr(i-2, 3) )
+			}
+			else{
+				arr.push( num.substr(0,i+1) )
+			}
+		}
+		arr.reverse();
+		numStr =  arr.join(",");
+		return numStr;
+	}
+	
+	$(document).ready(function(){
+		$('[id^=salesCnt]').each(function(){
+			$(this).text(commaNum($(this).text())+"개");
+		})
+		$('[id^=salesCost]').each(function(){
+			$(this).text(commaNum($(this).text())+"원");
+		})
+	})
+	
+</script>
 
 
 <script
