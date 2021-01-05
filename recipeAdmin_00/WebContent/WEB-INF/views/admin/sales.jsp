@@ -208,7 +208,7 @@ function salesAjaxF(searchDate){
 				totOrdCnt = totOrdCnt + parseInt(ordCnt,10);
 				var avgSales = "0"
 				if(parseInt(ordCnt,10)!=0){
-					avgSales = (parseInt(sales,10)/parseInt(ordCnt,10)).toString();
+					avgSales = Math.ceil((parseInt(sales,10)/parseInt(ordCnt,10))).toString();
 				}
 				
 				$('#sales'+hh).text(commaNum(sales)+"원");

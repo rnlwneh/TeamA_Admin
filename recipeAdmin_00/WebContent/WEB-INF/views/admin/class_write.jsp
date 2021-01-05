@@ -682,15 +682,15 @@
 
 							<ul id="divMaterialArea_1" class="ui-sortable">
 
-								<li id="liMaterial_1_1"><a href="#"
-									class="btn-lineup ui-sortable-handle" data-original-title=""
-									title=""></a> <input type="text" name="mate_name"
-									id="mate_name" class="form-control" style="width: 330px;"
-									placeholder="예) 돼지고기"> <input type="text"
-									name="mate_cnt" id="mate_cnt" class="form-control"
-									style="width: 280px;" placeholder="예) 300g"> <a
-									id="btnMaterialDel_1_1" href="javascript:delMaterial(1,1)"
-									class="btn-del" style="display: none;"></a></li>
+<!-- 								<li id="liMaterial_1_1"><a href="#" -->
+<!-- 									class="btn-lineup ui-sortable-handle" data-original-title="" -->
+<!-- 									title=""></a> <input type="text" name="mate_name" -->
+<!-- 									id="mate_name" class="form-control" style="width: 330px;" -->
+<!-- 									placeholder="예) 돼지고기"> <input type="text" -->
+<!-- 									name="mate_cnt" id="mate_cnt" class="form-control" -->
+<!-- 									style="width: 280px;" placeholder="예) 300g"> <a -->
+<!-- 									id="btnMaterialDel_1_1" href="javascript:delMaterial(1,1)" -->
+<!-- 									class="btn-del" style="display: none;"></a></li> -->
 
 
 							</ul>

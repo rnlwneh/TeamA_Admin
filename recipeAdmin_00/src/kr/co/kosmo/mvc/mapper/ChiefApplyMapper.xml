@@ -3,33 +3,30 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chiefApply">
+   <select id="newChief" resultType="cAply">
+      select distinct(m.mem_no), m.mem_id,c.chef_regdate,m.mem_email from rpatest
+      c,
+      member_info m where m.mem_email=c.mem_email and m.mem_grade_no='일반인'
+      and m.mem_no in (select mem_no from recipe_info group by mem_no having
+      count(mem_no)>1)
+</select>
 
 
+   <update id="updateGrade">
 
-	<select id="newChief" resultType="cAply">
-		select
-		c.chef_req_no, m.mem_no, m.mem_id,c.chef_regdate,m.mem_email from chef_request
-		c,
-		member_info m where m.mem_no=c.mem_no
-	</select>
+      update member_info
+      set
+      mem_grade_no ='셰프'
+      where
+      mem_email=#{mem_email}
 
-
-
-
-	<update id="updateGrade">
-
-		update member_info
-		set
-		mem_grade_no ='셰프'
-		where mem_no=#{mem_no}
-
-	</update>
+   </update>
 
 
-	<delete id="delete">
-		delete from chef_request
-		where mem_no=#{mem_no}
-	</delete>
+   <delete id="delete">
+      delete from rpatest
+      where mem_email=#{mem_email}
+   </delete>
 
 
 

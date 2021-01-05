@@ -46,7 +46,7 @@ table, th, td {
 					enctype="multipart/form-data">
 
 
-					<label> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input
+					 &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;<input
 						type="radio" id="admin_app" name="admin_app" value="0"
 						data-parsley-required="true" data-parsley-trigger="change"
 						checked="checked">승인대기 클라스
@@ -62,7 +62,7 @@ table, th, td {
 						</button>
 
 
-					</label>
+					
 
 
 
