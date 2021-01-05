@@ -5,7 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="strOrdList">
 
 	<resultMap type="strOrd" id="strOrderListMap">
-		<id property="str_ord_no" column="str_ord_no"/>
+		<id property="str_cart_no" column="str_cart_no"/>
+		<result property="str_ord_no" column="str_ord_no"/>
 		<result property="str_ord_cnt" column="str_ord_cnt"/>
 		<result property="str_ord_addr" column="str_ord_addr"/>
 		<result property="str_ord_date" column="str_ord_date"/>

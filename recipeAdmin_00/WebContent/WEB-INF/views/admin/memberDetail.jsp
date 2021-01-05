@@ -130,14 +130,14 @@ table, th, td {
 														data-parsley-required="true" data-parsley-trigger="change"
 														id="mem_status" placeholder="${board.mem_status }">
 												</div>
-												</br>
-												<div class="col-md-12">
-													<div class="demo-button">
-														<button type="button" class="btn btn-danger"
-															style="width: 10%;" onclick="location.href='tables'">정지</button>
-													</div>
+<!-- 												</br> -->
+<!-- 												<div class="col-md-12"> -->
+<!-- 													<div class="demo-button"> -->
+<!-- 														<button type="button" class="btn btn-danger" -->
+<!-- 															style="width: 10%;" onclick="location.href='tables'">정지</button> -->
+<!-- 													</div> -->
 
-												</div>
+<!-- 												</div> -->
 											</div>
 
 										</div>
@@ -152,7 +152,7 @@ table, th, td {
 											<div>
 												
 												<button type="button" class="btn btn-primary"
-													style="width: 45%;" onclick="location.href='tables'">목록가기</button>
+													style="width: 45%;" onclick="location.href='memberList'">목록가기</button>
 												<button style="width: 45%;" type="submit"
 													class="btn btn-success" id=btnUpdate>Save</button>
 											

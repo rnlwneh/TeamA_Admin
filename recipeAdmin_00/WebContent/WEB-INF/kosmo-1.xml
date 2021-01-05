@@ -58,4 +58,14 @@
 		</property>
 	</bean>
 	
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/*"/>
+			<mvc:exclude-mapping path="/"/>
+			<mvc:exclude-mapping path="/login"/>
+			<mvc:exclude-mapping path="/loginCheck"/>
+			<bean class="kr.co.kosmo.mvc.interceptor.SessionInterceptor"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
 </beans>

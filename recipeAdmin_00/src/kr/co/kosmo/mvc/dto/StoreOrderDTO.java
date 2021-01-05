@@ -1,19 +1,19 @@
 package kr.co.kosmo.mvc.dto;
 
 /*
- create table store_order(
-    str_ord_no number(6),
-    mem_no number(5),
-    str_pro_no number(5),
-    str_ord_cnt number(4),
-    str_ord_addr varchar2(80),
-    str_ord_date date default sysdate,
-    primary key (str_ord_no),
-    constraint store_order_mem_no_fk foreign key(mem_no) references member_info(mem_no),
-    constraint store_order_str_pro_no_fk foreign key(str_pro_no) references store_product(str_pro_no)
-    );
+create table store_order(
+        str_cart_no number(6), 
+        str_ord_no number(6), 
+        mem_no number(5),  
+        str_pro_no number(5),  
+        str_ord_cnt number(4), 
+        str_ord_addr varchar2(80),
+        str_ord_date date default sysdate, 
+        primary key (str_cart_no)
+ );
  */
 public class StoreOrderDTO {
+	private int str_cart_no;
 	private int str_ord_no;
 	private int mem_no;
 	private int str_pro_no;
@@ -26,6 +26,12 @@ public class StoreOrderDTO {
 	private RecipeMemberDTO recipeMemberDTO;
 	
 	
+	public int getStr_cart_no() {
+		return str_cart_no;
+	}
+	public void setStr_cart_no(int str_cart_no) {
+		this.str_cart_no = str_cart_no;
+	}
 	public int getStr_ord_no() {
 		return str_ord_no;
 	}
