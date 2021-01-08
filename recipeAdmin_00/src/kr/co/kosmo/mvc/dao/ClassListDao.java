@@ -3,7 +3,6 @@ package kr.co.kosmo.mvc.dao;
 import java.util.List;
 
 import kr.co.kosmo.mvc.dto.ClassListDTO;
-import kr.co.kosmo.mvc.dto.RecipeMemberDTO;
 
 public interface ClassListDao {
 	

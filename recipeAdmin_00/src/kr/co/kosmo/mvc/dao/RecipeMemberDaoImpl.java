@@ -2,7 +2,6 @@ package kr.co.kosmo.mvc.dao;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,6 @@ public class RecipeMemberDaoImpl implements RecipeMemberDao {
 
 	@Override
 	public List<RecipeMemberDTO> getMemberList(PageVO svo) {
-		// TODO Auto-generated method stub
 		return ss.selectList("recipeMember.memlist",svo);
 	}
 	

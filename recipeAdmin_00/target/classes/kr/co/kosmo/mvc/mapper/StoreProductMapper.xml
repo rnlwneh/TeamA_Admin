@@ -152,7 +152,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 				</if>
 			</when>
 		</choose>
-		order by str_pro_no) a ) where r_num between #{start} and #{end}
+		order by str_pro_no desc) a ) where r_num between #{start} and #{end}
 	</select>
 	
 	

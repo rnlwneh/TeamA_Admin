@@ -21,7 +21,7 @@ import kr.co.kosmo.mvc.dao.LoginLogDao;
 import kr.co.kosmo.mvc.dto.AdminInfoDTO;
 import kr.co.kosmo.mvc.dto.PageVO;
 
-//동주
+
 @Controller
 public class AdminInfoController {
 	
@@ -42,9 +42,7 @@ public class AdminInfoController {
 	public ModelAndView adminList(AdminInfoDTO vo) {
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("=====adminInfoDao adminList호출=====");
 		List<AdminInfoDTO> adminList = adminInfodao.adminList(vo);
-		System.out.println("=====mapper까지 찍고옴=====");
 		mv.setViewName("admin/adminList");
 		mv.addObject("adminList", adminList);
 		return mv;
@@ -57,8 +55,6 @@ public class AdminInfoController {
 		String no = request.getParameter("adminNo");
 		String[] adminNo = no.split(",");
 		for(String ad_no : adminNo) {
-			System.out.println("=====체크된 갯수만큼 adminInfoDao deleteAdmin 호출=====");
-			System.out.println(ad_no);
 			adminInfodao.deleteAdmin(ad_no);
 		}
 		mv.setViewName("redirect:adminList");
@@ -76,7 +72,6 @@ public class AdminInfoController {
 		}else {
 			mv.setViewName("admin/indexA");
 			//세션 추가
-			System.out.println("=====세션추가=====");
 			session.setAttribute("ad_name", adminLogin.getAd_name());
 			session.setAttribute("ad_email", adminLogin.getAd_email());
 			session.setAttribute("ad_author", adminLogin.getAd_author());
@@ -92,7 +87,6 @@ public class AdminInfoController {
 		try {
 			//로그아웃 시간 저장
 			Object ad_no = session.getAttribute("ad_no");
-			System.out.println(ad_no);
 			adminInfodao.logOut(ad_no);
 		}catch(Exception e){
 			//세션값 없을시 500에러 나므로
@@ -100,7 +94,6 @@ public class AdminInfoController {
 			return mv;
 		}
 		//세션삭제
-		System.out.println("=====세션삭제=====");
 		session.removeAttribute("ad_name");
 		session.removeAttribute("ad_email");
 		session.removeAttribute("ad_author");

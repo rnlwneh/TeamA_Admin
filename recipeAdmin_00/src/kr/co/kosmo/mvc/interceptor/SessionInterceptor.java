@@ -12,7 +12,6 @@ public class SessionInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		HttpSession session = request.getSession();
 		String check = (String) session.getAttribute("ad_name");
-		System.out.println("인터셉터 로그인여부:" + check);		
 		if (check == null||check.equals("")){			
 			response.sendRedirect("login");
 			return false;

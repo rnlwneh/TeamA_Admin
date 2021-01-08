@@ -23,7 +23,7 @@ import kr.co.kosmo.mvc.dto.PageVO;
 import kr.co.kosmo.mvc.dto.StoreProductDTO;
 import kr.co.kosmo.mvc.dto.TradeListDTO;
 
-//동주
+
 @Controller
 public class StoreProductController {
 	
@@ -34,7 +34,6 @@ public class StoreProductController {
 	public ModelAndView addStoreGoods(){
 		ModelAndView mv = new ModelAndView();
 		
-		System.out.println("=====StoreProductDao trdListName() 호출=====");
 		List<TradeListDTO> trdListName = storeProductDao.trdListName();
 		mv.addObject("trdListName", trdListName);
 		mv.setViewName("admin/addStoreGoods");
@@ -51,10 +50,8 @@ public class StoreProductController {
 		//이미지가 저장될 절대 경로를 지정 
 		HttpSession session = request.getSession();
 		String r_path = session.getServletContext().getRealPath("/");
-		System.out.println("Path :"+r_path);
 		String img_path ="resources\\image\\";
 		String detail_img_path = "resources\\detailImage\\";
-		System.out.println("imgPath :"+r_path+img_path);
 		StringBuffer path = new StringBuffer();
 		StringBuffer detailPath = new StringBuffer();
 		path.append(r_path).append(img_path);
@@ -69,8 +66,6 @@ public class StoreProductController {
 		detailPath.append(str_pro_detail_img);
 		vo.setStr_pro_image(str_pro_img);
 		vo.setStr_pro_detail_image(str_pro_detail_img);
-		System.out.println("FullPath :"+path);
-		System.out.println("DeFullPath :"+detailPath);
 		
 		// 파일 업로드 실행 
 		File f = new File(path.toString()); //실제 이미지가 저장될 경로
@@ -85,7 +80,6 @@ public class StoreProductController {
 		} catch (IllegalStateException | IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println("=====StoreProductDao addStoreGoods() 호출=====");
 		storeProductDao.addStoreGoods(vo);
 		mv.setViewName("redirect:storeGoodsList");
 		return mv;
@@ -104,9 +98,7 @@ public class StoreProductController {
 		map.put("searchProName", searchProName);
 		map.put("searchTrdList", searchTrdList);
 		map.put("searchStatus", searchStatus);
-		System.out.println("=====StoreProductDao totalCnt()호출=====");
 		int total = storeProductDao.totalCnt(map);
-		System.out.println("=====총갯수 : "+total+"=====");
 		
 		pvo = new PageVO(total, Integer.parseInt(nowPage), Integer.parseInt(cntPerPage));
 		
@@ -115,11 +107,8 @@ public class StoreProductController {
 		pvo.setSearchStatus(searchStatus);
 		
 		mv.addObject("paging",pvo);
-//		System.out.println("=====StoreProductDao storeInfo() 호출=====");
 		mv.addObject("storeInfo",storeProductDao.storeInfo());
-//		System.out.println("=====StoreProductDao storeGoodsList() 호출=====");
 		mv.addObject("goodsList", storeProductDao.storeGoodsList(pvo));
-//		System.out.println("=====StoreProductDao trdListName() 호출=====");
 		mv.addObject("trdListName",storeProductDao.trdListName());
 		mv.addObject("total", total);
 		mv.setViewName("admin/storeGoodsList");
@@ -133,8 +122,6 @@ public class StoreProductController {
 		System.out.println(request.getParameter("no"));
 		String[] noList = request.getParameter("no").split(",");
 		for(String str_pro_no : noList) {
-			System.out.println("==="+str_pro_no+"===");
-			System.out.println("=====StoreProductDao deleteProduct() 호출=====");
 			storeProductDao.deleteProduct(str_pro_no);
 		}
 	}
@@ -144,12 +131,9 @@ public class StoreProductController {
 		ModelAndView mv = new ModelAndView();
 		
 		String str_pro_no = (String)request.getParameter("str_pro_no");
-		System.out.println("=====StoreProductDao storeGoodsDetail() 호출=====");
 		mv.addObject("goodsDetail", storeProductDao.storeGoodsDetail(str_pro_no));
-		System.out.println("=====StoreProductDao trdListName() 호출=====");
 		mv.addObject("trdListName",storeProductDao.trdListName());
 		mv.setViewName("admin/storeGoodsDetail");
-		System.out.println("detail호출 끝");
 		return mv;
 	}
 	
@@ -163,10 +147,8 @@ public class StoreProductController {
 		//이미지가 저장될 절대 경로를 지정 
 		HttpSession session = request.getSession();
 		String r_path = session.getServletContext().getRealPath("/");
-		System.out.println("Path :"+r_path);
 		String img_path ="resources\\image\\";
 		String detail_img_path = "resources\\detailImage\\";
-		System.out.println("imgPath :"+r_path+img_path);
 		StringBuffer path = new StringBuffer();
 		StringBuffer detailPath = new StringBuffer();
 		path.append(r_path).append(img_path);
@@ -183,7 +165,6 @@ public class StoreProductController {
 			String str_pro_img = uuid.toString() + file.getOriginalFilename(); //업로드 된 이미지 이름		
 			path.append(str_pro_img);
 			vo.setStr_pro_image(str_pro_img);
-			System.out.println("FullPath :"+path);
 			
 			// 파일 업로드 실행 
 			File f = new File(path.toString()); //실제 이미지가 저장될 경로
@@ -202,7 +183,6 @@ public class StoreProductController {
 			String str_pro_detail_img = uuid.toString() + detailFile.getOriginalFilename();	
 			detailPath.append(str_pro_detail_img);
 			vo.setStr_pro_detail_image(str_pro_detail_img);
-			System.out.println("DeFullPath :"+detailPath);
 			
 			File df = new File(detailPath.toString());
 			try {
@@ -214,7 +194,6 @@ public class StoreProductController {
 			vo.setStr_pro_detail_image(pre_str_pro_detail_image);
 		}
 		
-		System.out.println("=====StoreProductDao updateGoodsList() 호출");
 		storeProductDao.updateStoreGoods(vo);
 		mv.setViewName("redirect:storeGoodsList");
 		return mv;

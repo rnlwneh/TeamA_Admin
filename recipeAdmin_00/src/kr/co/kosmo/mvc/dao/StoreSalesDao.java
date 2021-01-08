@@ -5,5 +5,4 @@ import java.util.List;
 
 public interface StoreSalesDao {
 	public List<HashMap<String,String>> storeSales(String date);
-//	public List<HashMap<String,String>> test();
 }

@@ -23,7 +23,7 @@ create table store_product (
      constraint store_product_trd_list_no_fk   foreign key(trd_list_no) references trade_list(trd_list_no)
 );
  */
-//µø¡÷
+
 public class StoreProductDTO {
 	private int str_pro_no;
 	private int trd_list_no;

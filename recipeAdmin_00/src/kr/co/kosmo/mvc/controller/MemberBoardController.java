@@ -14,16 +14,8 @@ import kr.co.kosmo.mvc.service.RecipeMemberBoardService;
 @Controller
 public class MemberBoardController {
 
-	@Autowired // @Resource
+	@Autowired
 	private RecipeMemberBoardService recipeMemberBoardService;
-
-	// @RequestMapping("/tables")
-	// public String memberList(Model m) {
-	//
-	// List<RecipeMemberDTO> list = recipeMemberBoardService.getMemberList();
-	// m.addAttribute("list", list);
-	// return "tables";
-	// }
 
 	@RequestMapping("/getBoard")
 	public void getBoard(RecipeMemberDTO vo, Model m) {
@@ -38,7 +30,6 @@ public class MemberBoardController {
 
 	@RequestMapping(value = "/memberDetail", method = RequestMethod.GET)
 	public String detail(int mem_no, Model model) {
-		System.out.println("****");
 		RecipeMemberDTO recipeMemberDTO = recipeMemberBoardService.getMemberDetail(mem_no);
 		model.addAttribute("board", recipeMemberDTO);
 		return "admin/memberDetail";
@@ -47,7 +38,6 @@ public class MemberBoardController {
 
 	@RequestMapping(value = "/upupup", method = RequestMethod.POST)
 	public String updateval(RecipeMemberDTO vo) {
-		System.out.println("===>" + vo.getMem_no());
 		recipeMemberBoardService.update(vo);
 		return "redirect:memberList";
 	}
@@ -68,9 +58,6 @@ public class MemberBoardController {
 		svo.setSearchType(searchType);
 
 		svo.setKeyword(keyword);
-
-		// System.out.println("Start :"+vo.getStart());
-		// System.out.println("End :"+vo.getEnd());
 		model.addAttribute("paging", svo);
 		model.addAttribute("list", recipeMemberBoardService.getMemberList(svo));
 		return "admin/memberList";

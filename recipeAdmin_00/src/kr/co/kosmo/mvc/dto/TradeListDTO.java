@@ -11,7 +11,7 @@ create table trade_list (
        primary key(trd_list_no)
 );
 */
-//µ¿ÁÖ
+
 public class TradeListDTO {
 	private int trd_list_no;
 	private String trd_list_name;

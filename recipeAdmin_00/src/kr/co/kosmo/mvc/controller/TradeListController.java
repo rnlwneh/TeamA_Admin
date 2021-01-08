@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import kr.co.kosmo.mvc.dao.TradeListDao;
 import kr.co.kosmo.mvc.dto.TradeListDTO;
 
-//동주
+
 @Controller
 public class TradeListController {
 	
@@ -22,7 +22,6 @@ public class TradeListController {
 	@RequestMapping("/clientList")
 	public ModelAndView clientList() {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("=====TradeListDao getTradeList() 호출");
 		List<TradeListDTO> trdList = tradeListdao.getTradeList();
 		mv.addObject("trdList", trdList);
 		mv.setViewName("admin/clientList");
@@ -34,7 +33,6 @@ public class TradeListController {
 		ModelAndView mv = new ModelAndView();
 		
 		int trd_list_no = Integer.parseInt(request.getParameter("trd_list_no"));
-		System.out.println(trd_list_no);
 		mv.addObject("trdDetail", tradeListdao.trdDetail(trd_list_no));
 		mv.addObject("trdDetailInfo",tradeListdao.trdDetailInfo(trd_list_no));
 		mv.addObject("trdTotSell", tradeListdao.trdTotSell());

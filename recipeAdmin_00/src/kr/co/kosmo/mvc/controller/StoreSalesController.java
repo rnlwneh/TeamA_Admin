@@ -31,11 +31,7 @@ public class StoreSalesController {
 	@RequestMapping(value="/searchDate")
 	public List<HashMap<String,String>> searchDate(HttpServletRequest request) {
 		String date = request.getParameter("searchDate").toString().trim();
-		System.out.println("검색날짜 : " + date);
 		List<HashMap<String,String>> searchDateList = storesalesdao.storeSales(date);
-//		List<HashMap<String,String>> test = storesalesdao.test();
-//		System.out.println(test);
-		System.out.println(searchDateList);
 		return searchDateList;
 	}
 }

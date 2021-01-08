@@ -20,50 +20,41 @@ public class StoreProductDaoImpl implements StoreProductDao {
 
 	@Override
 	public List<TradeListDTO> trdListName() {
-		System.out.println("=====StoreProductMapper trdListName 호출=====");
 		return ss.selectList("strProduct.trdListName");
 	}
 
 	@Override
 	public void addStoreGoods(StoreProductDTO vo) {
-		System.out.println("=====StoreProductMapper addStoreGoods 호출=====");
 		ss.insert("strProduct.addStoreGoods", vo);
 	}
 
 	@Override
 	public List<StoreProductDTO> storeGoodsList(PageVO pvo) {
-		System.out.println("=====StoreProductMapper goodsList 호출=====");
 		return ss.selectList("strProduct.goodsList",pvo);
 	}
 
 	@Override
 	public void deleteProduct(String str_pro_no) {
-		System.out.println("=====StoreProductMapper delPro 호출=====");
 		ss.delete("strProduct.delPro", str_pro_no);
 	}
 
 	@Override
 	public HashMap<String, Object> storeInfo() {
-		System.out.println("=====StoreProductMapper storeInfo호출=====");
 		return ss.selectOne("strProduct.storeInfo");
 	}
 
 	@Override
 	public int totalCnt(HashMap<String,String> map) {
-		System.out.println("=====StoreProductMapper totalCnt 호출=====");
-//		System.out.println("////////////"+map.get("searchStatus")+"/////////////////");
 		return ss.selectOne("strProduct.totalCnt",map);
 	}
 
 	@Override
 	public StoreProductDTO storeGoodsDetail(String str_pro_no) {
-		System.out.println("=====StoreProductMapper goodsDetail 호출=====");
 		return ss.selectOne("strProduct.goodsDetail", str_pro_no);
 	}
 
 	@Override
 	public void updateStoreGoods(StoreProductDTO vo) {
-		System.out.println("=====StoreProductMapper updateStoreGoods 호출");
 		ss.update("strProduct.updateStoreGoods", vo);
 	}
 }

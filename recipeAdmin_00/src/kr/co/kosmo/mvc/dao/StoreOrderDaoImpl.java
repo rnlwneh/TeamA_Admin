@@ -17,13 +17,11 @@ public class StoreOrderDaoImpl implements StoreOrderDao {
 	
 	@Override
 	public List<StoreOrderDTO> storeOrderList(PageVO pvo) {
-		System.out.println("=====StoreOrderListMapper strOrderList 호출=====");
 		return ss.selectList("strOrdList.strOrderList", pvo);
 	}
 
 	@Override
 	public int strOrdTot(PageVO pvo) {
-		System.out.println("=====StoreOrderListMapper strOrdTot 호출=====");
 		return ss.selectOne("strOrdList.strOrdTot",pvo);
 	}
 }

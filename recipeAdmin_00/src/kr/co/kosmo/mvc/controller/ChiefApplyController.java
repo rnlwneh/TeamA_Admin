@@ -27,7 +27,6 @@ public class ChiefApplyController {
 		List<ChiefApplyDTO> cAply = chiefApplyInfoDao.getApplyList();
 		mv.addObject("cAply", cAply);
 		mv.setViewName("admin/newChief");
-		System.out.print(cAply);
 		return mv;
 	}
 	
@@ -40,13 +39,10 @@ public class ChiefApplyController {
 	            
 	        String[] ajaxMsg = request.getParameterValues("valueArr");
 	        int size = ajaxMsg.length;
-	        
-	        System.out.println(size);
 
 	        for(int i=0; i<size; i++) {
 	        	chiefApplyInfoDao.memberUpgrade(ajaxMsg[i]);
 	        	chiefApplyInfoDao.delete(ajaxMsg[i]);
-	        	  System.out.println(ajaxMsg[i]);
 	        }
 
 	        return "redirect:newChief";

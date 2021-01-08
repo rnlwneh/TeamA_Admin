@@ -45,25 +45,20 @@ public class LoginLogAspect {
 					HttpSession session = (HttpSession) fd[0];
 					HttpServletRequest request = (HttpServletRequest) fd[1];
 					String ad_email = (String) session.getAttribute("ad_email");
-					System.out.println("mmmmmmmmmmmmmmmm"+ad_email+"mmmmmmmmmmmmmmmm");
 					// 세션의 값을 얻어와서 존재할 경우만
 					if (ad_email!=null) {
 						// 데이터베이스에 저장할 값을 세팅
 						vo.setAd_no((int)session.getAttribute("ad_no"));
 						vo.setLog_status("로그인");
-						System.out.println("//////////"+getClientIpAddr(request));
 						vo.setLog_reip(getClientIpAddr(request));
 						vo.setLog_login_fl("y");
 						vo.setLog_uagent("web");
 						loginLogDao.addLoginLog(vo);
 					}else {
-						System.out.println(1);
 						ad_email = (String)request.getParameter("ad_email");
-						System.out.println(ad_email);
 						int ad_no = adminInfoDao.ad_no(ad_email);
 						vo.setAd_no(ad_no);
 						vo.setLog_status("로그인");
-						System.out.println("//////////"+getClientIpAddr(request));
 						vo.setLog_reip(getClientIpAddr(request));
 						vo.setLog_login_fl("n");
 						vo.setLog_uagent("web");
@@ -80,12 +75,10 @@ public class LoginLogAspect {
 					HttpSession session = (HttpSession) fd[0];
 					HttpServletRequest request = (HttpServletRequest) fd[1];
 					int ad_no = (int) session.getAttribute("ad_no");
-					System.out.println("mmmmmmmmmmmmmmmm"+ad_no+"mmmmmmmmmmmmmmmm");
 					if (ad_no != 0) { // 세션이 존재할 때 처리 
 						// 데이터베이스에 저장할 값을 세팅
 						vo.setAd_no(ad_no);
 						vo.setLog_status("로그아웃");
-						System.out.println("//////////"+getClientIpAddr(request));
 						vo.setLog_reip(getClientIpAddr(request));
 						vo.setLog_login_fl("y");
 						vo.setLog_uagent("web");
@@ -98,7 +91,6 @@ public class LoginLogAspect {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("insert!===================");
 		return rpath;
 
 	}

@@ -13,7 +13,7 @@ package kr.co.kosmo.mvc.dto;
       constraint  admin_schedule_ad_no_fk   foreign key(ad_no) references admin_info(ad_no)
 );
  */
-//µø¡÷
+
 public class AdminScheduleDTO {
 	private int ad_sche_no;
 	private int ad_no;

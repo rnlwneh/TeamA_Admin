@@ -10,7 +10,7 @@ package kr.co.kosmo.mvc.dto;
     ad_logouttime date default sysdate,
     ad_regdate date default sysdate,
  */
-//µø¡÷
+
 public class AdminInfoDTO {
 	private int ad_no;
 	private String ad_name;

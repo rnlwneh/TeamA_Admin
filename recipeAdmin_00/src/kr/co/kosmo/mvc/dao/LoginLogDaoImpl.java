@@ -17,19 +17,16 @@ public class LoginLogDaoImpl implements LoginLogDao{
 	
 	@Override
 	public void addLoginLog(LoginLogDTO vo) {
-		System.out.println("=====LoginLogMapper loginLog 호출=====");
 		ss.insert("loginLog.loginLog", vo);
 	}
 
 	@Override
 	public List<LoginLogDTO> adLogDetail(HashMap<String,Integer> logCntMap) {
-		System.out.println("=====LoginLogMapper adLogDetail 호출=====");
 		return ss.selectList("loginLog.adLogDetail", logCntMap);
 	}
 
 	@Override
 	public int logCnt(int ad_no) {
-		System.out.println("=====LoginLogMapper logCnt 호출=====");
 		return ss.selectOne("loginLog.logCnt", ad_no);
 	}
 
