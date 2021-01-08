@@ -8,7 +8,7 @@ import java.util.Locale;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
-
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -104,17 +104,17 @@ public class ClassListController {
 		
 		
 		   @RequestMapping("/updateClass")
-		   public String updateClasses(@ModelAttribute("classListDTO") ClassListDTO vo, MultipartHttpServletRequest file)
+		   public String updateClasses(@ModelAttribute("classListDTO") ClassListDTO vo, MultipartHttpServletRequest file, HttpServletRequest request)
 		         throws Exception {
 
 				classListdao.updateClass(vo);
 
-		      // 파일 이름 변경
-		      UUID uuid = UUID.randomUUID();
-
+			HttpSession session = request.getSession();
+			String r_path = session.getServletContext().getRealPath("/");
+			
 		      List<MultipartFile> fileList = file.getFiles("file");
 
-		      String path = "C:\\Users\\haj10\\OneDrive\\바탕 화면\\mainWorkspace\\recipeAdmin_00_1224\\WebContent\\resources\\image\\FoodImg\\";
+		      String path = r_path + "resources\\image\\FoodImg\\";
 
 		      for (MultipartFile mf : fileList) {
 

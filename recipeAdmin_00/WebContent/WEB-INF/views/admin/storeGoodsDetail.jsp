@@ -13,7 +13,7 @@
 				<div class="container-fluid">
 					<h1 class="mt-4">상품 정보</h1>
 					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
+						<li class="breadcrumb-item"><a href="indexA">Necipe</a></li>
 						<li class="breadcrumb-item"><a href="storeGoodsList">스토어
 								상품 관리</a></li>
 						<li class="breadcrumb-item"><a href="">상품 정보</a></li>

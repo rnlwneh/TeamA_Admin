@@ -18,7 +18,7 @@ table, th, td {
 	<div class="container-fluid">
 		<h1 class="mt-4">거래처관리</h1>
 		<ol class="breadcrumb mb-4">
-			<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
+			<li class="breadcrumb-item"><a href="indexA">Necipe</a></li>
 			<li class="breadcrumb-item"><a href="clientList">거래처목록</a></li>
 			<li class="breadcrumb-item"><a href="clientDetail">거래처관리</a></li>
 

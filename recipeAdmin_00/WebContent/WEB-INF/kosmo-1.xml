@@ -58,6 +58,7 @@
 		</property>
 	</bean>
 	
+	<!-- interceptor 설정 -->
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/*"/>

@@ -77,7 +77,7 @@ table, th, td {
 	<div class="container-fluid">
 		<h1 class="mt-4">셰프신청</h1>
 		<ol class="breadcrumb mb-4">
-			<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
+			<li class="breadcrumb-item"><a href="indexA">Necipe</a></li>
 			<li class="breadcrumb-item"><a href="newChief">셰프관리</a></li>
 		</ol>
 
@@ -136,7 +136,7 @@ table, th, td {
 											<thead>
 												<tr>
 													<td align='center' style="vertical-align: middle" scope="col"><input style="vertical-align: middle" id="allCheck" type="checkbox" name="allCheck"/></td>
-													<th scope="col">번호</th>
+													<th scope="col">아이디</th>
 													<th scope="col">이메일</th>
 
 													<th scope="col">멤버아이디</th>
@@ -151,9 +151,9 @@ table, th, td {
 
 														<td align='center' style="vertical-align: middle"
 															class="checkbox"><input type='checkbox'
-															id='RowCheck' name="RowCheck" value="${cAply.mem_no}">
+															id='RowCheck' name="RowCheck" value="${cAply.mem_email}">
 														</td>
-														<td class="text_ct">${cAply.chef_req_no}</td>
+														<td class="text_ct">${cAply.mem_id}</td>
 
 														<td class="text_ct">${cAply.mem_email}</td>
 

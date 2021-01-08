@@ -23,7 +23,7 @@
 				<div class="container-fluid">
 					<h1 class="mt-4">고객배송정보</h1>
 					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
+						<li class="breadcrumb-item"><a href="indexA">Necipe</a></li>
 						<li class="breadcrumb-item"><a href="memberOrderList">고객주문관리</a></li>
 					</ol>
 					<div class="card mb-4">

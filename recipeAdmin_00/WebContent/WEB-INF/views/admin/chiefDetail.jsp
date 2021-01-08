@@ -17,7 +17,7 @@
                     <div class="container-fluid">
                         <h1 class="mt-4">셰프</h1>
                               <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
+                            <li class="breadcrumb-item"><a href="indexA">Necipe</a></li>
                           <li class="breadcrumb-item"><a href="chiefManage">셰프관리</a></li>
                             <li class="breadcrumb-item active"><a href="chiefDetail">셰프상세페이지</a></li>
                         </ol>

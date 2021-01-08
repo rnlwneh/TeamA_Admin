@@ -7,7 +7,7 @@
 				<div class="container-fluid">
 					<h1 class="mt-4">관리자 목록</h1>
 					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
+						<li class="breadcrumb-item"><a href="indexA">Necipe</a></li>
 						<li class="breadcrumb-item"><a href="adminList">관리자 목록</a></li>
 					</ol>
 					<div class="card mb-4">

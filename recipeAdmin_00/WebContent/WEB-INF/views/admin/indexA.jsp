@@ -46,7 +46,7 @@
                     <div class="container-fluid">
                         <h1 class="mt-4">${ad_name } 님의 일정</h1>
                         <ol class="breadcrumb mb-4">
-                            <li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
+                            <li class="breadcrumb-item"><a href="indexA">Necipe</a></li>
                         </ol>
                         <div class="row">
                             <div class="col-xl-3 col-md-6">

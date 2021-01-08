@@ -431,11 +431,11 @@
 
 <main>
 				<div class="container-fluid">
-					<h1 class="mt-4">클라스 관리</h1>
+					<h1 class="mt-4">클래스 상세정보</h1>
 					<ol class="breadcrumb mb-4">
-						<li class="breadcrumb-item"><a href="indexA">Recipe</a></li>
-						<li class="breadcrumb-item"><a href="tables">회원관리</a></li>
-						<li class="breadcrumb-item active"><a href="memberDetail">회원상세보기</a></li>
+						<li class="breadcrumb-item"><a href="indexA">Necipe</a></li>
+						<li class="breadcrumb-item"><a href="newClass">클래스관리</a></li>
+						<li class="breadcrumb-item active"><a href="class_write?class_no=${classDetail.class_no }">클래스 상세정보</a></li>
 					</ol>
 
 					<div class="card mb-4">

@@ -17,33 +17,12 @@
 						</a>
 
 						<c:set var="author" value="${ad_author }" />
-<%-- 						<c:if test="${fn:contains(author, '사이트관리')}"> --%>
-
-<!-- 							<div class="sb-sidenav-menu-heading">사이트 관리</div> -->
-<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
-<!-- 								<a href='adminBoardRegist'><font size='2' color='gray'>신고된 -->
-<!-- 										글 관리</font></a> -->
-<!-- 							</nav> -->
-<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
-<!-- 								<a href='#'><font size='2' color='gray'>사이트 카테고리 관리</font></a> -->
-<!-- 							</nav> -->
-<%-- 						</c:if> --%>
 
 						<c:if test="${fn:contains(author, '스토어관리')}">
 							<div class="sb-sidenav-menu-heading">스토어 관리</div>
-<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
-<!-- 								<a href='orderProduct'><font size='2' color='gray'>발주하기</font></a> -->
-<!-- 							</nav> -->
-<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
-<!-- 								<a href='orderList'><font size='2' color='gray'>발주조회</font></a> -->
-<!-- 							</nav> -->
 							<nav class="sb-sidenav-menu-nested nav">
 								<a href='sales'><font size='2' color='gray'>매출 현황</font></a>
 							</nav>
-<!-- 							<nav class="sb-sidenav-menu-nested nav"> -->
-<!-- 								<a href='salesAnalysis'><font size='2' color='gray'>매출 -->
-<!-- 										분석</font></a> -->
-<!-- 							</nav> -->
 							<nav class="sb-sidenav-menu-nested nav">
 								<a href='clientList'><font size='2' color='gray'>거래처목록</font></a>
 							</nav>

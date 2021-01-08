@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="chiefApply">
    <select id="newChief" resultType="cAply">
-      select distinct(m.mem_no), m.mem_id,c.chef_regdate,m.mem_email from rpatest
+      select m.mem_no, m.mem_id,c.chef_regdate,m.mem_email from rpatest
       c,
       member_info m where m.mem_email=c.mem_email and m.mem_grade_no='일반인'
       and m.mem_no in (select mem_no from recipe_info group by mem_no having
-      count(mem_no)>1)
+      count(mem_no)>=1) order by chef_regdate desc
 </select>
 
 
@@ -16,7 +16,7 @@
 
       update member_info
       set
-      mem_grade_no ='셰프'
+      mem_grade_no ='쉐프'
       where
       mem_email=#{mem_email}
 

@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
  <!-- header1 영역 시작  -->
     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-		<a class="navbar-brand" href="indexA">Recipe</a>
+		<a class="navbar-brand" href="indexA">Necipe</a>
 		<button class="btn btn-link btn-sm order-1 order-lg-0"
 			id="sidebarToggle" href="#">
 			목록 숨기기<i class="fas fa-bars"></i>
